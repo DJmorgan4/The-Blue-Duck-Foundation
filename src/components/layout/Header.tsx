@@ -5,7 +5,7 @@ export default function Header() {
     <header className="bg-slate-900 text-white sticky top-0 z-50">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5">
         <Link href="/" className="text-xl font-bold">
-          🦆 The Blue Duck
+          The Blue Duck Foundation
         </Link>
 
         <ul className="hidden md:flex gap-8 text-sm">
