@@ -33,20 +33,14 @@ function FeatureCard({
   );
 }
 
-function ProjectCard({
+function InitiativeCard({
   title,
   location,
-  progress,
   tag,
-  raised,
-  goal,
 }: {
   title: string;
   location: string;
-  progress: number;
   tag: string;
-  raised: string;
-  goal: string;
 }) {
   return (
     <div className="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white transition-all hover:border-slate-300 hover:shadow-lg">
@@ -65,32 +59,22 @@ function ProjectCard({
           {title}
         </h3>
 
-        <div className="mt-5">
-          <div className="flex items-baseline justify-between">
-            <span className="text-sm font-medium text-slate-900">${raised} raised</span>
-            <span className="text-sm text-slate-600">of ${goal}</span>
-          </div>
-          <div className="mt-2 h-1.5 rounded-full bg-slate-100">
-            <div
-              className="h-1.5 rounded-full bg-slate-900 transition-all"
-              style={{ width: `${Math.min(Math.max(progress, 0), 100)}%` }}
-            />
-          </div>
-          <p className="mt-2 text-xs text-slate-600">{progress}% funded</p>
-        </div>
+        <p className="mt-3 text-sm text-slate-600">
+          Strategic conservation initiative in development
+        </p>
 
         <div className="mt-6 flex gap-3">
           <Link
-            href="/contribute"
+            href="/conservation"
             className="flex-1 rounded-xl bg-slate-900 px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-slate-800"
           >
-            Support
+            Learn more
           </Link>
           <Link
-            href="/conservation"
+            href="/contribute"
             className="flex-1 rounded-xl border border-slate-300 px-4 py-2.5 text-center text-sm font-semibold text-slate-900 transition-colors hover:bg-slate-50"
           >
-            Learn more
+            Get involved
           </Link>
         </div>
       </div>
@@ -127,43 +111,44 @@ export default function HomePage() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-slate-900 opacity-75"></span>
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-slate-900"></span>
                 </span>
-                Active conservation projects across 12 states
+                Foundation launch in progress
               </div>
 
               <h1 className="mt-8 text-5xl font-light tracking-tight text-slate-900 sm:text-6xl lg:text-7xl">
-                Restoring wild places for future generations
+                Protecting Texas wetlands and wildlife for future generations
               </h1>
 
               <p className="mt-6 text-lg leading-relaxed text-slate-600">
-                The Blue Duck Foundation funds science-backed habitat restoration, waterway protection, 
-                and community conservation—with transparent reporting and measurable ecological impact.
+                The Blue Duck Foundation is building a science-backed approach to habitat conservation, 
+                waterway protection, and community engagement—starting in Texas and expanding across 
+                the Central Flyway.
               </p>
 
               <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
                 <Link
-                  href="/contribute"
+                  href="/about"
                   className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-8 py-4 font-semibold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-md"
                 >
-                  Make a donation
+                  Our mission
                 </Link>
                 <Link
                   href="/conservation"
                   className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-8 py-4 font-semibold text-slate-900 transition-all hover:bg-slate-50"
                 >
-                  View our work
+                  Conservation focus
                 </Link>
               </div>
 
               <div className="mt-12 grid grid-cols-3 gap-8 border-t border-slate-200 pt-8">
-                <Stat label="Waterway miles protected" value="240+" />
-                <Stat label="Acres restored" value="3,200+" />
-                <Stat label="Community partners" value="67" />
+                <Stat label="Foundation status" value="Forming" />
+                <Stat label="Launch target" value="2026" />
+                <Stat label="Initial focus" value="Texas" />
               </div>
 
               <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-                <TrustIndicator>501(c)(3) nonprofit</TrustIndicator>
-                <TrustIndicator>Quarterly impact reports</TrustIndicator>
-                <TrustIndicator>GuideStar verified</TrustIndicator>
+                <TrustIndicator>501(c)(3) filing in progress</TrustIndicator>
+                <TrustIndicator>Transparency first</TrustIndicator>
+                <TrustIndicator>Community driven</TrustIndicator>
               </div>
             </div>
 
@@ -173,84 +158,77 @@ export default function HomePage() {
                 <div className="flex items-start justify-between">
                   <div>
                     <h2 className="text-xl font-semibold text-slate-900">
-                      January 2026 Focus
+                      Foundation Development
                     </h2>
                     <p className="mt-1 text-slate-600">
-                      Critical wetland restoration and riparian buffer projects
+                      Building the structure for long-term conservation impact
                     </p>
                   </div>
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
-                    Active
+                  <span className="rounded-full bg-yellow-100 px-3 py-1 text-xs font-medium text-yellow-800">
+                    In Progress
                   </span>
                 </div>
 
                 <div className="mt-8 space-y-6">
-                  <div>
-                    <div className="flex items-baseline justify-between">
-                      <span className="text-sm font-medium text-slate-900">Monthly funding goal</span>
-                      <span className="text-2xl font-light text-slate-900">$100,000</span>
-                    </div>
-                    <div className="mt-3 h-2 rounded-full bg-slate-100">
-                      <div className="h-2 rounded-full bg-slate-900" style={{ width: '62%' }} />
-                    </div>
-                    <div className="mt-2 flex justify-between text-sm">
-                      <span className="font-medium text-slate-900">$62,000 raised</span>
-                      <span className="text-slate-600">62%</span>
-                    </div>
-                  </div>
-
                   <div className="rounded-xl bg-slate-50 p-5">
-                    <h3 className="text-sm font-semibold text-slate-900">Your impact this month</h3>
+                    <h3 className="text-sm font-semibold text-slate-900">Current priorities</h3>
                     <ul className="mt-3 space-y-2.5">
                       <li className="flex gap-3 text-sm text-slate-700">
                         <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
                         </svg>
-                        Native vegetation plantings and erosion control infrastructure
+                        Completing 501(c)(3) application and legal structure
                       </li>
                       <li className="flex gap-3 text-sm text-slate-700">
                         <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
                         </svg>
-                        Water quality monitoring equipment and testing protocols
+                        Establishing board of directors and advisory network
                       </li>
                       <li className="flex gap-3 text-sm text-slate-700">
                         <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
                         </svg>
-                        Community engagement events and volunteer coordination
+                        Building partnerships with conservation organizations
+                      </li>
+                      <li className="flex gap-3 text-sm text-slate-700">
+                        <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+                        </svg>
+                        Developing transparent reporting frameworks
                       </li>
                     </ul>
                   </div>
 
                   <div className="grid gap-3 sm:grid-cols-2">
                     <Link
-                      href="/contribute"
+                      href="/about"
                       className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-800"
                     >
-                      Contribute
+                      Learn more
                     </Link>
                     <Link
-                      href="/impact"
+                      href="/contact"
                       className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-900 transition-colors hover:bg-slate-50"
                     >
-                      Impact dashboard
+                      Get involved
                     </Link>
                   </div>
                 </div>
               </div>
 
               <div className="rounded-2xl border border-slate-200/80 bg-slate-900 p-8 text-white">
-                <h3 className="text-lg font-semibold">Transparency commitment</h3>
+                <h3 className="text-lg font-semibold">Built on transparency</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate-300">
-                  Every project includes detailed budget breakdowns, quarterly progress reports, 
-                  and third-party ecological assessments available to all stakeholders.
+                  From day one, we're committed to detailed reporting, clear financial accountability, 
+                  and measurable conservation outcomes. Every initiative will include public progress updates 
+                  and third-party verification.
                 </p>
                 <Link
-                  href="/financials"
+                  href="/about"
                   className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-slate-200"
                 >
-                  View financial reports
+                  Our approach
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -269,15 +247,15 @@ export default function HomePage() {
               Science-driven conservation
             </h2>
             <p className="mt-4 text-lg text-slate-600">
-              We partner with ecological experts, local communities, and land management agencies 
-              to deploy high-impact conservation strategies with documented outcomes.
+              We're building partnerships with ecological experts, wildlife agencies, and conservation 
+              organizations to develop high-impact strategies with documented outcomes.
             </p>
           </div>
 
           <div className="mt-16 grid gap-8 md:grid-cols-3">
             <FeatureCard
-              title="Habitat restoration"
-              desc="Evidence-based native ecosystem recovery including wetlands, prairies, and riparian corridors using regionally appropriate species and proven methodologies."
+              title="Wetland conservation"
+              desc="Focus on protecting and restoring seasonal wetlands, playas, and coastal marshes critical to migratory waterfowl and shorebirds across the Central Flyway."
               icon={
                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -285,8 +263,8 @@ export default function HomePage() {
               }
             />
             <FeatureCard
-              title="Waterway protection"
-              desc="Comprehensive watershed management through pollution reduction, streambank stabilization, and continuous water quality monitoring with IoT sensor networks."
+              title="Wildlife habitat support"
+              desc="Supporting native grasslands, riparian corridors, and agricultural conservation practices that benefit game and non-game species throughout Texas."
               icon={
                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -294,8 +272,8 @@ export default function HomePage() {
               }
             />
             <FeatureCard
-              title="Community partnerships"
-              desc="Direct funding and technical support for grassroots conservation groups, indigenous land stewards, and municipal environmental programs delivering measurable results."
+              title="Community engagement"
+              desc="Building networks of hunters, landowners, conservationists, and outdoor enthusiasts committed to ethical stewardship and sustainable practices."
               icon={
                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -306,23 +284,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FEATURED PROJECTS */}
+      {/* CONSERVATION INITIATIVES */}
       <section className="border-b border-slate-100 bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <div className="max-w-2xl">
               <h2 className="text-4xl font-light tracking-tight text-slate-900">
-                Active projects
+                Conservation priorities
               </h2>
               <p className="mt-3 text-lg text-slate-600">
-                Support critical conservation initiatives with transparent funding and regular progress updates.
+                Strategic initiatives in development as we build foundation capacity and partnerships.
               </p>
             </div>
             <Link
               href="/conservation"
               className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-slate-700"
             >
-              View all projects
+              View conservation focus
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -330,29 +308,20 @@ export default function HomePage() {
           </div>
 
           <div className="mt-12 grid gap-8 md:grid-cols-3">
-            <ProjectCard
-              tag="Waterways"
-              title="Clear Creek Watershed Restoration"
-              location="Central Texas"
-              progress={62}
-              raised="62,000"
-              goal="100,000"
+            <InitiativeCard
+              tag="Wetlands"
+              title="Texas Playa Lakes Conservation"
+              location="Texas Panhandle"
             />
-            <ProjectCard
+            <InitiativeCard
               tag="Habitat"
-              title="Tallgrass Prairie Recovery Initiative"
-              location="Kansas-Nebraska Border"
-              progress={41}
-              raised="41,000"
-              goal="100,000"
-            />
-            <ProjectCard
-              tag="Wildlife"
-              title="Coastal Wetland Nesting Sanctuary"
+              title="Coastal Marsh Protection"
               location="Upper Texas Coast"
-              progress={78}
-              raised="78,000"
-              goal="100,000"
+            />
+            <InitiativeCard
+              tag="Community"
+              title="Hunter Education & Mentorship"
+              location="Statewide Texas"
             />
           </div>
 
@@ -360,25 +329,25 @@ export default function HomePage() {
             <div className="grid gap-8 md:grid-cols-2 md:items-center">
               <div>
                 <h3 className="text-2xl font-semibold text-slate-900">
-                  Project accountability standards
+                  Accountability from the start
                 </h3>
                 <p className="mt-3 text-slate-600">
-                  Every funded initiative includes baseline assessments, milestone tracking, 
-                  post-completion monitoring, and independent verification of ecological outcomes.
+                  Every initiative will include clear objectives, baseline assessments, milestone tracking, 
+                  and public reporting on outcomes and expenditures.
                 </p>
               </div>
               <div className="flex gap-4 md:justify-end">
                 <Link
-                  href="/methodology"
+                  href="/about"
                   className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-900 transition-colors hover:bg-slate-50"
                 >
-                  Our methodology
+                  Our standards
                 </Link>
                 <Link
-                  href="/impact"
+                  href="/conservation"
                   className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-800"
                 >
-                  Impact metrics
+                  Conservation watch
                 </Link>
               </div>
             </div>
@@ -393,11 +362,11 @@ export default function HomePage() {
             <div className="grid gap-8 md:grid-cols-2 md:items-center">
               <div>
                 <h2 className="text-3xl font-light tracking-tight text-slate-900">
-                  Field updates delivered monthly
+                  Follow our progress
                 </h2>
                 <p className="mt-3 text-slate-600">
-                  Receive project progress reports, scientific findings, funding milestones, 
-                  and volunteer opportunities directly from our conservation teams.
+                  Stay informed as we build the foundation, establish programs, and launch 
+                  conservation initiatives across Texas.
                 </p>
               </div>
 
@@ -433,45 +402,45 @@ export default function HomePage() {
               <div className="grid gap-8 md:grid-cols-2 md:items-center">
                 <div>
                   <h3 className="text-3xl font-light tracking-tight text-white">
-                    Fund conservation that matters
+                    Help us build something real
                   </h3>
                   <p className="mt-3 text-lg text-slate-300">
-                    Every contribution supports science-backed projects with transparent reporting 
-                    and measurable ecological outcomes.
+                    The Blue Duck Foundation is building the infrastructure for long-term conservation 
+                    impact. Get involved as a founding supporter, advisor, or community partner.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-4">
                     <div className="flex items-center gap-2 text-sm text-slate-300">
                       <svg className="h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
                       </svg>
-                      Tax-deductible
+                      Transparent from day one
                     </div>
                     <div className="flex items-center gap-2 text-sm text-slate-300">
                       <svg className="h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
                       </svg>
-                      Secure processing
+                      Science-backed approach
                     </div>
                     <div className="flex items-center gap-2 text-sm text-slate-300">
                       <svg className="h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
                       </svg>
-                      Monthly or one-time
+                      Community driven
                     </div>
                   </div>
                 </div>
                 <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
                   <Link
-                    href="/contribute"
+                    href="/contact"
                     className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 font-semibold text-slate-900 transition-colors hover:bg-slate-100"
                   >
-                    Make a donation
+                    Get involved
                   </Link>
                   <Link
-                    href="/volunteer"
+                    href="/about"
                     className="inline-flex items-center justify-center rounded-xl border border-white/30 px-8 py-4 font-semibold text-white transition-colors hover:bg-white/10"
                   >
-                    Volunteer with us
+                    Our story
                   </Link>
                 </div>
               </div>
