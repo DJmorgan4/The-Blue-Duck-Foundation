@@ -145,7 +145,7 @@ export default function Events() {
                 ctaLabel="Become a Sponsor"
               />
               <EventCard
-                title="Blue Duck Gold Tournament"
+                title="Blue Duck Golf Tournament"
                 date="September 2026"
                 status="coming-soon"
                 description="A competitive fundraising tournament bringing together supporters, sponsors, and community leaders for a high-energy day with purpose."
