@@ -21,50 +21,37 @@ export default function Header() {
           {/* Desktop Navigation */}
           <ul className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-medium">
             <li>
-              <Link 
-                href="/" 
-                className="hover:text-blue-400 transition-colors"
-              >
+              <Link href="/" className="hover:text-blue-400 transition-colors">
                 Home
               </Link>
             </li>
             <li>
-              <Link 
-                href="/about" 
-                className="hover:text-blue-400 transition-colors"
-              >
+              <Link href="/about" className="hover:text-blue-400 transition-colors">
                 About
               </Link>
             </li>
             <li>
-              <Link 
-                href="/conservation" 
-                className="hover:text-blue-400 transition-colors"
-              >
+              <Link href="/conservation" className="hover:text-blue-400 transition-colors">
                 Conservation
               </Link>
             </li>
             <li>
-              <Link 
-                href="/events" 
-                className="hover:text-blue-400 transition-colors"
-              >
+              <Link href="/scholarship" className="hover:text-amber-400 transition-colors">
+                Scholarship
+              </Link>
+            </li>
+            <li>
+              <Link href="/events" className="hover:text-blue-400 transition-colors">
                 Events
               </Link>
             </li>
             <li>
-              <Link 
-                href="/news" 
-                className="hover:text-blue-400 transition-colors"
-              >
+              <Link href="/news" className="hover:text-blue-400 transition-colors">
                 News
               </Link>
             </li>
             <li>
-              <Link 
-                href="/contact" 
-                className="hover:text-blue-400 transition-colors"
-              >
+              <Link href="/contact" className="hover:text-blue-400 transition-colors">
                 Contact
               </Link>
             </li>
@@ -101,53 +88,28 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className="lg:hidden border-t border-slate-800">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link
-                href="/"
-                className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              <Link href="/" className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Home
               </Link>
-              <Link
-                href="/about"
-                className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              <Link href="/about" className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 About
               </Link>
-              <Link
-                href="/conservation"
-                className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              <Link href="/conservation" className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Conservation
               </Link>
-              <Link
-                href="/events"
-                className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              <Link href="/scholarship" className="block px-3 py-2 rounded-lg text-base font-medium text-amber-400 hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                Scholarship
+              </Link>
+              <Link href="/events" className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Events
               </Link>
-              <Link
-                href="/news"
-                className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              <Link href="/news" className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 News
               </Link>
-              <Link
-                href="/contact"
-                className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              <Link href="/contact" className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Contact
               </Link>
-              <Link
-                href="/contribute"
-                className="block px-3 py-2 mt-2 rounded-lg text-base font-semibold bg-white text-slate-900 hover:bg-slate-100 transition-colors text-center"
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              <Link href="/contribute" className="block px-3 py-2 mt-2 rounded-lg text-base font-semibold bg-white text-slate-900 hover:bg-slate-100 transition-colors text-center" onClick={() => setMobileMenuOpen(false)}>
                 Get Involved
               </Link>
             </div>
