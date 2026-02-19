@@ -204,7 +204,7 @@ export default function ScholarshipPage() {
 
                 <div className="border-l-4 border-blue-800 pl-8 py-2 my-10 bg-blue-50/50">
                   <p className="font-display text-xl text-slate-800 italic">
-                    "The Forever 44 Scholarship Fund was created in loving memory of Kaleb Cory. Forever 44 stands for strength, loyalty, perseverance, and the unbreakable bonds of family and friendship."
+                    "Love - Live - Laugh"
                   </p>
                 </div>
 
