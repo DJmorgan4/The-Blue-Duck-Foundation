@@ -41,6 +41,11 @@ export default function Header() {
               </Link>
             </li>
             <li>
+              <Link href="/membership" className="hover:text-teal-400 transition-colors">
+                Membership
+              </Link>
+            </li>
+            <li>
               <Link href="/events" className="hover:text-blue-400 transition-colors">
                 Events
               </Link>
@@ -99,6 +104,9 @@ export default function Header() {
               </Link>
               <Link href="/scholarship" className="block px-3 py-2 rounded-lg text-base font-medium text-amber-400 hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Scholarship
+              </Link>
+              <Link href="/membership" className="block px-3 py-2 rounded-lg text-base font-medium text-teal-400 hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>
+                Membership
               </Link>
               <Link href="/events" className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>
                 Events
