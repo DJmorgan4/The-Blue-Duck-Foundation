@@ -105,20 +105,30 @@ export default function ScholarshipPage() {
             0%, 100% { transform: translateY(0px) rotate(-5deg); }
             50% { transform: translateY(-12px) rotate(5deg); }
           }
+          .img-duotone {
+            filter: grayscale(20%) contrast(1.05);
+          }
         `}</style>
 
-        {/* ─── HERO ─────────────────────────────────────────────── */}
-        <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden" style={{ background: "linear-gradient(135deg, #7f1d1d 0%, #991b1b 30%, #1e3a8a 70%, #1e40af 100%)" }}>
-          {/* Texture overlay */}
-          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }} />
-          {/* White center glow */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,transparent_65%)]" />
+        {/* ─── HERO — field photo as background ─────────────────── */}
+        <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+          {/* Kaleb on the field — full bleed bg, duotone treated */}
+          <div className="absolute inset-0">
+            <img
+              src="/images/kaleb-field.jpg"
+              alt="Kaleb Cory on the field"
+              className="w-full h-full object-cover object-center img-duotone"
+              style={{ objectPosition: "50% 25%" }}
+            />
+            {/* Red-to-blue gradient overlay — heavy enough to read text, light enough to see him */}
+            <div className="absolute inset-0" style={{ background: "linear-gradient(160deg, rgba(127,29,29,0.82) 0%, rgba(30,58,138,0.80) 100%)" }} />
+            {/* Bottom fade for clean transition */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
+          </div>
 
           <Stars />
-
-          {/* White stripe accent — like jersey stripes */}
-          <div className="absolute left-0 top-0 bottom-0 w-2 bg-white/20" />
-          <div className="absolute right-0 top-0 bottom-0 w-2 bg-white/20" />
+          <div className="absolute left-0 top-0 bottom-0 w-2 bg-white/10" />
+          <div className="absolute right-0 top-0 bottom-0 w-2 bg-white/10" />
 
           <Feather className="absolute top-16 left-12 w-8 h-16 text-white feather-float opacity-20" />
           <Feather className="absolute bottom-24 right-16 w-6 h-12 text-white feather-float opacity-15" style={{ animationDelay: "3s" }} />
@@ -131,9 +141,7 @@ export default function ScholarshipPage() {
             </div>
 
             <div className="animate-fade-up-d1">
-              <div className="font-display text-7xl sm:text-8xl lg:text-9xl font-bold text-white tracking-tight leading-none drop-shadow-lg">
-                Forever
-              </div>
+              <div className="font-display text-7xl sm:text-8xl lg:text-9xl font-bold text-white tracking-tight leading-none drop-shadow-lg">Forever</div>
               <div className="font-display text-7xl sm:text-8xl lg:text-9xl font-bold tracking-tight leading-none"
                 style={{ WebkitTextStroke: "2px white", color: "transparent", filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.3))" }}>
                 44
@@ -163,8 +171,24 @@ export default function ScholarshipPage() {
         <section className="bg-white py-28">
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="grid lg:grid-cols-5 gap-16 lg:gap-24 items-start">
-              {/* Left: Quote + stats */}
+
+              {/* Left: portrait photo + quote + stats */}
               <div className="lg:col-span-2 lg:sticky lg:top-24">
+                {/* Kaleb portrait — contained, not stretched */}
+                <div className="relative mb-10">
+                  <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-red-700 shadow-xl">
+                    <img
+                      src="/images/kaleb-portrait.jpg"
+                      alt="Kaleb Cory"
+                      className="w-full h-full object-cover object-top img-duotone"
+                    />
+                  </div>
+                  {/* Jersey number badge */}
+                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-red-700 text-white font-display text-sm font-bold px-4 py-1 rounded-full shadow">
+                    #44
+                  </div>
+                </div>
+
                 <div className="relative">
                   <div className="absolute -top-8 -left-4 font-display text-[120px] leading-none text-red-600/10 select-none">&ldquo;</div>
                   <blockquote className="relative font-display text-2xl text-slate-800 italic leading-relaxed font-light">
@@ -233,9 +257,7 @@ export default function ScholarshipPage() {
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="mb-16">
               <p className="font-mono-custom text-red-700 text-xs tracking-[0.4em] uppercase font-semibold mb-4">The Foundation of This Fund</p>
-              <h2 className="font-display text-5xl text-slate-900 font-light">
-                What <em className="italic text-red-700">44</em> Means
-              </h2>
+              <h2 className="font-display text-5xl text-slate-900 font-light">What <em className="italic text-red-700">44</em> Means</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-x-16 gap-y-4">
               <ValuePillar number="01" title="Strength" desc="The kind of strength that doesn't announce itself — that shows up quietly, steadily, even when it's hardest to find. Kaleb embodied this. Forever 44 carries it forward." />
@@ -273,7 +295,7 @@ export default function ScholarshipPage() {
               <div>
                 <div className="rounded-2xl border border-slate-200/80 bg-slate-50 p-10">
                   <p className="font-mono-custom text-red-700 text-xs tracking-[0.4em] uppercase font-semibold mb-6">Eligibility & Criteria</p>
-                  <p className="font-body-serif text-slate-600 text-sm leading-relaxed mb-6">The Forever 44 Scholarship is awarded to students who carry the qualities Kaleb exemplified. Applicants are evaluated on the following criteria:</p>
+                  <p className="font-body-serif text-slate-600 text-sm leading-relaxed mb-6">The Forever 44 Scholarship is awarded to students who carry the qualities Kaleb exemplified.</p>
                   <ul className="space-y-0 divide-y divide-slate-100">
                     <CriteriaItem>Graduating high school senior or current undergraduate student</CriteriaItem>
                     <CriteriaItem>Demonstrated resilience, perseverance, and strength of character</CriteriaItem>
@@ -310,7 +332,6 @@ export default function ScholarshipPage() {
                 </div>
               </div>
 
-              {/* The number as art */}
               <div className="flex flex-col items-center justify-center">
                 <div className="relative">
                   <div className="font-display text-[200px] leading-none font-bold select-none"
@@ -337,9 +358,7 @@ export default function ScholarshipPage() {
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="text-center mb-16">
               <p className="font-mono-custom text-red-700 text-xs tracking-[0.4em] uppercase font-semibold mb-4">Get Involved</p>
-              <h2 className="font-display text-5xl text-slate-900 font-light">
-                Help us carry it <em className="italic text-red-700">forward</em>
-              </h2>
+              <h2 className="font-display text-5xl text-slate-900 font-light">Help us carry it <em className="italic text-red-700">forward</em></h2>
               <p className="mt-4 font-body-serif text-slate-500 text-lg max-w-xl mx-auto leading-relaxed">
                 Whether you knew Kaleb, believe in what this scholarship stands for, or simply want to support a student who refuses to give up — there is a place for you here.
               </p>
