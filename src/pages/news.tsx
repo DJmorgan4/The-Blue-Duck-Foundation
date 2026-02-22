@@ -14,7 +14,7 @@ type NewsProps = {
   warnings: string[];
 };
 
-// ─── Status Config ─────────────────────────────────────────────────────────────
+// ─── Status Config ──────────────────────────────────────────────────────────
 const STATUS_CONFIG: Record<
   ConservationNewsItem["status"],
   { label: string; dot: string; pill: string }
@@ -37,12 +37,15 @@ const STATUS_CONFIG: Record<
 };
 
 const CATEGORY_ACCENT: Record<string, string> = {
-  Wetlands: "bg-cyan-50 text-cyan-700 border-cyan-200",
-  Waterfowl: "bg-teal-50 text-teal-700 border-teal-200",
+  Wetlands:      "bg-cyan-50 text-cyan-700 border-cyan-200",
+  Wildlife:      "bg-teal-50 text-teal-700 border-teal-200",
   "Clean Water": "bg-blue-50 text-blue-700 border-blue-200",
-  Litigation: "bg-orange-50 text-orange-700 border-orange-200",
-  Legislation: "bg-violet-50 text-violet-700 border-violet-200",
-  "Land Use": "bg-lime-50 text-lime-700 border-lime-200",
+  Litigation:    "bg-orange-50 text-orange-700 border-orange-200",
+  Legislation:   "bg-violet-50 text-violet-700 border-violet-200",
+  "Land Use":    "bg-lime-50 text-lime-700 border-lime-200",
+  Archaeology:   "bg-amber-50 text-amber-700 border-amber-200",
+  Humanitarian:  "bg-rose-50 text-rose-700 border-rose-200",
+  Energy:        "bg-yellow-50 text-yellow-700 border-yellow-200",
 };
 
 function getCategoryStyle(cat: string): string {
@@ -72,7 +75,7 @@ function clampText(text: string, maxChars: number): string {
   return clean.slice(0, maxChars - 1).trimEnd() + "…";
 }
 
-// ─── getStaticProps ────────────────────────────────────────────────────────────
+// ─── getStaticProps ─────────────────────────────────────────────────────────
 export const getStaticProps: GetStaticProps<NewsProps> = async () => {
   const warnings: string[] = [];
   const options: FetchAllOptions = {
@@ -88,7 +91,7 @@ export const getStaticProps: GetStaticProps<NewsProps> = async () => {
   };
 };
 
-// ─── Stat Card ─────────────────────────────────────────────────────────────────
+// ─── Stat Card ──────────────────────────────────────────────────────────────
 function StatCard({ value, label, color }: { value: number; label: string; color: string }) {
   return (
     <div className="text-center">
@@ -98,21 +101,19 @@ function StatCard({ value, label, color }: { value: number; label: string; color
   );
 }
 
-// ─── News Card ─────────────────────────────────────────────────────────────────
+// ─── News Card ──────────────────────────────────────────────────────────────
 function NewsCard({ item }: { item: ConservationNewsItem }) {
   const status = STATUS_CONFIG[item.status];
   const { month, day, year } = formatDate(item.date);
 
   return (
     <article className="group relative flex flex-col rounded-2xl border border-slate-200/80 bg-white transition-all hover:border-slate-300 hover:shadow-lg overflow-hidden">
-      {/* Top accent line */}
       <div className={`h-0.5 w-full ${
         item.status === "active" ? "bg-red-500" :
         item.status === "watch" ? "bg-amber-400" : "bg-emerald-500"
       }`} />
 
       <div className="flex gap-5 p-5 pb-0">
-        {/* Date column */}
         <div className="flex flex-col items-center min-w-[42px] pt-0.5 flex-shrink-0">
           <span className="text-[10px] font-bold tracking-widest text-slate-400 uppercase">{month}</span>
           <span className="text-2xl font-light leading-none text-slate-900">{day}</span>
@@ -121,7 +122,6 @@ function NewsCard({ item }: { item: ConservationNewsItem }) {
 
         <div className="w-px bg-slate-100 self-stretch" />
 
-        {/* Main content */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap mb-2">
             <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[11px] font-semibold border ${status.pill}`}>
@@ -146,7 +146,6 @@ function NewsCard({ item }: { item: ConservationNewsItem }) {
         </div>
       </div>
 
-      {/* Summary */}
       <div className="px-5 pb-5 mt-2">
         <div className="ml-[55px]">
           <p className="text-sm text-slate-600 leading-relaxed">
@@ -182,7 +181,7 @@ function NewsCard({ item }: { item: ConservationNewsItem }) {
   );
 }
 
-// ─── Filter Pill ───────────────────────────────────────────────────────────────
+// ─── Filter Pill ────────────────────────────────────────────────────────────
 function FilterPill({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
   return (
     <button
@@ -198,7 +197,7 @@ function FilterPill({ label, active, onClick }: { label: string; active: boolean
   );
 }
 
-// ─── Main Page ─────────────────────────────────────────────────────────────────
+// ─── Page ───────────────────────────────────────────────────────────────────
 export default function News({ items, generatedAt, warnings }: NewsProps) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<string>("All");
@@ -225,10 +224,10 @@ export default function News({ items, generatedAt, warnings }: NewsProps) {
     });
   }, [items, query, category, status, source]);
 
-  const activeCount = items.filter((i) => i.status === "active").length;
-  const watchCount = items.filter((i) => i.status === "watch").length;
+  const activeCount  = items.filter((i) => i.status === "active").length;
+  const watchCount   = items.filter((i) => i.status === "watch").length;
   const resolvedCount = items.filter((i) => i.status === "resolved").length;
-  const hasFilters = query || category !== "All" || status !== "All" || source !== "All";
+  const hasFilters   = query || category !== "All" || status !== "All" || source !== "All";
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -264,21 +263,21 @@ export default function News({ items, generatedAt, warnings }: NewsProps) {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                 </span>
-                Updated every 30 minutes · ISR
+                Updated every 30 minutes · Live Feed
               </div>
 
               <h1 className="text-5xl font-light tracking-tight text-slate-900 sm:text-6xl lg:text-7xl">
-                Texas Conservation Watch
+                Conservation Watch
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-slate-600 max-w-2xl">
-                Authoritative tracking of wetland rules, litigation, land fights, and waterfowl policy — sourced directly from government records and court filings. No opinion, no noise.
+                Authoritative tracking of environmental policy, litigation, land rights, freshwater issues, and conservation threats — sourced directly from government records, court filings, and primary sources. No opinion, no noise.
               </p>
 
               <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-8 border-t border-slate-200 pt-8">
-                <StatCard value={activeCount} label="Active Threats" color="text-red-600" />
-                <StatCard value={watchCount} label="Under Watch" color="text-amber-600" />
-                <StatCard value={resolvedCount} label="Resolved" color="text-emerald-600" />
-                <StatCard value={items.length} label="Total Items" color="text-slate-900" />
+                <StatCard value={activeCount}   label="Active Threats"  color="text-red-600" />
+                <StatCard value={watchCount}    label="Under Watch"     color="text-amber-600" />
+                <StatCard value={resolvedCount} label="Resolved"        color="text-emerald-600" />
+                <StatCard value={items.length}  label="Total Items"     color="text-slate-900" />
               </div>
 
               <p className="mt-4 text-xs text-slate-400">
@@ -310,7 +309,6 @@ export default function News({ items, generatedAt, warnings }: NewsProps) {
 
           {/* Controls */}
           <div className="flex flex-col gap-4 mb-10">
-            {/* Search */}
             <div className="relative">
               <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -318,7 +316,7 @@ export default function News({ items, generatedAt, warnings }: NewsProps) {
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search issues, agencies, regulations… (e.g. WOTUS, Clean Water Act, USFWS)"
+                placeholder="Search issues, agencies, regulations… (e.g. WOTUS, Clean Water Act, ESA, freshwater)"
                 className="w-full rounded-xl border border-slate-300 bg-white pl-10 pr-10 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400/20"
               />
               {query && (
@@ -328,7 +326,6 @@ export default function News({ items, generatedAt, warnings }: NewsProps) {
               )}
             </div>
 
-            {/* Status filters */}
             <div className="flex flex-wrap gap-2 items-center">
               <span className="text-xs font-medium text-slate-400 uppercase tracking-wider mr-1">Status:</span>
               {(["All", "active", "watch", "resolved"] as const).map((s) => (
@@ -346,7 +343,6 @@ export default function News({ items, generatedAt, warnings }: NewsProps) {
               ))}
             </div>
 
-            {/* Source + count */}
             <div className="flex items-center gap-3 flex-wrap">
               <div className="relative">
                 <select
@@ -377,9 +373,9 @@ export default function News({ items, generatedAt, warnings }: NewsProps) {
           {/* Results */}
           {filtered.length === 0 ? (
             <div className="rounded-2xl border border-slate-200/80 bg-slate-50 p-16 text-center">
-              <div className="text-4xl mb-4">🌾</div>
+              <div className="text-4xl mb-4">🌍</div>
               <div className="text-slate-700 font-semibold mb-1">No matching issues found</div>
-              <div className="text-sm text-slate-500">Try broadening your search — e.g. "wetlands", "waterfowl", "ESA", "Clean Water Act"</div>
+              <div className="text-sm text-slate-500">Try broadening your search — e.g. "wetlands", "freshwater", "ESA", "Clean Water Act", "archaeology"</div>
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -398,7 +394,7 @@ export default function News({ items, generatedAt, warnings }: NewsProps) {
               <div>
                 <h3 className="text-xl font-semibold text-slate-900 mb-2">How We Publish</h3>
                 <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                  The Blue Duck Foundation prioritizes government records and court documents — the safest, most citable primary sources. For third-party media, we publish headlines, brief excerpts, and direct links only. No copy-paste. No misrepresentation.
+                  The Blue Duck Foundation prioritizes government records, court documents, and verified primary sources — the safest, most citable references. For third-party media, we publish headlines, brief excerpts, and direct links only. No copy-paste. No misrepresentation. Full transparency, always.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {[
@@ -417,18 +413,18 @@ export default function News({ items, generatedAt, warnings }: NewsProps) {
             </div>
           </section>
 
-          {/* Foundation CTA */}
+          {/* CTA */}
           <section className="mt-6">
             <div className="overflow-hidden rounded-2xl bg-slate-900 shadow-xl">
               <div className="px-8 py-10 md:px-12">
                 <div className="grid gap-6 md:grid-cols-2 md:items-center">
                   <div>
-                    <h3 className="text-2xl font-light tracking-tight text-white">Help protect Texas wetlands.</h3>
+                    <h3 className="text-2xl font-light tracking-tight text-white">Support the work behind the watch.</h3>
                     <p className="mt-2 text-slate-400 text-sm">The Blue Duck Foundation · 501(c)(3) · EIN 41-4361489 · All donations are tax-deductible</p>
                   </div>
                   <div className="flex gap-3 md:justify-end">
                     <a href="/contact" className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition-colors hover:bg-slate-100">
-                      Donate
+                      Get Involved
                     </a>
                     <a href="/about" className="inline-flex items-center justify-center rounded-xl border border-white/20 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10">
                       Our Mission

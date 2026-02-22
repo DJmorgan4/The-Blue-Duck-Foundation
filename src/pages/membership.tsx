@@ -28,7 +28,7 @@ const tiers: Tier[] = [
     annualPrice: 100,
     featured: false,
     icon: "◎",
-    description: "Begin your conservation journey. Every drop fills the playa.",
+    description: "Begin your conservation journey. Every contribution, every voice, every drop counts.",
     benefits: [
       "Blue Duck Foundation digital membership card",
       "Quarterly conservation newsletter",
@@ -46,12 +46,12 @@ const tiers: Tier[] = [
     annualPrice: 250,
     featured: false,
     icon: "◈",
-    description: "Wade deeper. The marsh is where life flourishes and purpose takes root.",
+    description: "Wade deeper. The marsh is where life flourishes — and where real work takes root.",
     benefits: [
       "Everything in Playa",
       "Printed membership card & welcome packet",
       "Invitations to conservation field events",
-      "Behind-the-scenes project updates",
+      "Behind-the-scenes program and project updates",
       "Member forum & community access",
       "10% discount on Foundation merchandise",
       "Annual impact report (printed)",
@@ -67,11 +67,11 @@ const tiers: Tier[] = [
     featured: true,
     badge: "Most Popular",
     icon: "◆",
-    description: "Soar with us. Flyway members are the backbone of everything we build.",
+    description: "Soar with us. Flyway members are the backbone of everything we build — here and globally.",
     benefits: [
       "Everything in Marsh",
       "Named recognition in annual conservation report",
-      "Priority access to Foundation events & hunts",
+      "Priority access to Foundation events",
       "Exclusive Flyway member patch & hat",
       "Direct line to Foundation leadership",
       "Voting rights on conservation priorities",
@@ -89,14 +89,14 @@ const tiers: Tier[] = [
     featured: false,
     badge: "Founding Patron",
     icon: "❖",
-    description: "The sentinels stand watch over what matters most. You are foundational.",
+    description: "The sentinels stand watch over what matters most. You are foundational to everything we become.",
     benefits: [
       "Everything in Flyway",
       "Founding Patron plaque at Foundation headquarters",
       "Personalized conservation impact briefing (annual)",
       "Name on all major conservation project signage",
       "Exclusive Sentinel member jacket",
-      "One complimentary seat at annual Gala",
+      "One complimentary seat at annual Banquet",
       "Input on Foundation strategic direction",
       "Direct scholarship fund contribution credited",
       "Legacy giving program access",
@@ -106,11 +106,30 @@ const tiers: Tier[] = [
 ];
 
 const faqs = [
-  { q: "Is my membership tax-deductible?", a: "Yes. The Blue Duck Foundation is a registered 501(c)(3) nonprofit (EIN 41-4361489). All membership contributions are tax-deductible to the extent permitted by law. You will receive an official receipt for your records." },
-  { q: "Can I cancel or change my membership tier?", a: "Absolutely. You can upgrade, downgrade, or cancel your membership at any time. Annual memberships are non-refundable but can be upgraded. We believe in making conservation accessible, not locked in." },
-  { q: "How are membership funds used?", a: "Membership fees directly fund conservation programs, wetland restoration initiatives, the Forever 44 Scholarship Fund, IoT environmental monitoring systems, and community engagement events across Texas." },
-  { q: "What is the Forever 44 Scholarship Fund?", a: "The Forever 44 Scholarship Fund is established in memory of Kaleb Cory and supports graduating seniors who demonstrate resilience, heart, and determination. Flyway and above members are recognized as scholarship supporters." },
-  { q: "Do you offer corporate or organizational memberships?", a: "Yes. We offer custom partnership packages for businesses, landowner associations, hunting clubs, and conservation organizations. Contact us directly to discuss a partnership that fits your goals." },
+  {
+    q: "Is my membership tax-deductible?",
+    a: "Yes. The Blue Duck Foundation is a registered 501(c)(3) nonprofit (EIN 41-4361489). All membership contributions are tax-deductible to the extent permitted by law. You will receive an official receipt for your records.",
+  },
+  {
+    q: "Can I cancel or change my membership tier?",
+    a: "Absolutely. You can upgrade, downgrade, or cancel your membership at any time. Annual memberships are non-refundable but can be upgraded. We believe in making conservation accessible — not locked in.",
+  },
+  {
+    q: "How are membership funds used?",
+    a: "Membership fees directly fund our conservation programs, environmental monitoring technology, archaeological and cultural preservation work, the Forever 44 Scholarship Fund, humanitarian environmental support, and community engagement events.",
+  },
+  {
+    q: "What is the Forever 44 Scholarship Fund?",
+    a: "The Forever 44 Scholarship Fund is established in memory of Kaleb Cory and supports graduating seniors who demonstrate resilience, heart, and determination. Flyway and above members are recognized as scholarship supporters.",
+  },
+  {
+    q: "Do you offer corporate or organizational memberships?",
+    a: "Yes. We offer custom partnership packages for businesses, conservation organizations, academic institutions, and community groups — domestically and internationally. Contact us directly to explore a partnership built around your goals.",
+  },
+  {
+    q: "Can international supporters become members?",
+    a: "Yes. The Blue Duck Foundation welcomes members and supporters from anywhere in the world. Our mission is global, and so is our community. Membership benefits are delivered digitally where applicable.",
+  },
 ];
 
 function TierCard({ tier, billing }: { tier: Tier; billing: BillingCycle }) {
@@ -118,9 +137,19 @@ function TierCard({ tier, billing }: { tier: Tier; billing: BillingCycle }) {
   const savings = tier.monthlyPrice * 12 - tier.annualPrice;
 
   return (
-    <div className={`group relative flex flex-col rounded-2xl border transition-all hover:shadow-lg ${tier.featured ? "border-slate-900 bg-slate-900 text-white" : "border-slate-200/80 bg-white hover:border-slate-300"}`}>
+    <div
+      className={`group relative flex flex-col rounded-2xl border transition-all hover:shadow-lg ${
+        tier.featured
+          ? "border-slate-900 bg-slate-900 text-white"
+          : "border-slate-200/80 bg-white hover:border-slate-300"
+      }`}
+    >
       {tier.badge && (
-        <div className={`absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-xs font-semibold ${tier.featured ? "bg-emerald-500 text-white" : "bg-slate-100 text-slate-700"}`}>
+        <div
+          className={`absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-xs font-semibold ${
+            tier.featured ? "bg-emerald-500 text-white" : "bg-slate-100 text-slate-700"
+          }`}
+        >
           {tier.badge}
         </div>
       )}
@@ -130,35 +159,57 @@ function TierCard({ tier, billing }: { tier: Tier; billing: BillingCycle }) {
           <div>
             <div className={`text-2xl mb-1 ${tier.featured ? "text-white" : "text-slate-400"}`}>{tier.icon}</div>
             <h3 className={`text-xl font-semibold ${tier.featured ? "text-white" : "text-slate-900"}`}>{tier.name}</h3>
-            <p className={`text-xs font-medium tracking-widest uppercase mt-0.5 ${tier.featured ? "text-slate-400" : "text-slate-400"}`}>{tier.subtitle}</p>
+            <p className={`text-xs font-medium tracking-widest uppercase mt-0.5 ${tier.featured ? "text-slate-400" : "text-slate-400"}`}>
+              {tier.subtitle}
+            </p>
           </div>
           <div className="text-right">
-            <div className={`text-4xl font-light tracking-tight ${tier.featured ? "text-white" : "text-slate-900"}`}>${price}</div>
-            <div className={`text-xs mt-0.5 ${tier.featured ? "text-slate-400" : "text-slate-500"}`}>{billing === "annual" ? "/ year" : "/ month"}</div>
+            <div className={`text-4xl font-light tracking-tight ${tier.featured ? "text-white" : "text-slate-900"}`}>
+              ${price}
+            </div>
+            <div className={`text-xs mt-0.5 ${tier.featured ? "text-slate-400" : "text-slate-500"}`}>
+              {billing === "annual" ? "/ year" : "/ month"}
+            </div>
             {billing === "annual" && savings > 0 && (
               <div className="text-xs mt-0.5 text-emerald-500 font-medium">Save ${savings}</div>
             )}
           </div>
         </div>
 
-        <p className={`text-sm italic leading-relaxed mb-5 ${tier.featured ? "text-slate-400" : "text-slate-500"}`}>{tier.description}</p>
+        <p className={`text-sm italic leading-relaxed mb-5 ${tier.featured ? "text-slate-400" : "text-slate-500"}`}>
+          {tier.description}
+        </p>
 
         <div className={`h-px mb-5 ${tier.featured ? "bg-slate-700" : "bg-slate-100"}`} />
 
         <ul className="space-y-2.5 flex-1 mb-8">
           {tier.benefits.map((benefit, i) => (
             <li key={i} className="flex items-start gap-3">
-              <svg className={`mt-0.5 h-4 w-4 flex-shrink-0 ${tier.featured ? "text-emerald-400" : "text-emerald-500"}`} fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+              <svg
+                className={`mt-0.5 h-4 w-4 flex-shrink-0 ${tier.featured ? "text-emerald-400" : "text-emerald-500"}`}
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                  clipRule="evenodd"
+                />
               </svg>
-              <span className={`text-sm leading-relaxed ${tier.featured ? "text-slate-300" : "text-slate-600"}`}>{benefit}</span>
+              <span className={`text-sm leading-relaxed ${tier.featured ? "text-slate-300" : "text-slate-600"}`}>
+                {benefit}
+              </span>
             </li>
           ))}
         </ul>
 
         <Link
           href="/contact"
-          className={`block text-center rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${tier.featured ? "bg-white text-slate-900 hover:bg-slate-100" : "bg-slate-900 text-white hover:bg-slate-800"}`}
+          className={`block text-center rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${
+            tier.featured
+              ? "bg-white text-slate-900 hover:bg-slate-100"
+              : "bg-slate-900 text-white hover:bg-slate-800"
+          }`}
         >
           {tier.cta}
         </Link>
@@ -192,7 +243,6 @@ export default function MembershipPage() {
       <Header />
 
       <main className="flex-grow bg-white">
-
         {/* HERO */}
         <section className="relative overflow-hidden border-b border-slate-100">
           <div className="absolute inset-0 -z-10">
@@ -212,13 +262,17 @@ export default function MembershipPage() {
                 Become a Member
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-slate-600 max-w-2xl">
-                Conservation is not a spectator sport. Every member of the Blue Duck Foundation is a stakeholder in Texas wetlands, wildlife, and the legacies we're building together.
+                Conservation is not a spectator sport. Every member of The Blue Duck Foundation is a stakeholder in the natural world, the communities that depend on it, and the legacies we're building together — here and globally.
               </p>
               <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-                {["501(c)(3) · EIN 41-4361489", "100% goes to conservation", "Cancel anytime"].map((item) => (
+                {["501(c)(3) · EIN 41-4361489", "Funds global programs", "Cancel anytime"].map((item) => (
                   <div key={item} className="flex items-center gap-2 text-sm text-slate-600">
                     <svg className="h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                     {item}
                   </div>
@@ -233,18 +287,24 @@ export default function MembershipPage() {
           <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center mb-12">
               <h2 className="text-4xl font-light tracking-tight text-slate-900">Choose your membership</h2>
-              <p className="mt-4 text-lg text-slate-600">Four tiers, each named for a Texas wetland ecosystem. Every level makes a direct impact on conservation across the Central Flyway.</p>
+              <p className="mt-4 text-lg text-slate-600">
+                Four tiers, each named for a natural ecosystem. Every level makes a direct impact on conservation, research, and community work — locally and around the world.
+              </p>
 
               <div className="mt-8 inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1">
                 <button
                   onClick={() => setBilling("monthly")}
-                  className={`rounded-lg px-6 py-2.5 text-sm font-semibold transition-all ${billing === "monthly" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-900"}`}
+                  className={`rounded-lg px-6 py-2.5 text-sm font-semibold transition-all ${
+                    billing === "monthly" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-900"
+                  }`}
                 >
                   Monthly
                 </button>
                 <button
                   onClick={() => setBilling("annual")}
-                  className={`rounded-lg px-6 py-2.5 text-sm font-semibold transition-all ${billing === "annual" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-900"}`}
+                  className={`rounded-lg px-6 py-2.5 text-sm font-semibold transition-all ${
+                    billing === "annual" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-900"
+                  }`}
                 >
                   Annual <span className="ml-1 text-emerald-600">(Save 17%)</span>
                 </button>
@@ -252,7 +312,9 @@ export default function MembershipPage() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-              {tiers.map((tier) => <TierCard key={tier.id} tier={tier} billing={billing} />)}
+              {tiers.map((tier) => (
+                <TierCard key={tier.id} tier={tier} billing={billing} />
+              ))}
             </div>
 
             {/* Corporate callout */}
@@ -260,10 +322,15 @@ export default function MembershipPage() {
               <div className="grid gap-6 md:grid-cols-2 md:items-center">
                 <div>
                   <h3 className="text-xl font-semibold text-slate-900">Corporate & Organizational Partnerships</h3>
-                  <p className="mt-2 text-slate-600">Hunting clubs, landowner associations, conservation orgs, and businesses — we offer custom partnership packages built around your goals and values.</p>
+                  <p className="mt-2 text-slate-600">
+                    Conservation organizations, academic institutions, energy companies, businesses, and community groups — we offer custom partnership packages built around your goals, values, and global reach.
+                  </p>
                 </div>
                 <div className="md:text-right">
-                  <Link href="/contact" className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-800">
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-800"
+                  >
                     Inquire About Partnerships
                   </Link>
                 </div>
@@ -308,7 +375,7 @@ export default function MembershipPage() {
                     ["Personal impact briefing", false, false, false, true],
                     ["Project signage recognition", false, false, false, true],
                     ["Sentinel member jacket", false, false, false, true],
-                    ["Annual Gala seat", false, false, false, true],
+                    ["Annual Banquet seat", false, false, false, true],
                   ].map(([feature, ...values], i) => (
                     <tr key={i} className={i % 2 === 0 ? "bg-slate-50/50" : ""}>
                       <td className="py-3 px-6 text-sm text-slate-600">{feature as string}</td>
@@ -316,7 +383,11 @@ export default function MembershipPage() {
                         <td key={j} className="py-3 px-4 text-center">
                           {val === true ? (
                             <svg className="h-5 w-5 mx-auto text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+                              <path
+                                fillRule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clipRule="evenodd"
+                              />
                             </svg>
                           ) : val === false ? (
                             <svg className="h-4 w-4 mx-auto text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -340,25 +411,56 @@ export default function MembershipPage() {
           <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
             <div className="grid gap-16 lg:grid-cols-2 lg:gap-24 items-center">
               <div>
-                <h2 className="text-4xl font-light tracking-tight text-slate-900">Your membership is land, water, and legacy</h2>
+                <h2 className="text-4xl font-light tracking-tight text-slate-900">
+                  Your membership is land, water, and legacy
+                </h2>
                 <p className="mt-6 text-lg leading-relaxed text-slate-600">
-                  Texas is losing wetlands at an alarming rate. The playas of the Panhandle, the marshes of the coast, the riparian corridors that birds depend on — they don't protect themselves.
+                  Ecosystems are disappearing. Archaeological sites are being lost. Communities in resource-dependent regions lack access to basic environmental safety and clean water. Forward-thinking research in conservation and renewable energy too often goes unfunded.
                 </p>
                 <p className="mt-4 leading-relaxed text-slate-600">
-                  The Blue Duck Foundation exists to change that. Your membership isn't a donation — it's a stake in something real, something that outlasts all of us.
+                  The Blue Duck Foundation exists to change that — creating transparent, accountable pathways for support that make a measurable difference. Your membership isn't a donation. It's a stake in something real, something that outlasts all of us.
                 </p>
                 <p className="mt-6 text-lg italic text-slate-500">
-                  "We are here not only to preserve the earth, but to preserve the special bonds that connect families and friends across generations."
+                  "We are here not only to preserve the earth, but to preserve the bonds that connect people, place, and purpose across generations."
                 </p>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 {[
-                  { icon: "🦆", title: "Wetland Restoration", desc: "Funding playa lake restoration, coastal marsh protection, and waterway health monitoring." },
-                  { icon: "📡", title: "Environmental Intelligence", desc: "Deploying IoT sensor networks to track wetland health in real time." },
-                  { icon: "🎓", title: "Forever 44 Scholarship", desc: "Supporting students in memory of Kaleb Cory — because legacy is something we continue." },
-                  { icon: "🤝", title: "Community & Stewardship", desc: "Building a network of hunters, landowners, and conservationists across Texas." },
+                  {
+                    icon: "🌍",
+                    title: "Global Conservation",
+                    desc: "Funding ecosystem protection, habitat restoration, and biodiversity programs worldwide.",
+                  },
+                  {
+                    icon: "📡",
+                    title: "Environmental Intelligence",
+                    desc: "Deploying IoT sensor networks and open data platforms for real-time conservation accountability.",
+                  },
+                  {
+                    icon: "🏺",
+                    title: "Heritage Preservation",
+                    desc: "Protecting archaeological sites, indigenous histories, and culturally significant landscapes.",
+                  },
+                  {
+                    icon: "🎓",
+                    title: "Forever 44 Scholarship",
+                    desc: "Supporting students in memory of Kaleb Cory — because legacy is something we continue.",
+                  },
+                  {
+                    icon: "💧",
+                    title: "Clean Water & Humanitarian Aid",
+                    desc: "Freshwater access initiatives and direct assistance for underserved communities globally.",
+                  },
+                  {
+                    icon: "🤝",
+                    title: "Open Pathways",
+                    desc: "Creating compliant, transparent channels for forward-thinking research and conservation support.",
+                  },
                 ].map((item) => (
-                  <div key={item.title} className="group relative rounded-2xl border border-slate-200/80 bg-white p-6 transition-all hover:border-slate-300 hover:shadow-sm">
+                  <div
+                    key={item.title}
+                    className="group relative rounded-2xl border border-slate-200/80 bg-white p-6 transition-all hover:border-slate-300 hover:shadow-sm"
+                  >
                     <div className="text-2xl mb-3">{item.icon}</div>
                     <h3 className="text-base font-semibold text-slate-900">{item.title}</h3>
                     <p className="mt-1 text-sm text-slate-600 leading-relaxed">{item.desc}</p>
@@ -386,15 +488,25 @@ export default function MembershipPage() {
               <div className="px-8 py-12 md:px-12 md:py-16">
                 <div className="grid gap-8 md:grid-cols-2 md:items-center">
                   <div>
-                    <h3 className="text-3xl font-light tracking-tight text-white">The flyway doesn't wait.<br />Neither should you.</h3>
-                    <p className="mt-3 text-lg text-slate-300">Join the Blue Duck Foundation and become part of the conservation story being written across Texas right now.</p>
+                    <h3 className="text-3xl font-light tracking-tight text-white">
+                      The world doesn't wait.<br />Neither should you.
+                    </h3>
+                    <p className="mt-3 text-lg text-slate-300">
+                      Join The Blue Duck Foundation and become part of a conservation story being written across communities, ecosystems, and borders — right now.
+                    </p>
                     <p className="mt-4 text-sm text-slate-500">501(c)(3) · EIN 41-4361489 · All memberships are tax-deductible</p>
                   </div>
                   <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
-                    <Link href="/contact" className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 font-semibold text-slate-900 transition-colors hover:bg-slate-100">
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 font-semibold text-slate-900 transition-colors hover:bg-slate-100"
+                    >
                       Join as Flyway Member
                     </Link>
-                    <Link href="/about" className="inline-flex items-center justify-center rounded-xl border border-white/30 px-8 py-4 font-semibold text-white transition-colors hover:bg-white/10">
+                    <Link
+                      href="/about"
+                      className="inline-flex items-center justify-center rounded-xl border border-white/30 px-8 py-4 font-semibold text-white transition-colors hover:bg-white/10"
+                    >
                       Learn More
                     </Link>
                   </div>

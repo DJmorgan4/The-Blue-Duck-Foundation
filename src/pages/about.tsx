@@ -99,17 +99,17 @@ export default function AboutPage() {
               <div className="mt-10 rounded-2xl border border-slate-200/80 bg-slate-900 px-10 py-8">
                 <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">Our Mission</p>
                 <p className="mt-4 text-2xl font-light leading-snug tracking-tight text-white sm:text-3xl">
-                  To protect, restore, and champion Texas wetlands and wildlife — not for a season, but for every generation that follows.
+                  To protect, restore, and champion the natural world and the communities that depend on it — transparently, scientifically, and without borders.
                 </p>
               </div>
 
               <p className="mt-8 max-w-3xl text-lg leading-relaxed text-slate-600">
-                Founded on a deep respect for the land and the creatures that depend on it, The Blue Duck Foundation brings together science, community, and a genuine love of the outdoors to build lasting conservation impact across the Central Flyway.
+                Born in Texas and built for the world, The Blue Duck Foundation brings together conservation science, environmental technology, cultural preservation, and humanitarian support into a single, fully accountable organization. We go where the work is needed — and we show our work every step of the way.
               </p>
 
               <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
                 <Link href="/conservation" className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-8 py-4 font-semibold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-md">
-                  Conservation focus
+                  Our programs
                 </Link>
                 <Link href="/contact" className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-8 py-4 font-semibold text-slate-900 transition-all hover:bg-slate-50">
                   Get involved
@@ -125,14 +125,14 @@ export default function AboutPage() {
             <div className="mx-auto max-w-3xl text-center">
               <h2 className="text-4xl font-light tracking-tight text-slate-900">What we stand for</h2>
               <p className="mt-4 text-lg text-slate-600">
-                Four words guide every decision we make, every partnership we form, and every acre we protect.
+                Four words guide every decision we make, every partnership we form, and every community we serve.
               </p>
             </div>
             <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              <ValueCard number="01" title="Integrity" desc="We operate with complete financial transparency and scientific honesty. Every dollar and every data point is accounted for — no exceptions." />
-              <ValueCard number="02" title="Respect" desc="For the land, for wildlife, for landowners, for hunters, and for the communities that have stewarded these places for generations." />
-              <ValueCard number="03" title="Restore" desc="We don't just protect what remains — we actively work to bring back wetlands, waterways, and habitats that have been lost or degraded over time." />
-              <ValueCard number="04" title="Create" desc="Innovative conservation takes creativity. We build new tools, new partnerships, and new approaches to meet the challenges facing Texas ecosystems today." />
+              <ValueCard number="01" title="Integrity" desc="Complete financial transparency and scientific honesty. Every dollar tracked, every data point accountable — publicly, always." />
+              <ValueCard number="02" title="Respect" desc="For the land, for wildlife, for indigenous communities, for workers, and for every person whose livelihood is tied to the natural world." />
+              <ValueCard number="03" title="Restore" desc="We don't just protect what remains — we actively work to bring back ecosystems, waterways, habitats, and communities that have been left behind." />
+              <ValueCard number="04" title="Advance" desc="Meaningful conservation requires innovation. We build new tools, new partnerships, and open pathways for research and support that have historically been out of reach." />
             </div>
           </div>
         </section>
@@ -144,35 +144,66 @@ export default function AboutPage() {
               <div>
                 <h2 className="text-4xl font-light tracking-tight text-slate-900">Our mission in depth</h2>
                 <p className="mt-6 text-lg leading-relaxed text-slate-600">
-                  The Blue Duck Foundation exists to close the gap between environmental science and on-the-ground conservation action. We focus specifically on the seasonal wetlands, playa lakes, coastal marshes, and riparian corridors that make Texas one of the most critical waypoints on the Central Flyway — habitats that are shrinking faster than most people realize.
+                  The Blue Duck Foundation exists to close the gap between environmental science and real-world action — and between forward-thinking work and the people and funding needed to support it.
                 </p>
                 <p className="mt-4 leading-relaxed text-slate-600">
-                  We believe that hunters, landowners, farmers, and conservationists share more common ground than divides them. Our work bridges those communities, building coalitions that translate into real acres protected, real water restored, and real wildlife populations sustained.
+                  We are rooted in Texas and proud of it. But our Certificate of Formation now reflects what we've always believed: that conservation, research, cultural preservation, and humanitarian support don't stop at state lines or national borders. Ecosystems don't. Neither do we.
                 </p>
                 <p className="mt-4 leading-relaxed text-slate-600">
-                  Science guides our strategy. Community drives our impact. Transparency earns our trust.
+                  We create safe, compliant, and transparent pathways for individuals, communities, and organizations to support meaningful work — environmental monitoring technology, archaeological preservation, freshwater access, renewable energy research, and more. Work that too often goes unfunded because the infrastructure to support it hasn't existed.
+                </p>
+                <p className="mt-4 leading-relaxed text-slate-600">
+                  We're building that infrastructure now.
                 </p>
               </div>
               <div>
                 <h2 className="text-4xl font-light tracking-tight text-slate-900">Strategic goals</h2>
                 <div className="mt-8 space-y-8">
-                  <GoalItem number="01" title="Protect critical wetland habitat" desc="Identify and establish conservation easements, partnerships, and funding streams to protect high-priority wetlands across the Texas Panhandle, coastal prairies, and river bottomlands." />
-                  <GoalItem number="02" title="Restore degraded ecosystems" desc="Fund and execute habitat restoration projects — replanting native vegetation, re-hydrating drained wetlands, and stabilizing eroded waterways — with documented before-and-after outcomes." />
-                  <GoalItem number="03" title="Build a statewide conservation network" desc="Connect hunters, landowners, wildlife agencies, and environmental professionals into a coordinated network that amplifies impact beyond what any single organization can achieve." />
-                  <GoalItem number="04" title="Advance conservation technology" desc="Deploy IoT environmental monitoring, remote sensing, and data tools that give land managers real-time intelligence to make better decisions for wildlife and water quality." />
+                  <GoalItem number="01" title="Build global conservation capacity" desc="Establish partnerships, easements, and funding streams for high-priority ecosystems — wetlands, waterways, forests, coastal regions, and beyond — wherever the need is greatest." />
+                  <GoalItem number="02" title="Advance environmental science and technology" desc="Deploy IoT monitoring systems, data platforms, and research tools that give land managers, scientists, and communities real-time intelligence and measurable outcomes." />
+                  <GoalItem number="03" title="Preserve cultural and natural heritage" desc="Fund and conduct archaeological documentation, indigenous history research, and geological heritage protection domestically and internationally." />
+                  <GoalItem number="04" title="Create open pathways for support" desc="Provide transparent, fully compliant channels for donors and partners to support forward-thinking work in renewables, conservation, and humanitarian environmental aid — no gatekeeping." />
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* BOARD */}
+        {/* PROGRAM AREAS */}
         <section className="border-b border-slate-100 bg-white">
+          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+            <h2 className="text-4xl font-light tracking-tight text-slate-900">Our program areas</h2>
+            <p className="mt-4 max-w-3xl text-lg text-slate-600">
+              Each program area is grounded in our Certificate of Formation and IRS purpose statement — charitable, scientific, educational, environmental, humanitarian, and cultural preservation work, all in furtherance of Section 501(c)(3).
+            </p>
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { label: "Global Environmental Stewardship", desc: "Ecosystems worldwide — wetlands, waterways, forests, coastal, marine, and more." },
+                { label: "Wildlife & Biodiversity Protection", desc: "Conservation, habitat restoration, ecological monitoring, and anti-poaching support." },
+                { label: "Water & Freshwater Resources", desc: "Watershed protection, water quality, and humanitarian freshwater access internationally." },
+                { label: "Geological & Earth Sciences", desc: "Research, documentation, and public education on geological and earth system science." },
+                { label: "Environmental Monitoring Technology", desc: "IoT sensors, data systems, and scientific tools for transparent, accountable conservation." },
+                { label: "Archaeological & Cultural Heritage", desc: "Site documentation, indigenous history, and protection of historically significant landscapes." },
+                { label: "Natural Resource Region Support", desc: "Charitable assistance to communities in resource-dependent or environmentally impacted areas." },
+                { label: "Renewable Energy & Research Support", desc: "Advancing forward-thinking research and development in energy, science, and sustainability." },
+                { label: "Education & Public Outreach", desc: "Digital platforms, public programs, and content connecting people to conservation science." },
+              ].map((area) => (
+                <div key={area.label} className="rounded-xl border border-slate-200/80 bg-slate-50 p-6">
+                  <h3 className="font-semibold text-slate-900">{area.label}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{area.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* BOARD */}
+        <section className="border-b border-slate-100 bg-slate-50">
           <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
             <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
               <div className="max-w-2xl">
                 <h2 className="text-4xl font-light tracking-tight text-slate-900">Board of Directors</h2>
-                <p className="mt-3 text-lg text-slate-600">Experienced leaders committed to building a foundation that outlasts all of us.</p>
+                <p className="mt-3 text-lg text-slate-600">Experienced leaders committed to building an organization that outlasts all of us.</p>
               </div>
               <Link href="/contact" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-slate-700">
                 Join the board
@@ -182,18 +213,18 @@ export default function AboutPage() {
               </Link>
             </div>
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-              <BoardMember name="DJ Morgan" role="President & Founder" />
+              <BoardMember name="DJ Morgan" role="Executive Director & Founder" />
               <BoardMember name="Cameron Francis" role="Board Member" />
               <BoardMember name="Jeramiah Sullivan" role="Board Member" />
               <BoardMember empty />
               <BoardMember empty />
             </div>
-            <div className="mt-12 rounded-2xl border border-slate-200/80 bg-slate-50 p-8">
+            <div className="mt-12 rounded-2xl border border-slate-200/80 bg-white p-8">
               <div className="grid gap-8 md:grid-cols-2 md:items-center">
                 <div>
                   <h3 className="text-xl font-semibold text-slate-900">Interested in serving on the board?</h3>
                   <p className="mt-2 text-slate-600">
-                    We're seeking experienced professionals in conservation, law, finance, agriculture, or environmental science who are passionate about Texas wetlands and wildlife.
+                    We're seeking experienced professionals in conservation, renewable energy, law, finance, environmental science, archaeology, or international development who believe in transparent, accountable stewardship.
                   </p>
                 </div>
                 <div className="flex gap-4 md:justify-end">
@@ -215,12 +246,12 @@ export default function AboutPage() {
                   <div>
                     <h3 className="text-3xl font-light tracking-tight text-white">This is just the beginning</h3>
                     <p className="mt-3 text-lg text-slate-300">
-                      The Blue Duck Foundation is actively building its programs, partnerships, and capacity. Follow our progress or get involved as a founding supporter.
+                      The Blue Duck Foundation is actively building its programs, partnerships, and global capacity. Follow our progress or get involved as a founding supporter.
                     </p>
                   </div>
                   <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
                     <Link href="/conservation" className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 font-semibold text-slate-900 transition-colors hover:bg-slate-100">
-                      Conservation work
+                      Explore programs
                     </Link>
                     <Link href="/contact" className="inline-flex items-center justify-center rounded-xl border border-white/30 px-8 py-4 font-semibold text-white transition-colors hover:bg-white/10">
                       Contact us

@@ -46,11 +46,13 @@ const INQUIRY_TYPES = [
   "General inquiry",
   "Board membership interest",
   "Sponsorship & partnerships",
+  "Research partnership",
   "Volunteer & get involved",
   "Media & press",
-  "Wetlands permitting & landowner",
   "Conservation tip or local issue",
   "Donation inquiry",
+  "International collaboration",
+  "Other",
 ];
 
 export default function ContactPage() {
@@ -85,7 +87,7 @@ export default function ContactPage() {
                 Get in Touch
               </h1>
               <p className="mt-6 text-xl leading-relaxed text-slate-600">
-                Whether you're interested in the board, want to partner with us, have a conservation tip, or just want to learn more — we'd love to hear from you.
+                Whether you're interested in the board, want to partner on a project, have a conservation tip, or are exploring how the Foundation can support your work — we'd love to hear from you.
               </p>
             </div>
           </div>
@@ -97,7 +99,7 @@ export default function ContactPage() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               <ContactCard
                 title="General Inquiries"
-                desc="Questions about The Blue Duck Foundation, our programs, or how we operate."
+                desc="Questions about The Blue Duck Foundation, our programs, or how we operate globally."
                 detail="info@theblueduck.org"
                 href="mailto:info@theblueduck.org"
                 linkLabel="Send an email"
@@ -109,7 +111,7 @@ export default function ContactPage() {
               />
               <ContactCard
                 title="Partnerships & Sponsorships"
-                desc="Interested in sponsoring events, partnering on conservation initiatives, or supporting our programs."
+                desc="Interested in sponsoring events, partnering on conservation or research initiatives, or supporting our programs — domestically or internationally."
                 detail="partnerships@theblueduck.org"
                 href="mailto:partnerships@theblueduck.org"
                 linkLabel="Explore partnership"
@@ -121,7 +123,7 @@ export default function ContactPage() {
               />
               <ContactCard
                 title="Board Membership"
-                desc="We're actively seeking experienced professionals to fill two open board seats. Conservation, law, finance, and ag backgrounds welcome."
+                desc="We're actively seeking experienced professionals in conservation, renewable energy, law, finance, environmental science, and international development to fill open board seats."
                 href="/about#board"
                 linkLabel="Learn about the board"
                 icon={
@@ -212,7 +214,7 @@ export default function ContactPage() {
                         id="organization"
                         type="text"
                         className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400/20"
-                        placeholder="Company or organization"
+                        placeholder="Company, institution, or organization"
                       />
                     </div>
 
@@ -242,7 +244,7 @@ export default function ContactPage() {
                         required
                         rows={5}
                         className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400/20 resize-none"
-                        placeholder="Tell us how we can help or how you'd like to get involved..."
+                        placeholder="Tell us how we can help, how you'd like to get involved, or about the work you're doing..."
                       />
                     </div>
 
@@ -256,7 +258,7 @@ export default function ContactPage() {
                 )}
               </div>
 
-              {/* SIDEBAR INFO */}
+              {/* SIDEBAR */}
               <aside className="space-y-6">
                 <div className="rounded-2xl border border-slate-200/80 bg-white p-8">
                   <h3 className="text-lg font-semibold text-slate-900">What to expect</h3>
@@ -264,7 +266,7 @@ export default function ContactPage() {
                     {[
                       { step: "01", text: "We review every message personally — no auto-responders beyond the confirmation." },
                       { step: "02", text: "Responses typically within 48 business hours." },
-                      { step: "03", text: "For board and sponsorship inquiries, we'll schedule a call to discuss further." },
+                      { step: "03", text: "For board, sponsorship, and research partnership inquiries, we'll schedule a call to discuss further." },
                     ].map((item) => (
                       <li key={item.step} className="flex gap-4">
                         <span className="shrink-0 text-xl font-light text-slate-200">{item.step}</span>
@@ -280,9 +282,10 @@ export default function ContactPage() {
                     {[
                       { label: "Board membership", href: "/about#board" },
                       { label: "Event sponsorships", href: "/events" },
-                      { label: "Conservation programs", href: "/conservation" },
+                      { label: "Conservation & research programs", href: "/conservation" },
                       { label: "Volunteer opportunities", href: "#" },
-                      { label: "Submit a conservation tip", href: "/conservation" },
+                      { label: "Submit a conservation tip", href: "/conservation#issues" },
+                      { label: "International collaboration", href: "#" },
                     ].map((item) => (
                       <li key={item.label}>
                         <Link
@@ -300,9 +303,9 @@ export default function ContactPage() {
                 </div>
 
                 <div className="rounded-2xl border border-slate-200/80 bg-slate-900 p-8 text-white">
-                  <h3 className="text-lg font-semibold">Based in Texas</h3>
+                  <h3 className="text-lg font-semibold">Headquartered in Texas.<br />Operating worldwide.</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-300">
-                    The Blue Duck Foundation operates across Texas with a focus on the Central Flyway. We're building from McKinney, TX and expanding statewide.
+                    The Blue Duck Foundation is based in McKinney, TX and operates programs, partnerships, and initiatives globally. We welcome inquiries from anywhere in the world.
                   </p>
                   <p className="mt-4 text-sm font-medium text-slate-400">EIN 41-4361489</p>
                 </div>
@@ -320,7 +323,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="text-3xl font-light tracking-tight text-white">Ready to make an impact?</h3>
                     <p className="mt-3 text-lg text-slate-300">
-                      Whether you give time, resources, or expertise — every contribution builds the Foundation's capacity to protect Texas wetlands for generations.
+                      Whether you give time, resources, or expertise — every contribution builds the Foundation's capacity to protect the natural world and support the communities that depend on it.
                     </p>
                   </div>
                   <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
@@ -328,7 +331,7 @@ export default function ContactPage() {
                       Learn about us
                     </Link>
                     <Link href="/conservation" className="inline-flex items-center justify-center rounded-xl border border-white/30 px-8 py-4 font-semibold text-white transition-colors hover:bg-white/10">
-                      Our conservation work
+                      Our programs
                     </Link>
                   </div>
                 </div>

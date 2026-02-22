@@ -217,6 +217,7 @@ export default function ScholarshipPage() {
           </div>
         </section>
 
+
         {/* ─── DIVIDER ──────────────────────────────────────────── */}
         <div className="py-4" style={{ background: "linear-gradient(90deg, #991b1b, #1e3a8a)" }}>
           <div className="mx-auto max-w-6xl px-6">

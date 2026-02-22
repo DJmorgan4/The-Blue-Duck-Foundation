@@ -119,7 +119,7 @@ export default function Events() {
                 Events & Community Programs
               </h1>
               <p className="mt-6 text-xl leading-relaxed text-slate-600">
-                Building community through conservation, competition, and celebration. Every event funds the habitat work that matters.
+                Building community through conservation, competition, and celebration. Every event funds the programs and people that matter — locally and around the world.
               </p>
             </div>
           </div>
@@ -131,7 +131,7 @@ export default function Events() {
             <div className="mx-auto max-w-3xl text-center">
               <h2 className="text-4xl font-light tracking-tight text-slate-900">Signature Events</h2>
               <p className="mt-4 text-lg text-slate-600">
-                Annual flagship events that bring together supporters, sponsors, and conservation leaders for high-impact fundraising and community engagement.
+                Annual flagship events that bring together supporters, sponsors, and conservation leaders for high-impact fundraising, community engagement, and shared purpose.
               </p>
             </div>
 
@@ -140,32 +140,52 @@ export default function Events() {
                 title="The Blue Duck Banquet"
                 date="October 2026"
                 status="coming-soon"
-                description="An elevated evening celebrating conservation, community, and the mission behind The Blue Duck Foundation. An annual tradition in the making."
-                highlights={["Formal dinner & program", "Silent and live auction", "Conservation impact showcase", "Sponsor recognition ceremony"]}
+                description="An elevated evening celebrating conservation, community, and the mission behind The Blue Duck Foundation. A night of impact, storytelling, and shared commitment to the work ahead."
+                highlights={[
+                  "Formal dinner & program",
+                  "Silent and live auction",
+                  "Conservation impact showcase",
+                  "Sponsor recognition ceremony",
+                ]}
                 ctaLabel="Become a Sponsor"
               />
               <EventCard
                 title="Blue Duck Golf Tournament"
                 date="September 2026"
                 status="coming-soon"
-                description="A competitive fundraising tournament bringing together supporters, sponsors, and community leaders for a high-energy day with purpose."
-                highlights={["Tournament competition", "Team and individual awards", "Sponsor recognition", "Proceeds fund habitat restoration"]}
+                description="A competitive fundraising tournament bringing together supporters, sponsors, and community leaders for a high-energy day on the course with real purpose behind every round."
+                highlights={[
+                  "Tournament competition",
+                  "Team and individual awards",
+                  "Sponsor recognition",
+                  "Proceeds fund conservation and humanitarian programs",
+                ]}
                 ctaLabel="Register Interest"
               />
               <EventCard
                 title="Blue Duck Clay Shooting Classic"
                 date="September – October 2026 (Date TBD)"
                 status="coming-soon"
-                description="A classic outdoor fundraiser rooted in camaraderie, friendly competition, and the conservation values that define who we are."
-                highlights={["Clay shooting competition", "Food and refreshments", "Awards and raffle", "Open to all skill levels"]}
+                description="A classic outdoor fundraiser rooted in camaraderie, friendly competition, and the conservation values that define who we are. Open to all — from first-timers to seasoned shooters."
+                highlights={[
+                  "Clay shooting competition",
+                  "Food and refreshments",
+                  "Awards and raffle",
+                  "Open to all skill levels",
+                ]}
                 ctaLabel="Register Interest"
               />
               <EventCard
-                title="Annual Wildlife Photography Calendar Competition"
+                title="Annual Nature & Wildlife Photography Competition"
                 date="Submissions: Spring – Summer · Winners: Fall"
                 status="coming-soon"
-                description="A nationwide photography competition celebrating animals, nature, and the bond between people and the wild. Winners featured in The Blue Duck Foundation's annual calendar."
-                highlights={["Open to amateurs and professionals", "Public voting and judges' selection", "Winners featured in Annual Calendar", "Proceeds support conservation programs"]}
+                description="A worldwide photography competition celebrating the natural world — wildlife, landscapes, ecosystems, and the communities that depend on them. Winners featured in The Blue Duck Foundation's annual calendar and digital publications."
+                highlights={[
+                  "Open to amateurs and professionals globally",
+                  "Public voting and judges' selection",
+                  "Winners featured in Annual Calendar",
+                  "Proceeds support global conservation programs",
+                ]}
                 ctaLabel="Learn More"
               />
             </div>
@@ -178,7 +198,7 @@ export default function Events() {
             <div className="mx-auto max-w-3xl text-center">
               <h2 className="text-4xl font-light tracking-tight text-slate-900">Year-Round Calendar</h2>
               <p className="mt-4 text-lg text-slate-600">
-                Conservation work doesn't stop between major events. Our community programs and engagement initiatives run year-round across Texas.
+                Conservation work doesn't stop between major events. Our community programs, research partnerships, and engagement initiatives run year-round — in the field and online.
               </p>
             </div>
 
@@ -187,39 +207,68 @@ export default function Events() {
                 period="January – March"
                 label="Q1"
                 title="Community Outreach & Service"
-                items={["Volunteer days", "Partnered charity support", "Local conservation service projects"]}
+                items={[
+                  "Volunteer field days",
+                  "Partnered charity and community support",
+                  "Conservation service projects",
+                  "Research partnership development",
+                ]}
               />
               <QuarterRow
                 period="April – June"
                 label="Q2"
-                title="Spring Fundraising & Outreach"
-                items={["Small-scale fundraising events", "Community meet-ups", "Photography contest submissions open"]}
+                title="Spring Fundraising & Engagement"
+                items={[
+                  "Small-scale fundraising events",
+                  "Community meet-ups and networking",
+                  "Photography competition submissions open",
+                  "Program partnership announcements",
+                ]}
               />
               <QuarterRow
                 period="July – August"
                 label="Q3"
-                title="Summer Community Engagement"
-                items={["Youth and family-friendly events", "Outreach programs", "Calendar competition public voting"]}
+                title="Summer Community & Education"
+                items={[
+                  "Youth and family-friendly events",
+                  "Public education and outreach programs",
+                  "Photography competition public voting",
+                  "Field research and monitoring deployments",
+                ]}
               />
               <QuarterRow
                 period="September"
                 label=""
                 title="Major Event Month"
-                items={["Blue Duck Gold Tournament", "Clay Shooting Classic", "Fall fundraising campaign launch"]}
+                items={[
+                  "Blue Duck Golf Tournament",
+                  "Clay Shooting Classic",
+                  "Fall fundraising campaign launch",
+                ]}
                 highlight
               />
               <QuarterRow
                 period="October"
                 label=""
-                title="Celebration & Awards"
-                items={["The Blue Duck Banquet", "Photography Calendar winners announced", "Annual Calendar pre-orders and sales"]}
+                title="Celebration & Recognition"
+                items={[
+                  "The Blue Duck Banquet",
+                  "Photography Calendar winners announced",
+                  "Annual Calendar pre-orders and sales",
+                  "Partner and sponsor recognition",
+                ]}
                 highlight
               />
               <QuarterRow
                 period="November – December"
                 label="Q4"
-                title="Giving Season & Impact"
-                items={["Year-end giving campaign", "Community service initiatives", "Annual conservation impact report"]}
+                title="Giving Season & Annual Impact"
+                items={[
+                  "Year-end giving campaign",
+                  "Community service initiatives",
+                  "Annual conservation and program impact report",
+                  "Strategic planning for the year ahead",
+                ]}
               />
             </div>
           </div>
@@ -234,7 +283,7 @@ export default function Events() {
                   <div>
                     <h3 className="text-3xl font-light tracking-tight text-white">Stay Connected</h3>
                     <p className="mt-3 text-lg text-slate-300">
-                      Get updates on upcoming events, volunteer opportunities, and ways to support our mission across Texas.
+                      Get updates on upcoming events, volunteer opportunities, and ways to support our growing global mission.
                     </p>
                   </div>
                   <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
