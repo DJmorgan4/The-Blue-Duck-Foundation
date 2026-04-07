@@ -1,59 +1,70 @@
-// components/layout/Header.tsx
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+
+const navLinks = [
+  { href: "/",            label: "Home" },
+  { href: "/about",       label: "About" },
+  { href: "/conservation", label: "Conservation" },
+  { href: "/scholarship", label: "Scholarship" },
+  { href: "/membership",  label: "Membership" },
+  { href: "/events",      label: "Events" },
+  { href: "/news",        label: "News" },
+  { href: "/contact",     label: "Contact" },
+];
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-slate-900 text-white sticky top-0 z-50 shadow-lg">
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
+    <header className="bg-slate-900 text-white sticky top-0 z-50 border-b border-slate-800">
+      <nav className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 lg:h-[68px]">
 
-          {/* Logo — shortened on mid-size screens to give nav room */}
+          {/* Logo */}
           <Link
             href="/"
-            className="font-bold hover:text-slate-200 transition-colors flex-shrink-0 text-base xl:text-lg"
+            className="font-['Cormorant_Garamond'] text-[17px] font-light tracking-[0.18em] uppercase text-white hover:text-slate-300 transition-colors flex-shrink-0"
           >
             <span className="hidden xl:inline">The Blue Duck Foundation</span>
-            <span className="hidden lg:inline xl:hidden">Blue Duck Foundation</span>
-            <span className="lg:hidden">Blue Duck Foundation</span>
+            <span className="xl:hidden">Blue Duck Foundation</span>
           </Link>
 
-          {/* Desktop Navigation — tighter gaps at lg, normal at xl */}
-          <ul className="hidden lg:flex items-center gap-4 xl:gap-7 text-sm font-medium">
-            <li><Link href="/" className="hover:text-blue-400 transition-colors whitespace-nowrap">Home</Link></li>
-            <li><Link href="/about" className="hover:text-blue-400 transition-colors whitespace-nowrap">About</Link></li>
-            <li><Link href="/conservation" className="hover:text-blue-400 transition-colors whitespace-nowrap">Conservation</Link></li>
-            <li><Link href="/scholarship" className="hover:text-amber-400 transition-colors whitespace-nowrap">Scholarship</Link></li>
-            <li><Link href="/membership" className="hover:text-teal-400 transition-colors whitespace-nowrap">Membership</Link></li>
-            <li><Link href="/events" className="hover:text-blue-400 transition-colors whitespace-nowrap">Events</Link></li>
-            <li><Link href="/news" className="hover:text-blue-400 transition-colors whitespace-nowrap">News</Link></li>
-            <li><Link href="/contact" className="hover:text-blue-400 transition-colors whitespace-nowrap">Contact</Link></li>
+          {/* Desktop nav */}
+          <ul className="hidden lg:flex items-center gap-7">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-[11px] tracking-[0.1em] uppercase font-medium text-slate-400 hover:text-white transition-colors whitespace-nowrap"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
 
-          {/* CTA Button */}
+          {/* CTA */}
           <Link
             href="/contribute"
-            className="hidden lg:inline-flex bg-white text-slate-900 px-4 xl:px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-slate-100 transition-colors flex-shrink-0 whitespace-nowrap"
+            className="hidden lg:inline-flex text-[11px] font-medium tracking-[0.12em] uppercase border border-slate-700 text-white px-5 py-2.5 hover:border-slate-500 hover:bg-slate-800 transition-colors flex-shrink-0 whitespace-nowrap"
           >
-            Get Involved
+            Get involved
           </Link>
 
-          {/* Mobile menu button */}
+          {/* Mobile toggle */}
           <button
             type="button"
-            className="lg:hidden inline-flex items-center justify-center p-2 rounded-lg text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white transition-colors"
+            className="lg:hidden p-2 text-slate-400 hover:text-white transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
               </svg>
             )}
@@ -62,17 +73,25 @@ export default function Header() {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-slate-800">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link href="/" className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-              <Link href="/about" className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>About</Link>
-              <Link href="/conservation" className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>Conservation</Link>
-              <Link href="/scholarship" className="block px-3 py-2 rounded-lg text-base font-medium text-amber-400 hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>Scholarship</Link>
-              <Link href="/membership" className="block px-3 py-2 rounded-lg text-base font-medium text-teal-400 hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>Membership</Link>
-              <Link href="/events" className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>Events</Link>
-              <Link href="/news" className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>News</Link>
-              <Link href="/contact" className="block px-3 py-2 rounded-lg text-base font-medium hover:bg-slate-800 transition-colors" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
-              <Link href="/contribute" className="block px-3 py-2 mt-2 rounded-lg text-base font-semibold bg-white text-slate-900 hover:bg-slate-100 transition-colors text-center" onClick={() => setMobileMenuOpen(false)}>Get Involved</Link>
+          <div className="lg:hidden border-t border-slate-800 py-4">
+            <div className="flex flex-col gap-0">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-[11px] tracking-[0.1em] uppercase font-medium text-slate-400 hover:text-white transition-colors py-3 border-b border-slate-800 last:border-b-0"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href="/contribute"
+                className="text-[11px] font-medium tracking-[0.12em] uppercase border border-slate-700 text-white px-5 py-3 hover:border-slate-500 transition-colors text-center mt-4"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Get involved
+              </Link>
             </div>
           </div>
         )}

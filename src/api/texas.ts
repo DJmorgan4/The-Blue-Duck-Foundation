@@ -1,5 +1,5 @@
 /**
- * Texas Conservation Watch API Integration
+ * Conservation Watch API Integration
  *
  * Pages Router–safe, TypeScript-safe fetch helpers for:
  * - Federal Register (no key)
@@ -8,7 +8,8 @@
  * - OpenStates (API key optional)
  *
  * IMPORTANT:
- * - Do not expose API keys to the client. Use getStaticProps/getServerSideProps.
+ * - Do not expose API keys to the client.
+ * - Use getStaticProps / getServerSideProps only.
  */
 
 export type ConservationStatus = "watch" | "active" | "resolved";
@@ -16,7 +17,7 @@ export type ConservationStatus = "watch" | "active" | "resolved";
 export type ConservationNewsItem = {
   id: string;
   title: string;
-  date: string; // ISO string
+  date: string;
   category: string;
   source: string;
   sourceType?: "court" | "rulemaking" | "agency" | "legislature" | "media";
@@ -30,7 +31,6 @@ export type ConservationNewsItem = {
 export type FetchAllOptions = {
   regulationsApiKey?: string;
   openStatesApiKey?: string;
-  // You can expand later: query terms, max items, etc.
 };
 
 type FetchJsonOptions = {
@@ -70,7 +70,7 @@ async function fetchJson<T>(url: string, opts: FetchJsonOptions = {}): Promise<T
 
 export interface FederalRegisterDocument {
   title: string;
-  publication_date: string; // YYYY-MM-DD
+  publication_date: string;
   html_url: string;
   pdf_url?: string;
   agencies: Array<{ name: string }>;
@@ -87,7 +87,7 @@ export interface FederalRegisterResponse {
  * Docs: https://www.federalregister.gov/developers/documentation/api/v1
  */
 export async function fetchFederalRegister(
-  searchTerm: string = "Texas wetlands",
+  searchTerm: string = "wetlands OR endangered species OR Clean Water Act OR archaeological",
   perPage: number = 20
 ): Promise<FederalRegisterDocument[]> {
   const params = new URLSearchParams({
@@ -96,7 +96,6 @@ export async function fetchFederalRegister(
     per_page: String(perPage),
   });
 
-  // Specify fields to keep payload smaller & stable
   [
     "title",
     "publication_date",
@@ -126,7 +125,7 @@ export interface RegulationsDocument {
   id: string;
   attributes: {
     title?: string;
-    postedDate?: string; // ISO
+    postedDate?: string;
     documentType?: string;
     agencyId?: string;
     objectId?: string;
@@ -146,7 +145,6 @@ export interface RegulationsResponse {
 
 /**
  * Docs: https://open.gsa.gov/api/regulationsgov/
- * Requires API key (optional for your site if you skip this source).
  */
 export async function fetchRegulationsDocs(
   searchTerm: string,
@@ -175,18 +173,15 @@ export async function fetchRegulationsDocs(
 // ============================================================================
 
 export interface CourtListenerResult {
-  // CourtListener’s search API can vary by type; keep fields flexible but usable.
   caseName?: string;
-  dateFiled?: string; // ISO-ish
+  dateFiled?: string;
   court?: string;
   absolute_url?: string;
   snippet?: string;
-  // Some results come back with different fields:
   case_name?: string;
   date_filed?: string;
   court_id?: string;
   absoluteUrl?: string;
-  // generic:
   id?: number | string;
 }
 
@@ -197,10 +192,10 @@ export interface CourtListenerResponse {
 
 /**
  * Docs: https://www.courtlistener.com/api/rest-info/
- * Free but rate-limited. Be respectful.
+ * Free but rate-limited — be respectful.
  */
 export async function fetchCourtCases(
-  searchQuery: string = "Texas wetlands",
+  searchQuery: string = "wetlands OR \"Clean Water Act\" OR \"Endangered Species Act\" OR archaeological",
   pageSize: number = 20
 ): Promise<CourtListenerResult[]> {
   const params = new URLSearchParams({
@@ -216,7 +211,7 @@ export async function fetchCourtCases(
     const data = await fetchJson<CourtListenerResponse>(url, {
       timeoutMs: 25000,
       headers: {
-        "User-Agent": "BlueDuckFoundation/1.0 (contact: admin@theblueduck.org)",
+        "User-Agent": "BlueDuckFoundation/1.0 (contact: info@theblueduck.org)",
       },
     });
     return Array.isArray(data.results) ? data.results : [];
@@ -250,7 +245,6 @@ export interface OpenStatesResponse {
 
 /**
  * Docs: https://docs.openstates.org/api-v3/
- * Requires API key (optional for your site if you skip this source).
  */
 export async function fetchTexasBills(
   searchQuery: string,
@@ -298,24 +292,41 @@ function categorizeFromText(text: string): { category: string; tags: string[] } 
   const t = (text || "").toLowerCase();
 
   const tags: string[] = [];
-  if (t.includes("wetland")) tags.push("wetlands");
-  if (t.includes("waterfowl") || t.includes("duck") || t.includes("goose")) tags.push("waterfowl");
-  if (t.includes("endangered species") || t.includes("esa")) tags.push("ESA");
-  if (t.includes("clean water act") || t.includes("cwa")) tags.push("Clean Water Act");
-  if (t.includes("public land") || t.includes("blm") || t.includes("forest service")) tags.push("public land");
-  if (t.includes("hunting")) tags.push("hunting regs");
 
+  // Environmental
+  if (t.includes("wetland"))                                         tags.push("wetlands");
+  if (t.includes("clean water act") || t.includes("cwa"))           tags.push("Clean Water Act");
+  if (t.includes("endangered species") || t.includes("esa"))        tags.push("ESA");
+  if (t.includes("freshwater") || t.includes("aquifer") || t.includes("watershed")) tags.push("freshwater");
+  if (t.includes("public land") || t.includes("blm") || t.includes("forest service")) tags.push("public land");
+  if (t.includes("wildlife") || t.includes("habitat"))              tags.push("wildlife");
+  if (t.includes("renewable") || t.includes("solar") || t.includes("wind")) tags.push("energy");
+
+  // Cultural / Heritage
+  if (t.includes("archaeological") || t.includes("archaeology") || t.includes("historic")) tags.push("archaeology");
+  if (t.includes("indigenous") || t.includes("tribal") || t.includes("native")) tags.push("indigenous");
+  if (t.includes("cultural heritage") || t.includes("preservation")) tags.push("heritage");
+
+  // Humanitarian
+  if (t.includes("humanitarian") || t.includes("community") || t.includes("access")) tags.push("humanitarian");
+
+  // Determine primary category
   let category = "Policy";
-  if (tags.includes("wetlands")) category = "Wetlands";
-  else if (tags.includes("waterfowl")) category = "Waterfowl";
-  else if (tags.includes("ESA")) category = "Endangered Species";
-  else if (tags.includes("public land")) category = "Public Land";
+  if (tags.includes("wetlands"))    category = "Wetlands";
+  else if (tags.includes("Clean Water Act")) category = "Clean Water";
+  else if (tags.includes("ESA"))    category = "Wildlife";
+  else if (tags.includes("freshwater")) category = "Clean Water";
+  else if (tags.includes("public land")) category = "Land Use";
+  else if (tags.includes("wildlife"))   category = "Wildlife";
+  else if (tags.includes("energy"))     category = "Energy";
+  else if (tags.includes("archaeology") || tags.includes("indigenous") || tags.includes("heritage")) category = "Archaeology";
+  else if (tags.includes("humanitarian")) category = "Humanitarian";
 
   return { category, tags };
 }
 
 // ============================================================================
-// COMBINED FETCH (For News Page)
+// COMBINED FETCH
 // ============================================================================
 
 export async function fetchAllConservationNews(
@@ -323,8 +334,11 @@ export async function fetchAllConservationNews(
 ): Promise<ConservationNewsItem[]> {
   const items: ConservationNewsItem[] = [];
 
-  // ---- Federal Register (always on)
-  const federalDocs = await fetchFederalRegister("Texas wetlands OR waterfowl OR endangered species OR Clean Water Act", 25);
+  // ── Federal Register (always on) ──────────────────────────────────────────
+  const federalDocs = await fetchFederalRegister(
+    "wetlands OR waterfowl OR \"endangered species\" OR \"Clean Water Act\" OR archaeological OR freshwater",
+    25
+  );
 
   federalDocs.slice(0, 12).forEach((doc) => {
     const iso = safeIso(doc.publication_date) ?? new Date().toISOString();
@@ -345,14 +359,19 @@ export async function fetchAllConservationNews(
     });
   });
 
-  // ---- CourtListener (always on)
-  const courtResults = await fetchCourtCases("Texas (wetlands OR waterfowl OR \"Clean Water Act\" OR \"Endangered Species Act\")", 20);
+  // ── CourtListener (always on) ─────────────────────────────────────────────
+  const courtResults = await fetchCourtCases(
+    "(wetlands OR \"Clean Water Act\" OR \"Endangered Species Act\" OR archaeological OR freshwater OR indigenous)",
+    20
+  );
 
   courtResults.slice(0, 8).forEach((r, idx) => {
     const name = r.caseName || r.case_name || "Court filing";
     const date = safeIso(r.dateFiled || r.date_filed) ?? null;
     const absolute = r.absolute_url || r.absoluteUrl || "";
-    const link = absolute ? `https://www.courtlistener.com${absolute}` : "https://www.courtlistener.com/";
+    const link = absolute
+      ? `https://www.courtlistener.com${absolute}`
+      : "https://www.courtlistener.com/";
 
     const { category, tags } = categorizeFromText(name);
 
@@ -360,7 +379,7 @@ export async function fetchAllConservationNews(
       id: makeId("courtlistener", String(r.id ?? absolute ?? idx)),
       title: name,
       date: date ?? new Date().toISOString(),
-      category: category === "Policy" ? "Courts" : category,
+      category: category === "Policy" ? "Litigation" : category,
       source: "CourtListener",
       sourceType: "court",
       status: "active",
@@ -371,10 +390,10 @@ export async function fetchAllConservationNews(
     });
   });
 
-  // ---- Regulations.gov (optional)
+  // ── Regulations.gov (optional) ────────────────────────────────────────────
   if (options.regulationsApiKey) {
     const regs = await fetchRegulationsDocs(
-      "Texas wetlands OR waterfowl OR Endangered Species Act OR Clean Water Act",
+      "wetlands OR waterfowl OR \"Endangered Species Act\" OR \"Clean Water Act\" OR archaeological",
       options.regulationsApiKey,
       20
     );
@@ -400,9 +419,13 @@ export async function fetchAllConservationNews(
     });
   }
 
-  // ---- OpenStates (optional)
+  // ── OpenStates (optional) ─────────────────────────────────────────────────
   if (options.openStatesApiKey) {
-    const bills = await fetchTexasBills("wetlands OR waterfowl OR wildlife OR hunting OR conservation", options.openStatesApiKey, 20);
+    const bills = await fetchTexasBills(
+      "wetlands OR wildlife OR conservation OR freshwater OR archaeological OR renewable energy",
+      options.openStatesApiKey,
+      20
+    );
 
     bills.slice(0, 8).forEach((b) => {
       const iso = safeIso(b.updated_at || b.created_at) ?? new Date().toISOString();
@@ -412,22 +435,21 @@ export async function fetchAllConservationNews(
         id: makeId("openstates", b.id),
         title: `${b.identifier}: ${b.title}`,
         date: iso,
-        category: category === "Policy" ? "Legislature" : category,
+        category: category === "Policy" ? "Legislation" : category,
         source: "OpenStates",
         sourceType: "legislature",
         status: "watch",
-        summary: "Texas bill tracker metadata. Open the source for actions, sponsors, and status.",
-        link: b.openstates_url || `https://openstates.org/`,
+        summary: "Texas bill tracker metadata. Open the source for actions, sponsors, and full status.",
+        link: b.openstates_url || "https://openstates.org/",
         agency: "Texas Legislature",
         tags: ["legislation", ...tags],
       });
     });
   }
 
-  // Sort newest first (ISO safe)
+  // Sort newest first
   items.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  // Defensive filter: remove any empty links
+  // Remove items with empty links
   return items.filter((i) => typeof i.link === "string" && i.link.length > 0);
 }
-

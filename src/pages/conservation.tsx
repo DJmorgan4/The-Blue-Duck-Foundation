@@ -2,6 +2,7 @@ import Link from "next/link";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 
+// ─── PROGRAM CARD ──────────────────────────────────────────────────────────
 function ProgramCard({
   title,
   scope,
@@ -16,23 +17,23 @@ function ProgramCard({
   tag: string;
 }) {
   return (
-    <div className="group relative rounded-2xl border border-slate-200/80 bg-white p-8 transition-all hover:border-slate-300 hover:shadow-lg">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-700">
-            {tag}
-          </span>
-          <h3 className="mt-3 text-xl font-semibold text-slate-900">{title}</h3>
-          <p className="mt-1 text-sm text-slate-500">{scope}</p>
-        </div>
+    <div className="border-t border-slate-100 pt-8">
+      <div className="text-[10px] tracking-[0.2em] uppercase text-slate-300 font-medium mb-4">
+        {tag}
       </div>
-      <p className="mt-4 leading-relaxed text-slate-600">{description}</p>
-      <ul className="mt-5 space-y-2">
+      <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-1">
+        {title}
+      </h3>
+      <div className="text-[11px] tracking-[0.08em] uppercase text-slate-400 font-medium mb-4">
+        {scope}
+      </div>
+      <p className="text-sm leading-relaxed text-slate-500 font-light mb-5">
+        {description}
+      </p>
+      <ul className="space-y-2">
         {activities.map((a) => (
-          <li key={a} className="flex items-start gap-2 text-sm text-slate-700">
-            <svg className="mt-0.5 h-4 w-4 flex-shrink-0 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-            </svg>
+          <li key={a} className="flex items-start gap-3 text-sm text-slate-500 font-light">
+            <span className="mt-2 w-1 h-1 rounded-full bg-slate-300 flex-shrink-0" />
             {a}
           </li>
         ))}
@@ -41,6 +42,7 @@ function ProgramCard({
   );
 }
 
+// ─── ISSUE CARD ────────────────────────────────────────────────────────────
 function IssueCard({
   title,
   scope,
@@ -53,95 +55,160 @@ function IssueCard({
   status: "ongoing" | "developing" | "critical";
 }) {
   const statusConfig = {
-    ongoing: { label: "Ongoing", classes: "bg-yellow-100 text-yellow-800" },
-    developing: { label: "Developing", classes: "bg-blue-100 text-blue-800" },
-    critical: { label: "Critical", classes: "bg-red-100 text-red-800" },
+    ongoing:   { label: "Ongoing",    color: "#92400e", bg: "#fef3c7" },
+    developing: { label: "Developing", color: "#1e40af", bg: "#eff6ff" },
+    critical:  { label: "Critical",   color: "#991b1b", bg: "#fef2f2" },
   };
+  const s = statusConfig[status];
 
   return (
-    <div className="group relative rounded-2xl border border-slate-200/80 bg-white p-6 transition-all hover:border-slate-300 hover:shadow-lg">
-      <div className="flex items-start justify-between gap-4">
+    <div className="border-t border-slate-100 pt-6 pb-2">
+      <div className="flex items-start justify-between gap-4 mb-3">
         <div>
-          <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
-          <p className="mt-1 text-sm text-slate-500">{scope}</p>
+          <h3 className="font-['Cormorant_Garamond'] text-xl font-light text-slate-900 mb-1">
+            {title}
+          </h3>
+          <div className="text-[10px] tracking-[0.1em] uppercase text-slate-400 font-medium">
+            {scope}
+          </div>
         </div>
-        <span className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold ${statusConfig[status].classes}`}>
-          {statusConfig[status].label}
+        <span
+          className="text-[10px] tracking-[0.1em] uppercase font-medium px-3 py-1 flex-shrink-0"
+          style={{ color: s.color, background: s.bg }}
+        >
+          {s.label}
         </span>
       </div>
-      <p className="mt-4 text-sm leading-relaxed text-slate-600">{description}</p>
+      <p className="text-sm leading-relaxed text-slate-500 font-light">{description}</p>
     </div>
   );
 }
 
+// ─── SECTION HEADER ────────────────────────────────────────────────────────
+function SectionHeader({
+  eyebrow,
+  title,
+  body,
+}: {
+  eyebrow: string;
+  title: string;
+  body?: string;
+}) {
+  return (
+    <div className="mb-14">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-5 h-px bg-slate-300" />
+        <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+          {eyebrow}
+        </span>
+      </div>
+      <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-3">
+        {title}
+      </h2>
+      {body && (
+        <p className="text-[15px] leading-[1.85] text-slate-500 font-light max-w-2xl">
+          {body}
+        </p>
+      )}
+    </div>
+  );
+}
+
+// ─── PAGE ──────────────────────────────────────────────────────────────────
 export default function ConservationPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      <main className="flex-grow bg-white">
-        {/* HERO */}
-        <section className="relative overflow-hidden border-b border-slate-100">
-          <div className="absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_#f1f5f9_0%,_transparent_50%)]" />
-          </div>
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
-            <div className="max-w-3xl">
-              <div className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-sm font-medium text-slate-700 shadow-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-slate-900 opacity-75"></span>
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-slate-900"></span>
-                </span>
-                Programs in development
+      <main className="flex-grow bg-white font-['Jost',sans-serif]">
+
+        {/* ── HERO ──────────────────────────────────────────────────────── */}
+        <section className="border-b border-slate-100">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid lg:grid-cols-[55fr_45fr] min-h-[400px]">
+
+              <div className="py-20 lg:py-28 lg:pr-16 lg:border-r border-slate-100 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 mb-10">
+                    <div className="w-6 h-px bg-slate-300" />
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                      Programs in development
+                    </span>
+                  </div>
+                  <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                    The work<br />
+                    <em className="italic">itself.</em>
+                  </h1>
+                  <p className="text-[15px] leading-[1.9] text-slate-500 font-light max-w-md">
+                    From ecosystems to archaeological sites, from environmental science to humanitarian support — our programs go where the need is real and the work is meaningful.
+                  </p>
+                </div>
               </div>
-              <h1 className="mt-8 text-5xl font-light tracking-tight text-slate-900 sm:text-6xl">
-                Our Programs
-              </h1>
-              <p className="mt-6 text-xl leading-relaxed text-slate-600">
-                From Texas wetlands to global ecosystems, from archaeological preservation to environmental monitoring technology — our program areas reflect a simple belief: meaningful work deserves support, transparency, and reach.
-              </p>
+
+              <div className="hidden lg:flex flex-col justify-center py-28 pl-16">
+                {[
+                  { num: "01", label: "Environmental Conservation", href: "#conservation" },
+                  { num: "02", label: "Research & Technology", href: "#research" },
+                  { num: "03", label: "Archaeological & Cultural", href: "#heritage" },
+                  { num: "04", label: "Humanitarian Support", href: "#humanitarian" },
+                  { num: "05", label: "Issues We're Watching", href: "#issues" },
+                ].map((item) => (
+                  <a
+                    key={item.num}
+                    href={item.href}
+                    className="flex items-baseline justify-between py-4 border-b border-slate-100 first:border-t group"
+                  >
+                    <span className="font-['Cormorant_Garamond'] text-[20px] font-light text-slate-800 group-hover:text-slate-900 transition-colors">
+                      {item.label}
+                    </span>
+                    <span className="text-[10px] tracking-[0.15em] text-slate-300 font-medium ml-4">
+                      {item.num}
+                    </span>
+                  </a>
+                ))}
+              </div>
+
             </div>
           </div>
         </section>
 
-        {/* CATEGORY NAV */}
-        <section className="sticky top-0 z-10 border-b border-slate-200 bg-white shadow-sm">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <nav className="flex gap-1 overflow-x-auto py-1" aria-label="Program categories">
+        {/* ── STICKY NAV ────────────────────────────────────────────────── */}
+        <nav className="sticky top-0 z-10 border-b border-slate-100 bg-white">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="flex gap-0 overflow-x-auto">
               {[
                 { label: "Conservation", href: "#conservation" },
                 { label: "Research & Technology", href: "#research" },
                 { label: "Heritage & Culture", href: "#heritage" },
-                { label: "Humanitarian Support", href: "#humanitarian" },
-                { label: "Issues We're Watching", href: "#issues" },
+                { label: "Humanitarian", href: "#humanitarian" },
+                { label: "Issues", href: "#issues" },
               ].map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  className="whitespace-nowrap rounded-lg px-4 py-3 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                  className="whitespace-nowrap px-5 py-4 text-[11px] tracking-[0.1em] uppercase font-medium text-slate-400 hover:text-slate-900 transition-colors border-r border-slate-100 last:border-r-0"
                 >
                   {item.label}
                 </a>
               ))}
-            </nav>
-          </div>
-        </section>
-
-        {/* CONSERVATION */}
-        <section className="border-b border-slate-100 bg-white" id="conservation">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="max-w-2xl">
-              <h2 className="text-4xl font-light tracking-tight text-slate-900">Environmental Conservation</h2>
-              <p className="mt-3 text-lg text-slate-600">
-                Protecting and restoring ecosystems at every scale — from local waterways to globally significant habitats.
-              </p>
             </div>
-            <div className="mt-12 grid gap-6 md:grid-cols-2">
+          </div>
+        </nav>
+
+        {/* ── CONSERVATION ──────────────────────────────────────────────── */}
+        <section className="border-b border-slate-100" id="conservation">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <SectionHeader
+              eyebrow="Environmental conservation"
+              title="Protecting ecosystems at every scale"
+              body="Conserving wetlands, waterways, forests, coastal regions, and terrestrial habitats — from local waterways to globally significant landscapes."
+            />
+            <div className="grid sm:grid-cols-2 gap-x-12 gap-y-0">
               <ProgramCard
-                tag="Global Stewardship"
+                tag="Global stewardship"
                 title="Ecosystem & Habitat Protection"
                 scope="North America & International"
-                description="Conserving wetlands, waterways, forests, coastal regions, marine environments, and terrestrial habitats. We prioritize high-impact sites through conservation easements, land stewardship partnerships, and field research."
+                description="Prioritizing high-impact sites through conservation easements, land stewardship partnerships, and field research across wetlands, waterways, forests, and marine environments."
                 activities={[
                   "Wetland and waterway restoration projects",
                   "Wildlife corridor and habitat connectivity initiatives",
@@ -150,10 +217,10 @@ export default function ConservationPage() {
                 ]}
               />
               <ProgramCard
-                tag="Wildlife & Biodiversity"
+                tag="Wildlife & biodiversity"
                 title="Wildlife Protection & Species Recovery"
                 scope="Domestic & International"
-                description="Supporting native, migratory, and endangered species through habitat restoration, ecological surveys, and grants to qualified anti-poaching and conservation organizations worldwide."
+                description="Supporting native, migratory, and endangered species through habitat restoration, ecological surveys, and grants to qualified conservation organizations worldwide."
                 activities={[
                   "Habitat restoration for migratory species",
                   "Species recovery support and ecological surveys",
@@ -162,10 +229,10 @@ export default function ConservationPage() {
                 ]}
               />
               <ProgramCard
-                tag="Water Resources"
+                tag="Water resources"
                 title="Freshwater Conservation & Access"
                 scope="Regional & International"
-                description="Protecting watersheds, aquifers, and freshwater systems — and ensuring communities in underserved regions have access to safe, clean water. A conservation and humanitarian priority."
+                description="Protecting watersheds, aquifers, and freshwater systems — and ensuring communities in underserved regions have access to safe, clean water."
                 activities={[
                   "Watershed monitoring and aquifer research partnerships",
                   "Water quality testing and pollution mitigation",
@@ -174,10 +241,10 @@ export default function ConservationPage() {
                 ]}
               />
               <ProgramCard
-                tag="Resource Stewardship"
-                title="Ethical Natural Resource Region Support"
+                tag="Resource stewardship"
+                title="Natural Resource Region Support"
                 scope="Resource-Dependent Communities"
-                description="Providing charitable support to communities impacted by natural resource industries — worker safety education, land reclamation advocacy, and environmental monitoring — without engaging in or benefiting commercial extraction."
+                description="Providing charitable support to communities impacted by natural resource industries — worker safety, land reclamation advocacy, and environmental monitoring — without engaging in or benefiting commercial extraction."
                 activities={[
                   "Worker safety education and training programs",
                   "Environmental monitoring for impacted communities",
@@ -189,45 +256,44 @@ export default function ConservationPage() {
           </div>
         </section>
 
-        {/* RESEARCH & TECHNOLOGY */}
+        {/* ── RESEARCH & TECHNOLOGY ─────────────────────────────────────── */}
         <section className="border-b border-slate-100 bg-slate-50" id="research">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="max-w-2xl">
-              <h2 className="text-4xl font-light tracking-tight text-slate-900">Research & Technology</h2>
-              <p className="mt-3 text-lg text-slate-600">
-                Science-driven tools and research that increase transparency, accountability, and measurable outcomes.
-              </p>
-            </div>
-            <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <SectionHeader
+              eyebrow="Research & technology"
+              title="Science-driven tools and measurable outcomes"
+              body="Increasing transparency, accountability, and real-world impact through environmental monitoring, earth science, and renewable energy research."
+            />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-0">
               <ProgramCard
-                tag="Environmental Technology"
+                tag="Environmental technology"
                 title="Environmental Monitoring Systems"
                 scope="Field Deployments & Partner Programs"
-                description="Developing and deploying IoT-based environmental sensors, data platforms, and scientific tools that give researchers, agencies, and communities real-time intelligence on conservation outcomes."
+                description="IoT-based sensors, data platforms, and scientific tools that give researchers, agencies, and communities real-time intelligence on conservation outcomes."
                 activities={[
-                  "IoT sensor networks for air, water, and soil monitoring",
+                  "IoT sensor networks for air, water, and soil",
                   "Open data platforms for conservation transparency",
-                  "Tools shared with government agencies and academic partners",
                   "Remote sensing and satellite data integration",
+                  "Tools shared with government and academic partners",
                 ]}
               />
               <ProgramCard
-                tag="Earth Sciences"
+                tag="Earth sciences"
                 title="Geological & Earth Systems Research"
                 scope="Academic & Public Programs"
-                description="Studying, documenting, and educating the public on geological formations, mineral systems, volcanology, soil science, and earth processes — for scientific advancement and public understanding."
+                description="Studying and documenting geological formations, mineral systems, soil science, and earth processes — for scientific advancement and public understanding."
                 activities={[
                   "Field research and geological documentation",
                   "Public education platforms and curriculum",
                   "Volcanology and earth systems study",
-                  "Mineral spring and subsurface research partnerships",
+                  "Mineral spring and subsurface research",
                 ]}
               />
               <ProgramCard
-                tag="Renewable Energy"
-                title="Renewable & Sustainable Energy Research"
+                tag="Renewable energy"
+                title="Sustainable Energy Research"
                 scope="Research Partnerships"
-                description="Supporting forward-thinking research in solar, wind, and other sustainable energy fields — creating transparent pathways to fund the work that too often goes without support."
+                description="Supporting forward-thinking research in solar, wind, and other sustainable energy fields — creating transparent pathways to fund work that too often goes without support."
                 activities={[
                   "Research grants to renewable energy scientists",
                   "Support for community solar and rural energy access",
@@ -235,37 +301,44 @@ export default function ConservationPage() {
                   "Education on sustainable energy and land use",
                 ]}
               />
-              <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-8">
-                <h3 className="text-lg font-semibold text-slate-900">Working on something that fits?</h3>
-                <p className="mt-2 text-sm text-slate-600">
-                  We're building research partnerships and program infrastructure. If you're a scientist, institution, or organization doing meaningful work in environmental science, energy, or conservation technology — we'd like to connect.
-                </p>
-                <Link href="/contact" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-slate-700">
-                  Get in touch
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
+            </div>
+            <div className="border-t border-slate-200 mt-12 pt-10">
+              <div className="grid lg:grid-cols-2 gap-10 lg:items-center">
+                <div>
+                  <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-2">
+                    Working on something that fits?
+                  </h3>
+                  <p className="text-sm leading-relaxed text-slate-500 font-light">
+                    We're building research partnerships and program infrastructure. If you're a scientist, institution, or organization doing meaningful work in environmental science, energy, or conservation technology — we'd like to connect.
+                  </p>
+                </div>
+                <div className="lg:flex lg:justify-end">
+                  <Link
+                    href="/contact"
+                    className="text-[11px] font-medium tracking-[0.14em] uppercase border border-slate-300 text-slate-700 px-7 py-3.5 hover:border-slate-600 transition-colors inline-flex"
+                  >
+                    Get in touch →
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* HERITAGE */}
-        <section className="border-b border-slate-100 bg-white" id="heritage">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="max-w-2xl">
-              <h2 className="text-4xl font-light tracking-tight text-slate-900">Archaeological & Cultural Heritage</h2>
-              <p className="mt-3 text-lg text-slate-600">
-                Preserving the human record — sites, stories, and landscapes that belong to all of us.
-              </p>
-            </div>
-            <div className="mt-12 grid gap-6 md:grid-cols-2">
+        {/* ── HERITAGE ──────────────────────────────────────────────────── */}
+        <section className="border-b border-slate-100" id="heritage">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <SectionHeader
+              eyebrow="Archaeological & cultural heritage"
+              title="Preserving the human record"
+              body="Sites, stories, and landscapes that belong to all of us — documented, protected, and made accessible for future generations."
+            />
+            <div className="grid sm:grid-cols-2 gap-x-12 gap-y-0 max-w-4xl">
               <ProgramCard
                 tag="Archaeology"
-                title="Archaeological Site Documentation & Protection"
+                title="Site Documentation & Protection"
                 scope="Domestic & International"
-                description="Conducting and sponsoring scientific study, excavation, documentation, and protection of archaeological sites and culturally significant landscapes in partnership with academic institutions and indigenous communities."
+                description="Conducting and sponsoring scientific study, excavation, documentation, and protection of archaeological sites in partnership with academic institutions and indigenous communities."
                 activities={[
                   "Archaeological site mapping and 3D documentation",
                   "Excavation support and field research grants",
@@ -274,10 +347,10 @@ export default function ConservationPage() {
                 ]}
               />
               <ProgramCard
-                tag="Cultural Preservation"
-                title="Historical Landscape & Heritage Protection"
+                tag="Cultural preservation"
+                title="Historical Landscape Protection"
                 scope="Domestic & International"
-                description="Protecting historically significant landscapes, geological heritage sites, and cultural heritage areas from degradation, development, and neglect — ensuring future generations can access and learn from them."
+                description="Protecting historically significant landscapes, geological heritage sites, and cultural areas from degradation, development, and neglect."
                 activities={[
                   "Heritage site identification and protection advocacy",
                   "Geological heritage documentation",
@@ -289,58 +362,68 @@ export default function ConservationPage() {
           </div>
         </section>
 
-        {/* HUMANITARIAN */}
+        {/* ── HUMANITARIAN ──────────────────────────────────────────────── */}
         <section className="border-b border-slate-100 bg-slate-50" id="humanitarian">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="max-w-2xl">
-              <h2 className="text-4xl font-light tracking-tight text-slate-900">Humanitarian Environmental Support</h2>
-              <p className="mt-3 text-lg text-slate-600">
-                Where human dignity and environmental protection intersect — we show up.
-              </p>
-            </div>
-            <div className="mt-12 max-w-4xl">
-              <div className="rounded-2xl border border-slate-200/80 bg-white p-8">
-                <p className="text-lg leading-relaxed text-slate-700">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <SectionHeader
+              eyebrow="Humanitarian environmental support"
+              title="Where human dignity and conservation meet"
+              body="We show up where environmental protection and human need intersect — directly supporting communities and workers in environmentally sensitive regions."
+            />
+            <div className="grid lg:grid-cols-[2fr_1fr] gap-16 lg:gap-24">
+              <div>
+                <p className="text-[15px] leading-[1.9] text-slate-500 font-light mb-8">
                   The Blue Duck Foundation provides direct charitable assistance — including safety equipment, training, supplies, and operational support — to communities and workers in environmentally sensitive or resource-dependent regions, particularly in underserved and developing areas.
                 </p>
-                <p className="mt-4 leading-relaxed text-slate-600">
-                  This includes support for individuals and organizations doing work in solar, renewables, conservation science, and other fields where access to funding has historically been limited or gatekept. We believe good work deserves a clear, compliant pathway to support — and we're building that pathway.
+                <p className="text-[15px] leading-[1.9] text-slate-500 font-light">
+                  This includes support for individuals and organizations doing work in solar, renewables, conservation science, and other fields where access to funding has historically been limited or gatekept. Good work deserves a clear, compliant pathway to support.
                 </p>
-                <div className="mt-8 grid gap-4 sm:grid-cols-3">
-                  {[
-                    { label: "Safety & Equipment", desc: "Direct provision of safety gear, field equipment, and supplies to workers and communities in need." },
-                    { label: "Training & Education", desc: "Environmental safety training, technical education, and capacity-building for underserved regions." },
-                    { label: "Operational Support", desc: "Grants and partnership support for humanitarian environmental organizations and initiatives globally." },
-                  ].map((item) => (
-                    <div key={item.label} className="rounded-xl bg-slate-50 p-5">
-                      <h4 className="font-semibold text-slate-900">{item.label}</h4>
-                      <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.desc}</p>
-                    </div>
-                  ))}
-                </div>
+              </div>
+              <div className="flex flex-col gap-0">
+                {[
+                  { label: "Safety & Equipment", desc: "Direct provision of safety gear, field equipment, and supplies to workers and communities in need." },
+                  { label: "Training & Education", desc: "Environmental safety training and capacity-building for underserved regions." },
+                  { label: "Operational Support", desc: "Grants and partnership support for humanitarian environmental organizations globally." },
+                ].map((item, i) => (
+                  <div key={i} className="border-t border-slate-200 pt-5 pb-4 last:border-b">
+                    <h4 className="font-['Cormorant_Garamond'] text-lg font-light text-slate-900 mb-1">
+                      {item.label}
+                    </h4>
+                    <p className="text-sm leading-relaxed text-slate-500 font-light">{item.desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* ISSUES WE'RE WATCHING */}
-        <section className="border-b border-slate-100 bg-white" id="issues">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-              <div className="max-w-2xl">
-                <h2 className="text-4xl font-light tracking-tight text-slate-900">Issues We're Watching</h2>
-                <p className="mt-3 text-lg text-slate-600">
+        {/* ── ISSUES WE'RE WATCHING ─────────────────────────────────────── */}
+        <section className="border-b border-slate-100" id="issues">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14">
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-5 h-px bg-slate-300" />
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                    Issues we're watching
+                  </span>
+                </div>
+                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-3">
+                  On our radar
+                </h2>
+                <p className="text-[15px] leading-[1.85] text-slate-500 font-light max-w-xl">
                   Regulatory, legal, and environmental developments shaping conservation globally — and how they connect to our work.
                 </p>
               </div>
-              <Link href="/contact" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-slate-700">
-                Submit a tip
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
+              <Link
+                href="/contact"
+                className="text-[11px] font-medium tracking-[0.12em] uppercase text-slate-500 hover:text-slate-900 transition-colors inline-flex items-center gap-2 self-start sm:self-auto flex-shrink-0"
+              >
+                Submit a tip →
               </Link>
             </div>
-            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-0">
               <IssueCard
                 title="Wetlands Protection Post-Sackett"
                 scope="United States"
@@ -368,56 +451,65 @@ export default function ConservationPage() {
               <IssueCard
                 title="Indigenous Environmental Rights"
                 scope="International"
-                description="Indigenous communities across North America, South America, and beyond continue to face displacement and loss of traditional lands to resource extraction. Legal recognition and enforcement of environmental rights remains inconsistent."
+                description="Indigenous communities across North America, South America, and beyond continue to face displacement and loss of traditional lands to resource extraction. Legal recognition and enforcement remains inconsistent."
                 status="ongoing"
               />
-              <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-6">
-                <h3 className="text-lg font-semibold text-slate-900">Know something happening locally?</h3>
-                <p className="mt-2 text-sm text-slate-600">
-                  Help us track conservation and environmental issues affecting communities worldwide. We rely on scientists, landowners, journalists, and community members to stay ahead of emerging threats.
+              <div className="border-t border-dashed border-slate-200 pt-6 pb-2">
+                <h3 className="font-['Cormorant_Garamond'] text-xl font-light text-slate-900 mb-2">
+                  Know something happening locally?
+                </h3>
+                <p className="text-sm leading-relaxed text-slate-500 font-light mb-4">
+                  We rely on scientists, landowners, journalists, and community members to stay ahead of emerging threats. Help us track conservation issues affecting communities worldwide.
                 </p>
-                <Link href="/contact" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-slate-700">
-                  Submit a tip
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
+                <Link
+                  href="/contact"
+                  className="text-[11px] font-medium tracking-[0.12em] uppercase text-slate-500 hover:text-slate-900 transition-colors inline-flex items-center gap-2"
+                >
+                  Submit a tip →
                 </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* NEWSLETTER CTA */}
-        <section className="bg-white">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="overflow-hidden rounded-2xl bg-slate-900 shadow-xl">
-              <div className="px-8 py-12 md:px-12 md:py-16">
-                <div className="grid gap-8 md:grid-cols-2 md:items-center">
-                  <div>
-                    <h3 className="text-3xl font-light tracking-tight text-white">Global Conservation & Environment Brief</h3>
-                    <p className="mt-3 text-lg text-slate-300">
-                      Monthly roundup of policy developments, research highlights, and environmental issues affecting communities worldwide — delivered to your inbox.
-                    </p>
+        {/* ── CTA ───────────────────────────────────────────────────────── */}
+        <section>
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <div className="bg-slate-900 px-10 py-14 lg:px-16 lg:py-16">
+              <div className="grid lg:grid-cols-2 gap-10 lg:items-center">
+                <div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-5 h-px bg-slate-600" />
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-slate-500 font-medium">
+                      Stay informed
+                    </span>
                   </div>
-                  <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 font-semibold text-slate-900 transition-colors hover:bg-slate-100"
-                    >
-                      Subscribe to monthly brief
-                    </Link>
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center justify-center rounded-xl border border-white/30 px-8 py-4 font-semibold text-white transition-colors hover:bg-white/10"
-                    >
-                      Partner with us
-                    </Link>
-                  </div>
+                  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light text-white mb-4 leading-tight">
+                    Global Conservation<br /><em className="italic">&amp; Environment Brief</em>
+                  </h3>
+                  <p className="text-[15px] leading-relaxed text-slate-400 font-light">
+                    Monthly roundup of policy developments, research highlights, and environmental issues affecting communities worldwide — delivered to your inbox.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 lg:justify-end">
+                  <Link
+                    href="/contact"
+                    className="text-[11px] font-medium tracking-[0.14em] uppercase bg-white text-slate-900 px-8 py-4 hover:bg-slate-100 transition-colors text-center"
+                  >
+                    Subscribe to monthly brief
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="text-[11px] font-medium tracking-[0.14em] uppercase border border-slate-700 text-white px-8 py-4 hover:border-slate-500 transition-colors text-center"
+                  >
+                    Partner with us
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
       </main>
 
       <Footer />

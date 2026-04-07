@@ -2,6 +2,7 @@ import Link from "next/link";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 
+// ─── VALUE CARD ────────────────────────────────────────────────────────────
 function ValueCard({
   title,
   desc,
@@ -12,223 +13,441 @@ function ValueCard({
   number: string;
 }) {
   return (
-    <div className="group relative">
-      <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-slate-100 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-      <div className="relative rounded-2xl border border-slate-200/80 bg-white p-8 transition-all group-hover:border-slate-300">
-        <div className="text-xs font-semibold tracking-widest text-slate-400 uppercase">{number}</div>
-        <h3 className="mt-4 text-2xl font-semibold tracking-tight text-slate-900">{title}</h3>
-        <div className="mt-2 h-px w-12 bg-slate-900" />
-        <p className="mt-4 leading-relaxed text-slate-600">{desc}</p>
+    <div className="border-t border-slate-200 pt-8">
+      <div className="text-[10px] font-medium tracking-[0.2em] text-slate-400 uppercase mb-6">
+        {number}
       </div>
+      <h3 className="font-['Cormorant_Garamond'] text-4xl font-light tracking-tight text-slate-900 mb-4">
+        {title}
+      </h3>
+      <p className="text-sm leading-relaxed text-slate-500 font-light">{desc}</p>
     </div>
   );
 }
 
-function BoardMember({ name, role, empty }: { name?: string; role?: string; empty?: boolean }) {
+// ─── BOARD MEMBER ──────────────────────────────────────────────────────────
+function BoardMember({
+  name,
+  role,
+  empty,
+}: {
+  name?: string;
+  role?: string;
+  empty?: boolean;
+}) {
   if (empty) {
     return (
-      <div className="group relative rounded-2xl border border-dashed border-slate-300 bg-slate-50/50 p-8 transition-all hover:border-slate-400">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-dashed border-slate-300 bg-white">
-          <svg className="h-6 w-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.5v15m7.5-7.5h-15" />
-          </svg>
+      <div className="border border-dashed border-slate-200 p-8 flex flex-col justify-between min-h-[200px]">
+        <div className="text-[10px] tracking-[0.2em] uppercase text-slate-300 font-medium">
+          Seat available
         </div>
-        <p className="mt-5 text-base font-semibold text-slate-400">Seat Available</p>
-        <p className="mt-1 text-sm text-slate-400">Board position open</p>
-        <Link href="/contact" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-slate-600 transition-colors hover:text-slate-900">
-          Express interest
-          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </Link>
+        <div>
+          <p className="text-sm text-slate-400 font-light mb-3">
+            Board position open
+          </p>
+          <Link
+            href="/contact"
+            className="text-[11px] font-medium tracking-[0.1em] uppercase text-slate-500 hover:text-slate-900 transition-colors inline-flex items-center gap-2"
+          >
+            Express interest
+            <span>→</span>
+          </Link>
+        </div>
       </div>
     );
   }
   return (
-    <div className="group relative">
-      <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-slate-100 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-      <div className="relative rounded-2xl border border-slate-200/80 bg-white p-8 transition-all group-hover:border-slate-300">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-900 text-xl font-semibold text-white">
-          {name?.charAt(0)}
-        </div>
-        <p className="mt-5 text-lg font-semibold text-slate-900">{name}</p>
-        <p className="mt-1 text-sm font-medium text-slate-500">{role}</p>
+    <div className="border border-slate-200 p-8 flex flex-col justify-between min-h-[200px] bg-white">
+      <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-white text-sm font-medium">
+        {name?.charAt(0)}
+      </div>
+      <div>
+        <p className="font-['Cormorant_Garamond'] text-xl font-light text-slate-900">
+          {name}
+        </p>
+        <p className="text-[11px] tracking-[0.08em] uppercase text-slate-400 font-medium mt-1">
+          {role}
+        </p>
       </div>
     </div>
   );
 }
 
-function GoalItem({ number, title, desc }: { number: string; title: string; desc: string }) {
+// ─── GOAL ITEM ─────────────────────────────────────────────────────────────
+function GoalItem({
+  number,
+  title,
+  desc,
+}: {
+  number: string;
+  title: string;
+  desc: string;
+}) {
   return (
-    <div className="flex gap-6">
-      <div className="flex-shrink-0 text-4xl font-light tracking-tight text-slate-200">{number}</div>
-      <div className="border-t border-slate-200 pt-4">
-        <h4 className="text-lg font-semibold text-slate-900">{title}</h4>
-        <p className="mt-2 leading-relaxed text-slate-600">{desc}</p>
+    <div className="grid grid-cols-[40px_1fr] gap-6 border-t border-slate-200 pt-6">
+      <div className="text-[10px] tracking-[0.15em] text-slate-300 font-medium pt-1">
+        {number}
+      </div>
+      <div>
+        <h4 className="font-['Cormorant_Garamond'] text-xl font-light text-slate-900 mb-2">
+          {title}
+        </h4>
+        <p className="text-sm leading-relaxed text-slate-500 font-light">{desc}</p>
       </div>
     </div>
   );
 }
 
+// ─── PROGRAM AREA ──────────────────────────────────────────────────────────
+function ProgramArea({ label, desc }: { label: string; desc: string }) {
+  return (
+    <div className="border-t border-slate-100 pt-5 pb-2">
+      <h3 className="text-sm font-medium text-slate-900 mb-1.5">{label}</h3>
+      <p className="text-sm leading-relaxed text-slate-500 font-light">{desc}</p>
+    </div>
+  );
+}
+
+// ─── PAGE ──────────────────────────────────────────────────────────────────
 export default function AboutPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      <main className="flex-grow bg-white">
-        {/* HERO */}
-        <section className="relative overflow-hidden border-b border-slate-100">
-          <div className="absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_#f1f5f9_0%,_transparent_50%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_#f8fafc_0%,_transparent_50%)]" />
-          </div>
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-            <div className="max-w-4xl">
-              <div className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-sm font-medium text-slate-700 shadow-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
-                </span>
-                EIN 41-4361489 · 501(c)(3) Nonprofit
+      <main className="flex-grow bg-white font-['Jost',sans-serif]">
+
+        {/* ── HERO ──────────────────────────────────────────────────────── */}
+        <section className="border-b border-slate-100">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid lg:grid-cols-[55fr_45fr] min-h-[520px]">
+
+              {/* Left */}
+              <div className="py-20 lg:py-28 lg:pr-16 lg:border-r border-slate-100 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 mb-10">
+                    <div className="w-6 h-px bg-slate-300" />
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                      501(c)(3) · EIN 41-4361489 · Est. 2026
+                    </span>
+                  </div>
+
+                  <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                    Built from<br />
+                    <em className="italic">curiosity.</em><br />
+                    Driven by<br />
+                    purpose.
+                  </h1>
+
+                  <p className="text-[15px] leading-[1.9] text-slate-500 font-light max-w-md mb-10">
+                    The Blue Duck Foundation was built by people who explore the world and want to help it. A federally recognized public charity funding conservation, science, cultural preservation, and humanitarian work — wherever the need exists.
+                  </p>
+
+                  <div className="flex items-center gap-4">
+                    <Link
+                      href="/conservation"
+                      className="text-[11px] font-medium tracking-[0.14em] uppercase bg-slate-900 text-white px-7 py-3.5 hover:bg-slate-700 transition-colors"
+                    >
+                      Our programs
+                    </Link>
+                    <Link
+                      href="/contact"
+                      className="text-[11px] font-medium tracking-[0.14em] uppercase text-slate-500 border border-slate-200 px-7 py-3.5 hover:border-slate-400 transition-colors"
+                    >
+                      Get involved
+                    </Link>
+                  </div>
+                </div>
               </div>
 
-              <h1 className="mt-8 text-5xl font-light tracking-tight text-slate-900 sm:text-6xl lg:text-7xl">
-                About the Foundation
-              </h1>
+              {/* Right */}
+              <div className="hidden lg:flex flex-col justify-between py-28 pl-16">
+                <div className="space-y-0">
+                  {[
+                    { num: "01", label: "Environment & Ecosystems" },
+                    { num: "02", label: "Scientific Research" },
+                    { num: "03", label: "Cultural & Archaeological" },
+                    { num: "04", label: "Humanitarian Stewardship" },
+                  ].map((item) => (
+                    <div
+                      key={item.num}
+                      className="flex items-baseline justify-between py-4 border-b border-slate-100 first:border-t"
+                    >
+                      <span className="font-['Cormorant_Garamond'] text-[22px] font-light text-slate-800">
+                        {item.label}
+                      </span>
+                      <span className="text-[10px] tracking-[0.15em] text-slate-300 font-medium ml-4">
+                        {item.num}
+                      </span>
+                    </div>
+                  ))}
+                </div>
 
-              <div className="mt-10 rounded-2xl border border-slate-200/80 bg-slate-900 px-10 py-8">
-                <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">Our Mission</p>
-                <p className="mt-4 text-2xl font-light leading-snug tracking-tight text-white sm:text-3xl">
-                  To protect, restore, and champion the natural world and the communities that depend on it — transparently, scientifically, and without borders.
-                </p>
-              </div>
-
-              <p className="mt-8 max-w-3xl text-lg leading-relaxed text-slate-600">
-                Born in Texas and built for the world, The Blue Duck Foundation brings together conservation science, environmental technology, cultural preservation, and humanitarian support into a single, fully accountable organization. We go where the work is needed — and we show our work every step of the way.
-              </p>
-
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <Link href="/conservation" className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-8 py-4 font-semibold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-md">
-                  Our programs
-                </Link>
-                <Link href="/contact" className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-8 py-4 font-semibold text-slate-900 transition-all hover:bg-slate-50">
-                  Get involved
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* VALUES */}
-        <section className="border-b border-slate-100 bg-white">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-4xl font-light tracking-tight text-slate-900">What we stand for</h2>
-              <p className="mt-4 text-lg text-slate-600">
-                Four words guide every decision we make, every partnership we form, and every community we serve.
-              </p>
-            </div>
-            <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              <ValueCard number="01" title="Integrity" desc="Complete financial transparency and scientific honesty. Every dollar tracked, every data point accountable — publicly, always." />
-              <ValueCard number="02" title="Respect" desc="For the land, for wildlife, for indigenous communities, for workers, and for every person whose livelihood is tied to the natural world." />
-              <ValueCard number="03" title="Restore" desc="We don't just protect what remains — we actively work to bring back ecosystems, waterways, habitats, and communities that have been left behind." />
-              <ValueCard number="04" title="Advance" desc="Meaningful conservation requires innovation. We build new tools, new partnerships, and open pathways for research and support that have historically been out of reach." />
-            </div>
-          </div>
-        </section>
-
-        {/* MISSION & GOALS */}
-        <section className="border-b border-slate-100 bg-slate-50">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
-              <div>
-                <h2 className="text-4xl font-light tracking-tight text-slate-900">Our mission in depth</h2>
-                <p className="mt-6 text-lg leading-relaxed text-slate-600">
-                  The Blue Duck Foundation exists to close the gap between environmental science and real-world action — and between forward-thinking work and the people and funding needed to support it.
-                </p>
-                <p className="mt-4 leading-relaxed text-slate-600">
-                  We are rooted in Texas and proud of it. But our Certificate of Formation now reflects what we've always believed: that conservation, research, cultural preservation, and humanitarian support don't stop at state lines or national borders. Ecosystems don't. Neither do we.
-                </p>
-                <p className="mt-4 leading-relaxed text-slate-600">
-                  We create safe, compliant, and transparent pathways for individuals, communities, and organizations to support meaningful work — environmental monitoring technology, archaeological preservation, freshwater access, renewable energy research, and more. Work that too often goes unfunded because the infrastructure to support it hasn't existed.
-                </p>
-                <p className="mt-4 leading-relaxed text-slate-600">
-                  We're building that infrastructure now.
-                </p>
-              </div>
-              <div>
-                <h2 className="text-4xl font-light tracking-tight text-slate-900">Strategic goals</h2>
-                <div className="mt-8 space-y-8">
-                  <GoalItem number="01" title="Build global conservation capacity" desc="Establish partnerships, easements, and funding streams for high-priority ecosystems — wetlands, waterways, forests, coastal regions, and beyond — wherever the need is greatest." />
-                  <GoalItem number="02" title="Advance environmental science and technology" desc="Deploy IoT monitoring systems, data platforms, and research tools that give land managers, scientists, and communities real-time intelligence and measurable outcomes." />
-                  <GoalItem number="03" title="Preserve cultural and natural heritage" desc="Fund and conduct archaeological documentation, indigenous history research, and geological heritage protection domestically and internationally." />
-                  <GoalItem number="04" title="Create open pathways for support" desc="Provide transparent, fully compliant channels for donors and partners to support forward-thinking work in renewables, conservation, and humanitarian environmental aid — no gatekeeping." />
+                {/* Credential tiles */}
+                <div className="grid grid-cols-2 border border-slate-100">
+                  {[
+                    { val: "501(c)(3)", lbl: "Federal exemption" },
+                    { val: "Feb 2026", lbl: "Effective date" },
+                    { val: "Public", lbl: "Charity class" },
+                    { val: "41-4361489", lbl: "EIN" },
+                  ].map((s, i) => (
+                    <div
+                      key={i}
+                      className="p-5 border-b border-r border-slate-100 last:border-r-0 [&:nth-child(2)]:border-r-0 [&:nth-child(3)]:border-b-0 [&:nth-child(4)]:border-b-0"
+                    >
+                      <div className="font-['Cormorant_Garamond'] text-[20px] font-light text-slate-900 mb-0.5">
+                        {s.val}
+                      </div>
+                      <div className="text-[10px] tracking-[0.08em] uppercase text-slate-400">
+                        {s.lbl}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* PROGRAM AREAS */}
-        <section className="border-b border-slate-100 bg-white">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <h2 className="text-4xl font-light tracking-tight text-slate-900">Our program areas</h2>
-            <p className="mt-4 max-w-3xl text-lg text-slate-600">
-              Each program area is grounded in our Certificate of Formation and IRS purpose statement — charitable, scientific, educational, environmental, humanitarian, and cultural preservation work, all in furtherance of Section 501(c)(3).
-            </p>
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* ── TRUST STRIP ───────────────────────────────────────────────── */}
+        <div className="border-b border-slate-100 bg-slate-50">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="flex flex-wrap items-center divide-x divide-slate-200">
               {[
-                { label: "Global Environmental Stewardship", desc: "Ecosystems worldwide — wetlands, waterways, forests, coastal, marine, and more." },
-                { label: "Wildlife & Biodiversity Protection", desc: "Conservation, habitat restoration, ecological monitoring, and anti-poaching support." },
-                { label: "Water & Freshwater Resources", desc: "Watershed protection, water quality, and humanitarian freshwater access internationally." },
-                { label: "Geological & Earth Sciences", desc: "Research, documentation, and public education on geological and earth system science." },
-                { label: "Environmental Monitoring Technology", desc: "IoT sensors, data systems, and scientific tools for transparent, accountable conservation." },
-                { label: "Archaeological & Cultural Heritage", desc: "Site documentation, indigenous history, and protection of historically significant landscapes." },
-                { label: "Natural Resource Region Support", desc: "Charitable assistance to communities in resource-dependent or environmentally impacted areas." },
-                { label: "Renewable Energy & Research Support", desc: "Advancing forward-thinking research and development in energy, science, and sustainability." },
-                { label: "Education & Public Outreach", desc: "Digital platforms, public programs, and content connecting people to conservation science." },
-              ].map((area) => (
-                <div key={area.label} className="rounded-xl border border-slate-200/80 bg-slate-50 p-6">
-                  <h3 className="font-semibold text-slate-900">{area.label}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{area.desc}</p>
+                "Contributions deductible under IRC Section 170",
+                "Publicly supported · IRC 170(b)(1)(A)(vi)",
+                "Annual 990 filing · Full financial transparency",
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-2 px-6 py-3.5 first:pl-0 text-[11px] text-slate-400"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" />
+                  {item}
                 </div>
               ))}
             </div>
           </div>
+        </div>
+
+        {/* ── VALUES ────────────────────────────────────────────────────── */}
+        <section className="border-b border-slate-100">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <div className="grid lg:grid-cols-[1fr_3fr] gap-16 lg:gap-24">
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-5 h-px bg-slate-300" />
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                    Our values
+                  </span>
+                </div>
+                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+                  What we<br />stand for
+                </h2>
+              </div>
+              <div className="grid sm:grid-cols-3 gap-10">
+                <ValueCard
+                  number="01"
+                  title="Honesty"
+                  desc="We say what we mean, report what we find, and account for every dollar — publicly, without exception. No spin, no varnish."
+                />
+                <ValueCard
+                  number="02"
+                  title="Respect"
+                  desc="For the land, for communities, for the science, and for the people doing the work. Every decision starts here."
+                />
+                <div className="border-t border-dashed border-slate-200 pt-8">
+                  <div className="text-[10px] font-medium tracking-[0.2em] text-slate-300 uppercase mb-6">
+                    03
+                  </div>
+                  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light tracking-tight text-slate-300 mb-4 italic">
+                    Coming soon
+                  </h3>
+                  <p className="text-sm leading-relaxed text-slate-300 font-light">
+                    Our third value is being finalized with our board. It will reflect the same spirit that drives everything we do.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
-        {/* BOARD */}
+        {/* ── MISSION & GOALS ───────────────────────────────────────────── */}
         <section className="border-b border-slate-100 bg-slate-50">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-              <div className="max-w-2xl">
-                <h2 className="text-4xl font-light tracking-tight text-slate-900">Board of Directors</h2>
-                <p className="mt-3 text-lg text-slate-600">Experienced leaders committed to building an organization that outlasts all of us.</p>
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+
+              <div>
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-5 h-px bg-slate-300" />
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                    Mission
+                  </span>
+                </div>
+                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-8">
+                  Why we exist
+                </h2>
+                <div className="space-y-5 text-[15px] leading-[1.9] text-slate-500 font-light">
+                  <p>
+                    The Blue Duck Foundation exists to close the gap between environmental science and real-world action — and between forward-thinking work and the funding it needs to happen.
+                  </p>
+                  <p>
+                    We are rooted in Texas. But our work doesn't stop at state lines or national borders. Ecosystems don't. Neither do we.
+                  </p>
+                  <p>
+                    We create transparent, fully compliant pathways for individuals and organizations to support meaningful work — monitoring technology, archaeological preservation, freshwater access, renewable energy research. Work that too often goes unfunded because the infrastructure to support it hasn't existed.
+                  </p>
+                  <p className="font-medium text-slate-700">
+                    We're building that infrastructure now.
+                  </p>
+                </div>
               </div>
-              <Link href="/contact" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-slate-700">
-                Join the board
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
+
+              <div>
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-5 h-px bg-slate-300" />
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                    Strategic goals
+                  </span>
+                </div>
+                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-8">
+                  Where we're headed
+                </h2>
+                <div className="space-y-6">
+                  <GoalItem
+                    number="01"
+                    title="Build global conservation capacity"
+                    desc="Establish partnerships and funding streams for high-priority ecosystems — wetlands, waterways, forests, coastal regions — wherever the need is greatest."
+                  />
+                  <GoalItem
+                    number="02"
+                    title="Advance environmental science"
+                    desc="Deploy IoT monitoring systems and research tools that give land managers and scientists real-time intelligence and measurable outcomes."
+                  />
+                  <GoalItem
+                    number="03"
+                    title="Preserve cultural and natural heritage"
+                    desc="Fund archaeological documentation, indigenous history research, and geological heritage protection domestically and internationally."
+                  />
+                  <GoalItem
+                    number="04"
+                    title="Open the pathways"
+                    desc="Transparent, compliant channels for donors and partners to support conservation, renewables, and humanitarian environmental aid — no gatekeeping."
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── PROGRAM AREAS ─────────────────────────────────────────────── */}
+        <section className="border-b border-slate-100">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <div className="grid lg:grid-cols-[1fr_3fr] gap-16 lg:gap-24">
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-5 h-px bg-slate-300" />
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                    Programs
+                  </span>
+                </div>
+                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight mb-4">
+                  Areas<br />of work
+                </h2>
+                <p className="text-sm leading-relaxed text-slate-400 font-light">
+                  Grounded in our IRS purpose statement — charitable, scientific, educational, environmental, humanitarian, and cultural preservation work under Section 501(c)(3).
+                </p>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8">
+                <ProgramArea
+                  label="Global Environmental Stewardship"
+                  desc="Ecosystems worldwide — wetlands, waterways, forests, coastal, marine, and more."
+                />
+                <ProgramArea
+                  label="Wildlife & Biodiversity Protection"
+                  desc="Conservation, habitat restoration, ecological monitoring, and anti-poaching support."
+                />
+                <ProgramArea
+                  label="Water & Freshwater Resources"
+                  desc="Watershed protection, water quality, and humanitarian freshwater access internationally."
+                />
+                <ProgramArea
+                  label="Geological & Earth Sciences"
+                  desc="Research, documentation, and public education on geological and earth system science."
+                />
+                <ProgramArea
+                  label="Environmental Monitoring Technology"
+                  desc="IoT sensors, data systems, and scientific tools for transparent, accountable conservation."
+                />
+                <ProgramArea
+                  label="Archaeological & Cultural Heritage"
+                  desc="Site documentation, indigenous history, and protection of historically significant landscapes."
+                />
+                <ProgramArea
+                  label="Natural Resource Region Support"
+                  desc="Charitable assistance to communities in resource-dependent or environmentally impacted areas."
+                />
+                <ProgramArea
+                  label="Renewable Energy & Research"
+                  desc="Advancing forward-thinking research and development in energy, science, and sustainability."
+                />
+                <ProgramArea
+                  label="Education & Public Outreach"
+                  desc="Digital platforms, public programs, and content connecting people to conservation science."
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── BOARD ─────────────────────────────────────────────────────── */}
+        <section className="border-b border-slate-100 bg-slate-50">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-5 h-px bg-slate-300" />
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                    Leadership
+                  </span>
+                </div>
+                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900">
+                  Board of Directors
+                </h2>
+                <p className="mt-2 text-sm text-slate-400 font-light">
+                  Building an organization that outlasts all of us.
+                </p>
+              </div>
+              <Link
+                href="/contact"
+                className="text-[11px] font-medium tracking-[0.12em] uppercase text-slate-500 hover:text-slate-900 transition-colors inline-flex items-center gap-2 self-start sm:self-auto"
+              >
+                Join the board →
               </Link>
             </div>
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
               <BoardMember name="DJ Morgan" role="Executive Director & Founder" />
               <BoardMember name="Cameron Francis" role="Board Member" />
               <BoardMember name="Jeramiah Sullivan" role="Board Member" />
               <BoardMember empty />
               <BoardMember empty />
             </div>
-            <div className="mt-12 rounded-2xl border border-slate-200/80 bg-white p-8">
-              <div className="grid gap-8 md:grid-cols-2 md:items-center">
+
+            <div className="mt-10 border border-slate-200 bg-white p-8 lg:p-10">
+              <div className="grid lg:grid-cols-2 gap-8 lg:items-center">
                 <div>
-                  <h3 className="text-xl font-semibold text-slate-900">Interested in serving on the board?</h3>
-                  <p className="mt-2 text-slate-600">
-                    We're seeking experienced professionals in conservation, renewable energy, law, finance, environmental science, archaeology, or international development who believe in transparent, accountable stewardship.
+                  <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-2">
+                    Interested in serving on the board?
+                  </h3>
+                  <p className="text-sm leading-relaxed text-slate-500 font-light">
+                    We're seeking professionals in conservation, law, finance, environmental science, archaeology, or international development who believe in transparent, accountable stewardship.
                   </p>
                 </div>
-                <div className="flex gap-4 md:justify-end">
-                  <Link href="/contact" className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-800">
+                <div className="lg:flex lg:justify-end">
+                  <Link
+                    href="/contact"
+                    className="text-[11px] font-medium tracking-[0.14em] uppercase bg-slate-900 text-white px-7 py-3.5 hover:bg-slate-700 transition-colors inline-flex"
+                  >
                     Express interest
                   </Link>
                 </div>
@@ -237,31 +456,44 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="bg-white">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="overflow-hidden rounded-2xl bg-slate-900 shadow-xl">
-              <div className="px-8 py-12 md:px-12 md:py-16">
-                <div className="grid gap-8 md:grid-cols-2 md:items-center">
-                  <div>
-                    <h3 className="text-3xl font-light tracking-tight text-white">This is just the beginning</h3>
-                    <p className="mt-3 text-lg text-slate-300">
-                      The Blue Duck Foundation is actively building its programs, partnerships, and global capacity. Follow our progress or get involved as a founding supporter.
-                    </p>
+        {/* ── CTA ───────────────────────────────────────────────────────── */}
+        <section>
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <div className="bg-slate-900 px-10 py-14 lg:px-16 lg:py-16">
+              <div className="grid lg:grid-cols-2 gap-10 lg:items-center">
+                <div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-5 h-px bg-slate-600" />
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-slate-500 font-medium">
+                      Get involved
+                    </span>
                   </div>
-                  <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
-                    <Link href="/conservation" className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 font-semibold text-slate-900 transition-colors hover:bg-slate-100">
-                      Explore programs
-                    </Link>
-                    <Link href="/contact" className="inline-flex items-center justify-center rounded-xl border border-white/30 px-8 py-4 font-semibold text-white transition-colors hover:bg-white/10">
-                      Contact us
-                    </Link>
-                  </div>
+                  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light text-white mb-4 leading-tight">
+                    This is just<br /><em className="italic">the beginning.</em>
+                  </h3>
+                  <p className="text-[15px] leading-relaxed text-slate-400 font-light">
+                    The Blue Duck Foundation is actively building programs, partnerships, and global capacity. Get involved as a founding supporter, advisor, or partner.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 lg:justify-end">
+                  <Link
+                    href="/conservation"
+                    className="text-[11px] font-medium tracking-[0.14em] uppercase bg-white text-slate-900 px-8 py-4 hover:bg-slate-100 transition-colors text-center"
+                  >
+                    Explore programs
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="text-[11px] font-medium tracking-[0.14em] uppercase border border-slate-700 text-white px-8 py-4 hover:border-slate-500 transition-colors text-center"
+                  >
+                    Contact us
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
       </main>
 
       <Footer />

@@ -3,95 +3,78 @@ import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-// ─── HIDDEN TRIDENT MARK ──────────────────────────────────────────────────
-function TridentMark({ className = "" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 40 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <line x1="20" y1="56" x2="20" y2="18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <line x1="12" y1="52" x2="28" y2="52" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M20 18 L20 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M20 22 Q14 18 10 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-      <path d="M20 22 Q26 18 30 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-      <path d="M10 8 L8 3 L12 6 L11 1" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      <path d="M20 4 L18 0 L21 3 L20 -1" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      <path d="M30 8 L28 3 L32 6 L31 1" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-    </svg>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <div className="text-3xl font-light tracking-tight text-slate-900">{value}</div>
-      <div className="mt-1.5 text-sm font-medium text-slate-500">{label}</div>
-    </div>
-  );
-}
-
-function PillarSection({
-  number, label, title, description, items, href, cta, accent,
+// ─── PILLAR ROW ────────────────────────────────────────────────────────────
+function PillarRow({
+  number,
+  label,
+  title,
+  description,
+  items,
+  href,
+  cta,
+  dark,
 }: {
-  number: string; label: string; title: string; description: string;
-  items: string[]; href: string; cta: string; accent: "sage" | "earth" | "water";
+  number: string;
+  label: string;
+  title: string;
+  description: string;
+  items: string[];
+  href: string;
+  cta: string;
+  dark?: boolean;
 }) {
-  const accentMap = {
-    sage:  { bg: "bg-emerald-50", border: "border-emerald-200", tag: "bg-emerald-100 text-emerald-800", num: "text-emerald-200" },
-    earth: { bg: "bg-amber-50",   border: "border-amber-200",   tag: "bg-amber-100 text-amber-800",     num: "text-amber-200"   },
-    water: { bg: "bg-sky-50",     border: "border-sky-200",     tag: "bg-sky-100 text-sky-800",         num: "text-sky-200"     },
-  };
-  const a = accentMap[accent];
   return (
-    <section className={`border-b border-slate-100 ${a.bg}`}>
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20 items-start">
-          <div className="lg:pt-2">
-            <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${a.tag}`}>{label}</span>
-            <div className={`mt-4 text-8xl font-light leading-none ${a.num} select-none`}>{number}</div>
-          </div>
+    <section className={`border-b border-slate-100 ${dark ? "bg-slate-50" : "bg-white"}`}>
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+        <div className="grid lg:grid-cols-[1fr_3fr] gap-12 lg:gap-24">
+
           <div>
-            <h2 className="text-4xl font-light tracking-tight text-slate-900 sm:text-5xl">{title}</h2>
-            <p className="mt-5 text-lg leading-relaxed text-slate-600 max-w-2xl">{description}</p>
-            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-              {items.map((item) => (
-                <li key={item} className={`flex items-start gap-3 rounded-xl border ${a.border} bg-white/70 px-4 py-3 text-sm text-slate-700`}>
-                  <svg className="mt-0.5 h-4 w-4 flex-shrink-0 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                  </svg>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-8">
-              <Link href={href} className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-700">
-                {cta}
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-5 h-px bg-slate-300" />
+              <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                {number}
+              </span>
             </div>
+            <span className="text-[10px] tracking-[0.15em] uppercase font-medium text-slate-400 border border-slate-200 px-3 py-1.5 inline-block mb-4">
+              {label}
+            </span>
+            <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+              {title}
+            </h2>
           </div>
+
+          <div>
+            <p className="text-[15px] leading-[1.9] text-slate-500 font-light mb-8 max-w-2xl">
+              {description}
+            </p>
+            <div className="grid sm:grid-cols-2 gap-x-10 mb-8">
+              {items.map((item) => (
+                <div key={item} className="flex items-start gap-3 py-3 border-b border-slate-100">
+                  <span className="mt-2 w-1 h-1 rounded-full bg-slate-300 flex-shrink-0" />
+                  <span className="text-sm text-slate-600 font-light">{item}</span>
+                </div>
+              ))}
+            </div>
+            <Link
+              href={href}
+              className="text-[11px] font-medium tracking-[0.14em] uppercase text-slate-500 hover:text-slate-900 transition-colors inline-flex items-center gap-2"
+            >
+              {cta} →
+            </Link>
+          </div>
+
         </div>
       </div>
     </section>
   );
 }
 
-function TrustIndicator({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex items-center gap-2 text-sm text-slate-600">
-      <svg className="h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-      </svg>
-      {children}
-    </div>
-  );
-}
-
-export default function Home() {
+// ─── PAGE ──────────────────────────────────────────────────────────────────
+export default function HomePage() {
   return (
     <>
       <Head>
-        <title>The Blue Duck Foundation — Stewardship Without Borders</title>
+        <title>The Blue Duck Foundation — Explore the World. Help It.</title>
         <meta name="description" content="A Texas-born, globally-minded 501(c)(3) nonprofit dedicated to environmental conservation, scientific research, cultural preservation, and humanitarian support — wherever the work is needed most." />
         <meta property="og:title" content="The Blue Duck Foundation" />
         <meta property="og:description" content="Protecting the natural world and the communities that depend on it — transparently, scientifically, and without borders." />
@@ -102,124 +85,116 @@ export default function Home() {
       <div className="flex min-h-screen flex-col">
         <Header />
 
-        <main className="flex-1 bg-white">
+        <main className="flex-1 bg-white font-['Jost',sans-serif]">
 
-          {/* HERO */}
-          <section className="relative overflow-hidden border-b border-slate-100">
-            <div className="absolute inset-0 -z-10">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_#f1f5f9_0%,_transparent_55%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_#f8fafc_0%,_transparent_55%)]" />
-            </div>
+          {/* ── HERO ────────────────────────────────────────────────────── */}
+          <section className="border-b border-slate-100">
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+              <div className="grid lg:grid-cols-[55fr_45fr] min-h-[520px]">
 
-            <div className="absolute top-6 right-8 text-slate-900/[0.04] hover:text-slate-900/[0.08] transition-colors duration-700 pointer-events-none select-none">
-              <TridentMark className="w-8 h-11" />
-            </div>
-
-            <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-              <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-                <div className="flex flex-col justify-center">
-                  <div className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-sm font-medium text-slate-700 shadow-sm">
-                    <span className="relative flex h-2 w-2">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                    </span>
-                    501(c)(3) Nonprofit · EIN 41-4361489
-                  </div>
-
-                  <h1 className="mt-8 text-5xl font-light tracking-tight text-slate-900 sm:text-6xl lg:text-7xl">
-                    Stewardship without borders
-                  </h1>
-
-                  <p className="mt-6 text-lg leading-relaxed text-slate-600">
-                    The Blue Duck Foundation is a Texas-born, globally-minded 501(c)(3) nonprofit dedicated to environmental conservation, scientific research, cultural preservation, and humanitarian support — wherever the work is needed most.
-                  </p>
-
-                  <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-                    <Link href="/about" className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-8 py-4 font-semibold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-md">
-                      Our mission
-                    </Link>
-                    <Link href="/conservation" className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-8 py-4 font-semibold text-slate-900 transition-all hover:bg-slate-50">
-                      Our programs
-                    </Link>
-                  </div>
-
-                  <div className="mt-12 grid grid-cols-3 gap-8 border-t border-slate-200 pt-8">
-                    <Stat label="Legal status" value="Active" />
-                    <Stat label="Founded" value="2026" />
-                    <Stat label="Scope" value="Global" />
-                  </div>
-
-                  <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-                    <TrustIndicator>Federally recognized 501(c)(3)</TrustIndicator>
-                    <TrustIndicator>Fully transparent operations</TrustIndicator>
-                    <TrustIndicator>Science-driven approach</TrustIndicator>
-                  </div>
-                </div>
-
-                {/* Right panel */}
-                <div className="flex flex-col gap-6">
-                  <div className="rounded-2xl border border-slate-200/80 bg-white p-8 shadow-sm">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <h2 className="text-xl font-semibold text-slate-900">Foundation Development</h2>
-                        <p className="mt-1 text-slate-600">Building the structure for lasting global impact</p>
-                      </div>
-                      <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-800">Active</span>
+                <div className="py-20 lg:py-28 lg:pr-16 lg:border-r border-slate-100 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-3 mb-10">
+                      <div className="w-6 h-px bg-slate-300" />
+                      <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                        501(c)(3) Public Charity · EIN 41-4361489 · Texas
+                      </span>
                     </div>
-                    <div className="mt-8 space-y-6">
-                      <div className="rounded-xl bg-slate-50 p-5">
-                        <h3 className="text-sm font-semibold text-slate-900">2026 priorities</h3>
-                        <ul className="mt-3 space-y-2.5">
-                          {[
-                            "501(c)(3) status confirmed — EIN 41-4361489",
-                            "Certificate of Amendment filed — expanded global mission",
-                            "Board of Directors being established",
-                            "Building conservation and research partnerships",
-                            "Deploying IoT environmental monitoring systems",
-                            "Launching inaugural programs and fundraising",
-                          ].map((item) => (
-                            <li key={item} className="flex gap-3 text-sm text-slate-700">
-                              <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                              </svg>
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="grid gap-3 sm:grid-cols-2">
-                        <Link href="/about" className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-800">
-                          Learn more
-                        </Link>
-                        <Link href="/contact" className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-900 transition-colors hover:bg-slate-50">
-                          Get involved
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div className="rounded-2xl border border-slate-200/80 bg-slate-900 p-8 text-white">
-                    <h3 className="text-lg font-semibold">Built on transparency</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-300">
-                      From day one, we're committed to detailed reporting, clear financial accountability, and measurable outcomes. Every initiative includes public progress updates and third-party verification — no exceptions.
+                    <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                      Explore<br />
+                      the world.<br />
+                      <em className="italic">Help it.</em>
+                    </h1>
+
+                    <p className="text-[15px] leading-[1.9] text-slate-500 font-light max-w-md mb-10">
+                      The Blue Duck Foundation funds conservation, environmental science, cultural preservation, and humanitarian work — wherever it's needed. We show up, we document, and we act.
                     </p>
-                    <Link href="/about" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-slate-200">
-                      Our approach
-                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
+
+                    <div className="flex items-center gap-4">
+                      <Link
+                        href="/about"
+                        className="text-[11px] font-medium tracking-[0.14em] uppercase bg-slate-900 text-white px-7 py-3.5 hover:bg-slate-700 transition-colors"
+                      >
+                        Our mission
+                      </Link>
+                      <Link
+                        href="/conservation"
+                        className="text-[11px] font-medium tracking-[0.14em] uppercase text-slate-500 border border-slate-200 px-7 py-3.5 hover:border-slate-400 transition-colors"
+                      >
+                        See the work →
+                      </Link>
+                    </div>
                   </div>
                 </div>
+
+                <div className="hidden lg:flex flex-col justify-between py-28 pl-16">
+                  <div className="space-y-0">
+                    {[
+                      { num: "01", label: "Environment & Ecosystems" },
+                      { num: "02", label: "Scientific Research" },
+                      { num: "03", label: "Cultural & Archaeological" },
+                      { num: "04", label: "Humanitarian Stewardship" },
+                    ].map((item) => (
+                      <div key={item.num} className="flex items-baseline justify-between py-4 border-b border-slate-100 first:border-t">
+                        <span className="font-['Cormorant_Garamond'] text-[22px] font-light text-slate-800">
+                          {item.label}
+                        </span>
+                        <span className="text-[10px] tracking-[0.15em] text-slate-300 font-medium ml-4">
+                          {item.num}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="grid grid-cols-2 border border-slate-100">
+                    {[
+                      { val: "501(c)(3)", lbl: "Federal exemption" },
+                      { val: "Feb 2026",  lbl: "Effective date" },
+                      { val: "Public",    lbl: "Charity class" },
+                      { val: "41-4361489", lbl: "EIN" },
+                    ].map((s, i) => (
+                      <div
+                        key={i}
+                        className="p-5 border-b border-r border-slate-100 last:border-r-0 [&:nth-child(2)]:border-r-0 [&:nth-child(3)]:border-b-0 [&:nth-child(4)]:border-b-0"
+                      >
+                        <div className="font-['Cormorant_Garamond'] text-[19px] font-light text-slate-900 mb-0.5">
+                          {s.val}
+                        </div>
+                        <div className="text-[10px] tracking-[0.08em] uppercase text-slate-400">
+                          {s.lbl}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
               </div>
             </div>
           </section>
 
-          {/* THREE PILLARS */}
-          <PillarSection
+          {/* ── TRUST STRIP ───────────────────────────────────────────────*/}
+          <div className="border-b border-slate-100 bg-slate-50">
+            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+              <div className="flex flex-wrap items-center divide-x divide-slate-200">
+                {[
+                  "Contributions deductible under IRC Section 170",
+                  "Publicly supported · IRC 170(b)(1)(A)(vi)",
+                  "Annual 990 filing · Full financial transparency",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2 px-6 py-3.5 first:pl-0 text-[11px] text-slate-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* ── THREE PILLARS ─────────────────────────────────────────────*/}
+          <PillarRow
             number="01"
             label="Environment & Natural Resources"
-            accent="sage"
             title="Protecting the natural world — everywhere"
             description="From Texas wetlands to global ecosystems, we conserve and restore the environments that sustain all life. Wetlands, waterways, forests, coastal regions, freshwater systems, and biodiversity — supported by science, monitored by technology, and sustained by transparent partnerships."
             items={[
@@ -234,10 +209,9 @@ export default function Home() {
             cta="Conservation programs"
           />
 
-          <PillarSection
+          <PillarRow
             number="02"
             label="Archaeological & Historical"
-            accent="earth"
             title="Preserving the record of humanity"
             description="Archaeological sites, indigenous histories, geological heritage, and culturally significant landscapes belong to all of us — and too many are disappearing. We fund documentation, protection, and public access to the human record, domestically and internationally."
             items={[
@@ -250,19 +224,19 @@ export default function Home() {
             ]}
             href="/conservation#heritage"
             cta="Heritage programs"
+            dark
           />
 
-          <PillarSection
+          <PillarRow
             number="03"
             label="Mission to Help"
-            accent="water"
             title="Clean water. Direct assistance. Open pathways."
-            description="Where environmental protection and human dignity intersect, we show up. Clean water access, safety equipment, humanitarian aid, and transparent funding pathways for forward-thinking work in conservation, renewables, and community resilience — especially in underserved and resource-dependent regions."
+            description="Where environmental protection and human dignity intersect, we show up. Clean water access, safety equipment, humanitarian aid, and transparent funding pathways for forward-thinking work in conservation, renewables, and community resilience."
             items={[
               "International freshwater access initiatives",
               "Safety equipment and field training",
               "Humanitarian environmental assistance",
-              "Support for communities in resource-dependent regions",
+              "Support for resource-dependent region communities",
               "Transparent pathways for renewable energy research",
               "Grants to organizations doing work that's been gatekept",
             ]}
@@ -270,61 +244,87 @@ export default function Home() {
             cta="Humanitarian programs"
           />
 
-          {/* CTA */}
-          <section className="bg-white">
-            <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-              <div className="rounded-2xl border border-slate-200/80 bg-white p-8 shadow-sm md:p-12 mb-12">
-                <div className="grid gap-8 md:grid-cols-2 md:items-center">
+          {/* ── CTA ───────────────────────────────────────────────────────*/}
+          <section>
+            <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+
+              <div className="border border-slate-100 p-8 lg:p-12 mb-6">
+                <div className="grid lg:grid-cols-2 gap-8 lg:items-center">
                   <div>
-                    <h2 className="text-3xl font-light tracking-tight text-slate-900">Follow our progress</h2>
-                    <p className="mt-3 text-slate-600">Stay informed as we launch programs, announce partnerships, and grow our global network.</p>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-5 h-px bg-slate-300" />
+                      <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                        Stay informed
+                      </span>
+                    </div>
+                    <h2 className="font-['Cormorant_Garamond'] text-3xl font-light text-slate-900 mb-2">
+                      Follow our progress
+                    </h2>
+                    <p className="text-sm text-slate-500 font-light">
+                      Stay informed as we launch programs, announce partnerships, and grow our global network.
+                    </p>
                   </div>
-                  <form className="flex flex-col gap-3 sm:flex-row" onSubmit={(e) => e.preventDefault()}>
+                  <form className="flex gap-3" onSubmit={(e) => e.preventDefault()}>
                     <label className="sr-only" htmlFor="email">Email address</label>
                     <input
                       id="email" type="email" inputMode="email" autoComplete="email"
-                      placeholder="your.email@example.com" required
-                      className="flex-1 rounded-xl border border-slate-300 px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400/20"
+                      placeholder="your@email.com" required
+                      className="flex-1 border border-slate-200 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-300 focus:border-slate-400 focus:outline-none"
                     />
-                    <button type="submit" className="rounded-xl bg-slate-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-slate-800">
+                    <button
+                      type="submit"
+                      className="text-[11px] font-medium tracking-[0.12em] uppercase bg-slate-900 text-white px-6 py-3 hover:bg-slate-700 transition-colors flex-shrink-0"
+                    >
                       Subscribe
                     </button>
                   </form>
                 </div>
               </div>
 
-              <div className="overflow-hidden rounded-2xl bg-slate-900 shadow-xl">
-                <div className="px-8 py-12 md:px-12 md:py-16">
-                  <div className="grid gap-8 md:grid-cols-2 md:items-center">
-                    <div>
-                      <h3 className="text-3xl font-light tracking-tight text-white">Help us build something meaningful</h3>
-                      <p className="mt-3 text-lg text-slate-300">
-                        The Blue Duck Foundation creates transparent, compliant pathways for people who want to support forward-thinking conservation, research, and community work — globally.
-                      </p>
-                      <div className="mt-6 flex flex-wrap gap-4">
-                        {["Transparent from day one", "Science-backed approach", "No gatekeeping"].map((item) => (
-                          <div key={item} className="flex items-center gap-2 text-sm text-slate-300">
-                            <svg className="h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                            </svg>
-                            {item}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
-                      <Link href="/contact" className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 font-semibold text-slate-900 transition-colors hover:bg-slate-100">
+              <div className="bg-slate-900 px-10 py-14 lg:px-16 lg:py-16">
+                <div className="grid lg:grid-cols-2 gap-10 lg:items-center">
+                  <div>
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="w-5 h-px bg-slate-600" />
+                      <span className="text-[10px] tracking-[0.2em] uppercase text-slate-500 font-medium">
                         Get involved
-                      </Link>
-                      <Link href="/about" className="inline-flex items-center justify-center rounded-xl border border-white/30 px-8 py-4 font-semibold text-white transition-colors hover:bg-white/10">
-                        Our story
-                      </Link>
+                      </span>
                     </div>
+                    <h3 className="font-['Cormorant_Garamond'] text-4xl font-light text-white mb-4 leading-tight">
+                      Help us build<br /><em className="italic">something meaningful.</em>
+                    </h3>
+                    <p className="text-[15px] leading-relaxed text-slate-400 font-light mb-6">
+                      The Blue Duck Foundation creates transparent, compliant pathways for people who want to support forward-thinking conservation, research, and community work — globally.
+                    </p>
+                    <div className="flex flex-wrap gap-6">
+                      {["Transparent from day one", "Science-backed approach", "No gatekeeping"].map((item) => (
+                        <div key={item} className="flex items-center gap-2">
+                          <span className="w-1 h-1 rounded-full bg-slate-600 flex-shrink-0" />
+                          <span className="text-[13px] text-slate-400 font-light">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-3 lg:justify-end">
+                    <Link
+                      href="/contact"
+                      className="text-[11px] font-medium tracking-[0.14em] uppercase bg-white text-slate-900 px-8 py-4 hover:bg-slate-100 transition-colors text-center"
+                    >
+                      Get involved
+                    </Link>
+                    <Link
+                      href="/about"
+                      className="text-[11px] font-medium tracking-[0.14em] uppercase border border-slate-700 text-white px-8 py-4 hover:border-slate-500 transition-colors text-center"
+                    >
+                      Our story
+                    </Link>
                   </div>
                 </div>
               </div>
+
             </div>
           </section>
+
         </main>
 
         <Footer />

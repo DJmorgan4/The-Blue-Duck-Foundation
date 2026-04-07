@@ -12,8 +12,6 @@ interface Tier {
   monthlyPrice: number;
   annualPrice: number;
   featured: boolean;
-  badge?: string;
-  icon: string;
   description: string;
   benefits: string[];
   cta: string;
@@ -27,12 +25,11 @@ const tiers: Tier[] = [
     monthlyPrice: 10,
     annualPrice: 100,
     featured: false,
-    icon: "◎",
     description: "Begin your conservation journey. Every contribution, every voice, every drop counts.",
     benefits: [
-      "Blue Duck Foundation digital membership card",
+      "Digital membership card",
       "Quarterly conservation newsletter",
-      "Access to member-only updates & reports",
+      "Member-only updates & reports",
       "Recognition on our supporter wall",
       "Tax-deductible contribution receipt",
     ],
@@ -45,14 +42,13 @@ const tiers: Tier[] = [
     monthlyPrice: 25,
     annualPrice: 250,
     featured: false,
-    icon: "◈",
     description: "Wade deeper. The marsh is where life flourishes — and where real work takes root.",
     benefits: [
       "Everything in Playa",
       "Printed membership card & welcome packet",
       "Invitations to conservation field events",
-      "Behind-the-scenes program and project updates",
-      "Member forum & community access",
+      "Behind-the-scenes program updates",
+      "Member community access",
       "10% discount on Foundation merchandise",
       "Annual impact report (printed)",
     ],
@@ -65,9 +61,7 @@ const tiers: Tier[] = [
     monthlyPrice: 60,
     annualPrice: 600,
     featured: true,
-    badge: "Most Popular",
-    icon: "◆",
-    description: "Soar with us. Flyway members are the backbone of everything we build — here and globally.",
+    description: "Flyway members are the backbone of everything we build — here and globally.",
     benefits: [
       "Everything in Marsh",
       "Named recognition in annual conservation report",
@@ -87,8 +81,6 @@ const tiers: Tier[] = [
     monthlyPrice: 150,
     annualPrice: 1500,
     featured: false,
-    badge: "Founding Patron",
-    icon: "❖",
     description: "The sentinels stand watch over what matters most. You are foundational to everything we become.",
     benefits: [
       "Everything in Flyway",
@@ -132,109 +124,101 @@ const faqs = [
   },
 ];
 
+// ─── TIER CARD ─────────────────────────────────────────────────────────────
 function TierCard({ tier, billing }: { tier: Tier; billing: BillingCycle }) {
   const price = billing === "annual" ? tier.annualPrice : tier.monthlyPrice;
   const savings = tier.monthlyPrice * 12 - tier.annualPrice;
 
   return (
-    <div
-      className={`group relative flex flex-col rounded-2xl border transition-all hover:shadow-lg ${
-        tier.featured
-          ? "border-slate-900 bg-slate-900 text-white"
-          : "border-slate-200/80 bg-white hover:border-slate-300"
-      }`}
-    >
-      {tier.badge && (
-        <div
-          className={`absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-xs font-semibold ${
-            tier.featured ? "bg-emerald-500 text-white" : "bg-slate-100 text-slate-700"
-          }`}
-        >
-          {tier.badge}
-        </div>
-      )}
-
-      <div className="p-8 flex flex-col flex-1">
-        <div className="flex items-start justify-between mb-4">
+    <div className={`flex flex-col justify-between p-8 border ${
+      tier.featured
+        ? "border-slate-900 bg-slate-900"
+        : "border-slate-100 bg-white"
+    }`}>
+      <div>
+        <div className="flex items-baseline justify-between mb-6">
           <div>
-            <div className={`text-2xl mb-1 ${tier.featured ? "text-white" : "text-slate-400"}`}>{tier.icon}</div>
-            <h3 className={`text-xl font-semibold ${tier.featured ? "text-white" : "text-slate-900"}`}>{tier.name}</h3>
-            <p className={`text-xs font-medium tracking-widest uppercase mt-0.5 ${tier.featured ? "text-slate-400" : "text-slate-400"}`}>
+            {tier.featured && (
+              <div className="text-[10px] tracking-[0.2em] uppercase text-emerald-400 font-medium mb-2">
+                Most popular
+              </div>
+            )}
+            <div className={`font-['Cormorant_Garamond'] text-3xl font-light mb-0.5 ${tier.featured ? "text-white" : "text-slate-900"}`}>
+              {tier.name}
+            </div>
+            <div className={`text-[10px] tracking-[0.15em] uppercase font-medium ${tier.featured ? "text-slate-500" : "text-slate-300"}`}>
               {tier.subtitle}
-            </p>
+            </div>
           </div>
           <div className="text-right">
-            <div className={`text-4xl font-light tracking-tight ${tier.featured ? "text-white" : "text-slate-900"}`}>
+            <div className={`font-['Cormorant_Garamond'] text-4xl font-light ${tier.featured ? "text-white" : "text-slate-900"}`}>
               ${price}
             </div>
-            <div className={`text-xs mt-0.5 ${tier.featured ? "text-slate-400" : "text-slate-500"}`}>
-              {billing === "annual" ? "/ year" : "/ month"}
+            <div className={`text-[10px] tracking-[0.08em] uppercase ${tier.featured ? "text-slate-500" : "text-slate-400"}`}>
+              {billing === "annual" ? "per year" : "per month"}
             </div>
             {billing === "annual" && savings > 0 && (
-              <div className="text-xs mt-0.5 text-emerald-500 font-medium">Save ${savings}</div>
+              <div className="text-[10px] text-emerald-500 font-medium mt-0.5">Save ${savings}</div>
             )}
           </div>
         </div>
 
-        <p className={`text-sm italic leading-relaxed mb-5 ${tier.featured ? "text-slate-400" : "text-slate-500"}`}>
+        <p className={`text-sm leading-relaxed font-light italic mb-6 ${tier.featured ? "text-slate-400" : "text-slate-500"}`}>
           {tier.description}
         </p>
 
-        <div className={`h-px mb-5 ${tier.featured ? "bg-slate-700" : "bg-slate-100"}`} />
+        <div className={`h-px mb-6 ${tier.featured ? "bg-slate-800" : "bg-slate-100"}`} />
 
-        <ul className="space-y-2.5 flex-1 mb-8">
+        <ul className="space-y-2.5 mb-8">
           {tier.benefits.map((benefit, i) => (
             <li key={i} className="flex items-start gap-3">
-              <svg
-                className={`mt-0.5 h-4 w-4 flex-shrink-0 ${tier.featured ? "text-emerald-400" : "text-emerald-500"}`}
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span className={`text-sm leading-relaxed ${tier.featured ? "text-slate-300" : "text-slate-600"}`}>
+              <span className={`mt-2 w-1 h-1 rounded-full flex-shrink-0 ${tier.featured ? "bg-slate-500" : "bg-slate-300"}`} />
+              <span className={`text-sm font-light leading-relaxed ${tier.featured ? "text-slate-300" : "text-slate-600"}`}>
                 {benefit}
               </span>
             </li>
           ))}
         </ul>
-
-        <Link
-          href="/contact"
-          className={`block text-center rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${
-            tier.featured
-              ? "bg-white text-slate-900 hover:bg-slate-100"
-              : "bg-slate-900 text-white hover:bg-slate-800"
-          }`}
-        >
-          {tier.cta}
-        </Link>
       </div>
+
+      <Link
+        href="/contact"
+        className={`text-[11px] font-medium tracking-[0.14em] uppercase px-6 py-3.5 text-center inline-block transition-colors ${
+          tier.featured
+            ? "bg-white text-slate-900 hover:bg-slate-100"
+            : "border border-slate-200 text-slate-700 hover:border-slate-400"
+        }`}
+      >
+        {tier.cta}
+      </Link>
     </div>
   );
 }
 
+// ─── FAQ ───────────────────────────────────────────────────────────────────
 function FAQ({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-slate-200">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-5 text-left">
-        <span className="text-base font-semibold text-slate-900 pr-8">{q}</span>
-        <span className={`flex-shrink-0 text-slate-400 transition-transform duration-200 ${open ? "rotate-45" : ""}`}>
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div className="border-b border-slate-100">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between py-5 text-left gap-8"
+      >
+        <span className="text-sm font-medium text-slate-900">{q}</span>
+        <span className={`flex-shrink-0 text-slate-300 transition-transform duration-200 ${open ? "rotate-45" : ""}`}>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
           </svg>
         </span>
       </button>
-      {open && <div className="pb-5 text-slate-600 leading-relaxed text-sm -mt-1">{a}</div>}
+      {open && (
+        <div className="pb-5 text-sm text-slate-500 font-light leading-relaxed -mt-1">{a}</div>
+      )}
     </div>
   );
 }
 
+// ─── PAGE ──────────────────────────────────────────────────────────────────
 export default function MembershipPage() {
   const [billing, setBilling] = useState<BillingCycle>("annual");
 
@@ -242,96 +226,120 @@ export default function MembershipPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      <main className="flex-grow bg-white">
-        {/* HERO */}
-        <section className="relative overflow-hidden border-b border-slate-100">
-          <div className="absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_#f1f5f9_0%,_transparent_50%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_#f8fafc_0%,_transparent_50%)]" />
-          </div>
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-            <div className="max-w-3xl">
-              <div className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-sm font-medium text-slate-700 shadow-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
-                </span>
-                501(c)(3) Nonprofit · Tax-Deductible
-              </div>
-              <h1 className="mt-8 text-5xl font-light tracking-tight text-slate-900 sm:text-6xl lg:text-7xl">
-                Become a Member
-              </h1>
-              <p className="mt-6 text-lg leading-relaxed text-slate-600 max-w-2xl">
-                Conservation is not a spectator sport. Every member of The Blue Duck Foundation is a stakeholder in the natural world, the communities that depend on it, and the legacies we're building together — here and globally.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-                {["501(c)(3) · EIN 41-4361489", "Funds global programs", "Cancel anytime"].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-sm text-slate-600">
-                    <svg className="h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    {item}
+      <main className="flex-grow bg-white font-['Jost',sans-serif]">
+
+        {/* ── HERO ──────────────────────────────────────────────────────── */}
+        <section className="border-b border-slate-100">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid lg:grid-cols-[55fr_45fr] min-h-[400px]">
+
+              <div className="py-20 lg:py-28 lg:pr-16 lg:border-r border-slate-100 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 mb-10">
+                    <div className="w-6 h-px bg-slate-300" />
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                      501(c)(3) · EIN 41-4361489 · Tax-deductible
+                    </span>
                   </div>
-                ))}
+                  <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                    Become<br />
+                    a <em className="italic">member.</em>
+                  </h1>
+                  <p className="text-[15px] leading-[1.9] text-slate-500 font-light max-w-md">
+                    Conservation is not a spectator sport. Every member of The Blue Duck Foundation is a stakeholder in the natural world, the communities that depend on it, and the legacies we're building together.
+                  </p>
+                </div>
               </div>
+
+              <div className="hidden lg:flex flex-col justify-center py-28 pl-16">
+                <div className="space-y-0">
+                  {tiers.map((tier, i) => (
+                    <div key={i} className="flex items-baseline justify-between py-4 border-b border-slate-100 first:border-t">
+                      <div>
+                        <span className="font-['Cormorant_Garamond'] text-[20px] font-light text-slate-800 mr-3">
+                          {tier.name}
+                        </span>
+                        <span className="text-[10px] tracking-[0.1em] uppercase text-slate-300 font-medium">
+                          {tier.subtitle}
+                        </span>
+                      </div>
+                      <span className="text-sm text-slate-500 font-light">
+                        ${tier.annualPrice}/yr
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-8 text-[11px] tracking-[0.08em] text-slate-400 font-light">
+                  All memberships fully tax-deductible · Cancel anytime
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
 
-        {/* TIERS */}
-        <section className="border-b border-slate-100 bg-white">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-3xl text-center mb-12">
-              <h2 className="text-4xl font-light tracking-tight text-slate-900">Choose your membership</h2>
-              <p className="mt-4 text-lg text-slate-600">
-                Four tiers, each named for a natural ecosystem. Every level makes a direct impact on conservation, research, and community work — locally and around the world.
-              </p>
+        {/* ── TIER CARDS ────────────────────────────────────────────────── */}
+        <section className="border-b border-slate-100">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
 
-              <div className="mt-8 inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14">
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-5 h-px bg-slate-300" />
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                    Membership tiers
+                  </span>
+                </div>
+                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900">
+                  Choose your level
+                </h2>
+              </div>
+              <div className="flex items-center border border-slate-200 bg-slate-50 p-1 self-start sm:self-auto">
                 <button
                   onClick={() => setBilling("monthly")}
-                  className={`rounded-lg px-6 py-2.5 text-sm font-semibold transition-all ${
-                    billing === "monthly" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-900"
+                  className={`px-5 py-2 text-[11px] tracking-[0.1em] uppercase font-medium transition-all ${
+                    billing === "monthly"
+                      ? "bg-white text-slate-900"
+                      : "text-slate-400 hover:text-slate-700"
                   }`}
                 >
                   Monthly
                 </button>
                 <button
                   onClick={() => setBilling("annual")}
-                  className={`rounded-lg px-6 py-2.5 text-sm font-semibold transition-all ${
-                    billing === "annual" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-900"
+                  className={`px-5 py-2 text-[11px] tracking-[0.1em] uppercase font-medium transition-all ${
+                    billing === "annual"
+                      ? "bg-white text-slate-900"
+                      : "text-slate-400 hover:text-slate-700"
                   }`}
                 >
-                  Annual <span className="ml-1 text-emerald-600">(Save 17%)</span>
+                  Annual · Save 17%
                 </button>
               </div>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-100">
               {tiers.map((tier) => (
                 <TierCard key={tier.id} tier={tier} billing={billing} />
               ))}
             </div>
 
-            {/* Corporate callout */}
-            <div className="mt-10 rounded-2xl border border-slate-200/80 bg-slate-50 p-8">
-              <div className="grid gap-6 md:grid-cols-2 md:items-center">
+            <div className="mt-px bg-white border border-slate-100 p-8 lg:p-10">
+              <div className="grid lg:grid-cols-2 gap-8 lg:items-center">
                 <div>
-                  <h3 className="text-xl font-semibold text-slate-900">Corporate & Organizational Partnerships</h3>
-                  <p className="mt-2 text-slate-600">
+                  <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-2">
+                    Corporate & organizational partnerships
+                  </h3>
+                  <p className="text-sm leading-relaxed text-slate-500 font-light">
                     Conservation organizations, academic institutions, energy companies, businesses, and community groups — we offer custom partnership packages built around your goals, values, and global reach.
                   </p>
                 </div>
-                <div className="md:text-right">
+                <div className="lg:flex lg:justify-end">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-800"
+                    className="text-[11px] font-medium tracking-[0.14em] uppercase bg-slate-900 text-white px-7 py-3.5 hover:bg-slate-700 transition-colors inline-flex"
                   >
-                    Inquire About Partnerships
+                    Inquire about partnerships
                   </Link>
                 </div>
               </div>
@@ -339,21 +347,29 @@ export default function MembershipPage() {
           </div>
         </section>
 
-        {/* COMPARISON TABLE */}
+        {/* ── COMPARISON TABLE ──────────────────────────────────────────── */}
         <section className="border-b border-slate-100 bg-slate-50">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-3xl text-center mb-12">
-              <h2 className="text-4xl font-light tracking-tight text-slate-900">Everything side by side</h2>
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-5 h-px bg-slate-300" />
+              <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                Compare
+              </span>
             </div>
-            <div className="overflow-x-auto rounded-2xl border border-slate-200/80 bg-white">
+            <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-12">
+              Everything side by side
+            </h2>
+            <div className="overflow-x-auto border border-slate-100 bg-white">
               <table className="w-full border-collapse">
                 <thead>
                   <tr className="border-b border-slate-100">
-                    <th className="text-left py-4 px-6 text-sm font-semibold text-slate-500 w-1/3">Feature</th>
+                    <th className="text-left py-4 px-6 text-[10px] tracking-[0.15em] uppercase font-medium text-slate-400 w-1/3">
+                      Feature
+                    </th>
                     {tiers.map((tier) => (
                       <th key={tier.id} className="py-4 px-4 text-center">
-                        <div className="text-sm font-semibold text-slate-900">{tier.name}</div>
-                        <div className="text-xs text-slate-400 mt-0.5">${tier.annualPrice}/yr</div>
+                        <div className="font-['Cormorant_Garamond'] text-lg font-light text-slate-900">{tier.name}</div>
+                        <div className="text-[10px] tracking-[0.08em] uppercase text-slate-400 mt-0.5">${tier.annualPrice}/yr</div>
                       </th>
                     ))}
                   </tr>
@@ -378,23 +394,15 @@ export default function MembershipPage() {
                     ["Annual Banquet seat", false, false, false, true],
                   ].map(([feature, ...values], i) => (
                     <tr key={i} className={i % 2 === 0 ? "bg-slate-50/50" : ""}>
-                      <td className="py-3 px-6 text-sm text-slate-600">{feature as string}</td>
+                      <td className="py-3 px-6 text-sm text-slate-500 font-light">{feature as string}</td>
                       {values.map((val, j) => (
                         <td key={j} className="py-3 px-4 text-center">
                           {val === true ? (
-                            <svg className="h-5 w-5 mx-auto text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                              <path
-                                fillRule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
+                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-slate-900" />
                           ) : val === false ? (
-                            <svg className="h-4 w-4 mx-auto text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
-                            </svg>
+                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-slate-100" />
                           ) : (
-                            <span className="text-xs font-semibold text-slate-700">{val as string}</span>
+                            <span className="text-[11px] font-medium text-slate-700">{val as string}</span>
                           )}
                         </td>
                       ))}
@@ -406,64 +414,47 @@ export default function MembershipPage() {
           </div>
         </section>
 
-        {/* WHY MEMBER */}
-        <section className="border-b border-slate-100 bg-white">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="grid gap-16 lg:grid-cols-2 lg:gap-24 items-center">
+        {/* ── WHY MEMBER ────────────────────────────────────────────────── */}
+        <section className="border-b border-slate-100">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
               <div>
-                <h2 className="text-4xl font-light tracking-tight text-slate-900">
-                  Your membership is land, water, and legacy
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-5 h-px bg-slate-300" />
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                    Why it matters
+                  </span>
+                </div>
+                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-8 leading-tight">
+                  Your membership is<br /><em className="italic">land, water, and legacy.</em>
                 </h2>
-                <p className="mt-6 text-lg leading-relaxed text-slate-600">
-                  Ecosystems are disappearing. Archaeological sites are being lost. Communities in resource-dependent regions lack access to basic environmental safety and clean water. Forward-thinking research in conservation and renewable energy too often goes unfunded.
-                </p>
-                <p className="mt-4 leading-relaxed text-slate-600">
-                  The Blue Duck Foundation exists to change that — creating transparent, accountable pathways for support that make a measurable difference. Your membership isn't a donation. It's a stake in something real, something that outlasts all of us.
-                </p>
-                <p className="mt-6 text-lg italic text-slate-500">
-                  "We are here not only to preserve the earth, but to preserve the bonds that connect people, place, and purpose across generations."
-                </p>
+                <div className="space-y-5 text-[15px] leading-[1.9] text-slate-500 font-light">
+                  <p>
+                    Ecosystems are disappearing. Archaeological sites are being lost. Communities in resource-dependent regions lack access to basic environmental safety and clean water.
+                  </p>
+                  <p>
+                    The Blue Duck Foundation exists to change that — creating transparent, accountable pathways for support that make a measurable difference.
+                  </p>
+                  <p className="font-medium text-slate-700">
+                    Your membership isn't a donation. It's a stake in something real, something that outlasts all of us.
+                  </p>
+                </div>
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
+
+              <div className="flex flex-col gap-0">
                 {[
-                  {
-                    icon: "🌍",
-                    title: "Global Conservation",
-                    desc: "Funding ecosystem protection, habitat restoration, and biodiversity programs worldwide.",
-                  },
-                  {
-                    icon: "📡",
-                    title: "Environmental Intelligence",
-                    desc: "Deploying IoT sensor networks and open data platforms for real-time conservation accountability.",
-                  },
-                  {
-                    icon: "🏺",
-                    title: "Heritage Preservation",
-                    desc: "Protecting archaeological sites, indigenous histories, and culturally significant landscapes.",
-                  },
-                  {
-                    icon: "🎓",
-                    title: "Forever 44 Scholarship",
-                    desc: "Supporting students in memory of Kaleb Cory — because legacy is something we continue.",
-                  },
-                  {
-                    icon: "💧",
-                    title: "Clean Water & Humanitarian Aid",
-                    desc: "Freshwater access initiatives and direct assistance for underserved communities globally.",
-                  },
-                  {
-                    icon: "🤝",
-                    title: "Open Pathways",
-                    desc: "Creating compliant, transparent channels for forward-thinking research and conservation support.",
-                  },
-                ].map((item) => (
-                  <div
-                    key={item.title}
-                    className="group relative rounded-2xl border border-slate-200/80 bg-white p-6 transition-all hover:border-slate-300 hover:shadow-sm"
-                  >
-                    <div className="text-2xl mb-3">{item.icon}</div>
-                    <h3 className="text-base font-semibold text-slate-900">{item.title}</h3>
-                    <p className="mt-1 text-sm text-slate-600 leading-relaxed">{item.desc}</p>
+                  { title: "Global Conservation", desc: "Funding ecosystem protection, habitat restoration, and biodiversity programs worldwide." },
+                  { title: "Environmental Intelligence", desc: "Deploying IoT sensor networks and open data platforms for real-time conservation accountability." },
+                  { title: "Heritage Preservation", desc: "Protecting archaeological sites, indigenous histories, and culturally significant landscapes." },
+                  { title: "Forever 44 Scholarship", desc: "Supporting students in memory of Kaleb Cory — because legacy is something we continue." },
+                  { title: "Clean Water & Humanitarian Aid", desc: "Freshwater access initiatives and direct assistance for underserved communities globally." },
+                  { title: "Open Pathways", desc: "Transparent, compliant channels for forward-thinking research and conservation support." },
+                ].map((item, i) => (
+                  <div key={i} className="border-t border-slate-100 py-5 last:border-b grid grid-cols-[1fr_2fr] gap-8">
+                    <div className="font-['Cormorant_Garamond'] text-lg font-light text-slate-900">
+                      {item.title}
+                    </div>
+                    <p className="text-sm text-slate-500 font-light leading-relaxed">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -471,50 +462,69 @@ export default function MembershipPage() {
           </div>
         </section>
 
-        {/* FAQ */}
+        {/* ── FAQ ───────────────────────────────────────────────────────── */}
         <section className="border-b border-slate-100 bg-slate-50">
-          <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-light tracking-tight text-slate-900">Frequently asked questions</h2>
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <div className="grid lg:grid-cols-[1fr_2fr] gap-16 lg:gap-24">
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-5 h-px bg-slate-300" />
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                    FAQ
+                  </span>
+                </div>
+                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+                  Questions<br />answered.
+                </h2>
+              </div>
+              <div>
+                {faqs.map((faq, i) => <FAQ key={i} q={faq.q} a={faq.a} />)}
+              </div>
             </div>
-            <div>{faqs.map((faq, i) => <FAQ key={i} q={faq.q} a={faq.a} />)}</div>
           </div>
         </section>
 
-        {/* CLOSING CTA */}
-        <section className="bg-white">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="overflow-hidden rounded-2xl bg-slate-900 shadow-xl">
-              <div className="px-8 py-12 md:px-12 md:py-16">
-                <div className="grid gap-8 md:grid-cols-2 md:items-center">
-                  <div>
-                    <h3 className="text-3xl font-light tracking-tight text-white">
-                      The world doesn't wait.<br />Neither should you.
-                    </h3>
-                    <p className="mt-3 text-lg text-slate-300">
-                      Join The Blue Duck Foundation and become part of a conservation story being written across communities, ecosystems, and borders — right now.
-                    </p>
-                    <p className="mt-4 text-sm text-slate-500">501(c)(3) · EIN 41-4361489 · All memberships are tax-deductible</p>
+        {/* ── CTA ───────────────────────────────────────────────────────── */}
+        <section>
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <div className="bg-slate-900 px-10 py-14 lg:px-16 lg:py-16">
+              <div className="grid lg:grid-cols-2 gap-10 lg:items-center">
+                <div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-5 h-px bg-slate-600" />
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-slate-500 font-medium">
+                      Join today
+                    </span>
                   </div>
-                  <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 font-semibold text-slate-900 transition-colors hover:bg-slate-100"
-                    >
-                      Join as Flyway Member
-                    </Link>
-                    <Link
-                      href="/about"
-                      className="inline-flex items-center justify-center rounded-xl border border-white/30 px-8 py-4 font-semibold text-white transition-colors hover:bg-white/10"
-                    >
-                      Learn More
-                    </Link>
+                  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light text-white mb-4 leading-tight">
+                    The world doesn't wait.<br /><em className="italic">Neither should you.</em>
+                  </h3>
+                  <p className="text-[15px] leading-relaxed text-slate-400 font-light mb-4">
+                    Join The Blue Duck Foundation and become part of a conservation story being written across communities, ecosystems, and borders — right now.
+                  </p>
+                  <div className="text-[11px] tracking-[0.08em] text-slate-600 font-medium">
+                    501(c)(3) · EIN 41-4361489 · All memberships tax-deductible
                   </div>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 lg:justify-end">
+                  <Link
+                    href="/contact"
+                    className="text-[11px] font-medium tracking-[0.14em] uppercase bg-white text-slate-900 px-8 py-4 hover:bg-slate-100 transition-colors text-center"
+                  >
+                    Join as Flyway member
+                  </Link>
+                  <Link
+                    href="/about"
+                    className="text-[11px] font-medium tracking-[0.14em] uppercase border border-slate-700 text-white px-8 py-4 hover:border-slate-500 transition-colors text-center"
+                  >
+                    Learn more
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
       </main>
 
       <Footer />

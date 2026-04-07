@@ -3,45 +3,6 @@ import Link from "next/link";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 
-function ContactCard({
-  title,
-  desc,
-  detail,
-  href,
-  linkLabel,
-  icon,
-}: {
-  title: string;
-  desc: string;
-  detail?: string;
-  href: string;
-  linkLabel: string;
-  icon: React.ReactNode;
-}) {
-  return (
-    <div className="group relative">
-      <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-slate-100 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-      <div className="relative rounded-2xl border border-slate-200/80 bg-white p-8 transition-all group-hover:border-slate-300">
-        <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-slate-900 text-white">
-          {icon}
-        </div>
-        <h3 className="mt-5 text-lg font-semibold text-slate-900">{title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-slate-600">{desc}</p>
-        {detail && <p className="mt-3 text-sm font-medium text-slate-900">{detail}</p>}
-        <a
-          href={href}
-          className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-slate-700 transition-colors hover:text-slate-900"
-        >
-          {linkLabel}
-          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </a>
-      </div>
-    </div>
-  );
-}
-
 const INQUIRY_TYPES = [
   "General inquiry",
   "Board membership interest",
@@ -67,166 +28,145 @@ export default function ContactPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      <main className="flex-grow bg-white">
-        {/* HERO */}
-        <section className="relative overflow-hidden border-b border-slate-100">
-          <div className="absolute inset-0 -z-10">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_#f1f5f9_0%,_transparent_50%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_#f8fafc_0%,_transparent_50%)]" />
-          </div>
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
-            <div className="max-w-3xl">
-              <div className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-sm font-medium text-slate-700 shadow-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
-                </span>
-                We respond within 48 hours
+      <main className="flex-grow bg-white font-['Jost',sans-serif]">
+
+        {/* ── HERO ──────────────────────────────────────────────────────── */}
+        <section className="border-b border-slate-100">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid lg:grid-cols-[55fr_45fr] min-h-[360px]">
+
+              <div className="py-20 lg:py-24 lg:pr-16 lg:border-r border-slate-100 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-10">
+                  <div className="w-6 h-px bg-slate-300" />
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                    We respond within 48 hours
+                  </span>
+                </div>
+                <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                  Let's talk.
+                </h1>
+                <p className="text-[15px] leading-[1.9] text-slate-500 font-light max-w-md">
+                  Whether you're interested in the board, want to partner on a project, have a conservation tip, or are exploring how the Foundation can support your work — we'd like to hear from you.
+                </p>
               </div>
-              <h1 className="mt-8 text-5xl font-light tracking-tight text-slate-900 sm:text-6xl">
-                Get in Touch
-              </h1>
-              <p className="mt-6 text-xl leading-relaxed text-slate-600">
-                Whether you're interested in the board, want to partner on a project, have a conservation tip, or are exploring how the Foundation can support your work — we'd love to hear from you.
-              </p>
+
+              <div className="hidden lg:flex flex-col justify-center py-24 pl-16 gap-0">
+                {[
+                  { label: "General inquiries", detail: "info@theblueduck.org" },
+                  { label: "Partnerships & sponsorships", detail: "partnerships@theblueduck.org" },
+                  { label: "Board membership", detail: "Learn about open seats →" },
+                  { label: "Headquartered", detail: "McKinney, Texas · Operating worldwide" },
+                  { label: "EIN", detail: "41-4361489" },
+                ].map((item, i) => (
+                  <div key={i} className="flex justify-between items-baseline py-4 border-b border-slate-100 first:border-t">
+                    <span className="text-[11px] tracking-[0.1em] uppercase text-slate-400 font-medium">{item.label}</span>
+                    <span className="text-sm text-slate-600 font-light">{item.detail}</span>
+                  </div>
+                ))}
+              </div>
+
             </div>
           </div>
         </section>
 
-        {/* CONTACT CARDS */}
-        <section className="border-b border-slate-100 bg-white">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              <ContactCard
-                title="General Inquiries"
-                desc="Questions about The Blue Duck Foundation, our programs, or how we operate globally."
-                detail="info@theblueduck.org"
-                href="mailto:info@theblueduck.org"
-                linkLabel="Send an email"
-                icon={
-                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                  </svg>
-                }
-              />
-              <ContactCard
-                title="Partnerships & Sponsorships"
-                desc="Interested in sponsoring events, partnering on conservation or research initiatives, or supporting our programs — domestically or internationally."
-                detail="partnerships@theblueduck.org"
-                href="mailto:partnerships@theblueduck.org"
-                linkLabel="Explore partnership"
-                icon={
-                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-                  </svg>
-                }
-              />
-              <ContactCard
-                title="Board Membership"
-                desc="We're actively seeking experienced professionals in conservation, renewable energy, law, finance, environmental science, and international development to fill open board seats."
-                href="/about#board"
-                linkLabel="Learn about the board"
-                icon={
-                  <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
-                  </svg>
-                }
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* CONTACT FORM */}
+        {/* ── FORM + SIDEBAR ────────────────────────────────────────────── */}
         <section className="border-b border-slate-100 bg-slate-50">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="grid gap-16 lg:grid-cols-[1fr_420px]">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <div className="grid lg:grid-cols-[2fr_1fr] gap-16 lg:gap-24">
 
               {/* FORM */}
               <div>
-                <h2 className="text-4xl font-light tracking-tight text-slate-900">Send us a message</h2>
-                <p className="mt-3 text-lg text-slate-600">
-                  Fill out the form and the right person on our team will follow up directly.
-                </p>
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-5 h-px bg-slate-300" />
+                  <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">
+                    Send a message
+                  </span>
+                </div>
+                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-8">
+                  How can we help?
+                </h2>
 
                 {submitted ? (
-                  <div className="mt-10 rounded-2xl border border-emerald-200 bg-emerald-50 p-10 text-center">
-                    <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100">
-                      <svg className="h-7 w-7 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                      </svg>
+                  <div className="border border-slate-200 bg-white p-12 text-center">
+                    <div className="w-10 h-10 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto mb-5">
+                      <span className="text-emerald-600 text-lg">✓</span>
                     </div>
-                    <h3 className="mt-4 text-xl font-semibold text-slate-900">Message received</h3>
-                    <p className="mt-2 text-slate-600">Thank you for reaching out. We'll be in touch within 48 hours.</p>
+                    <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-2">
+                      Message received
+                    </h3>
+                    <p className="text-sm text-slate-500 font-light mb-6">
+                      Thank you for reaching out. We'll be in touch within 48 hours.
+                    </p>
                     <button
                       onClick={() => setSubmitted(false)}
-                      className="mt-6 text-sm font-semibold text-slate-600 underline underline-offset-2 hover:text-slate-900"
+                      className="text-[11px] font-medium tracking-[0.12em] uppercase text-slate-500 hover:text-slate-900 transition-colors"
                     >
                       Send another message
                     </button>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="mt-10 space-y-6">
-                    <div className="grid gap-6 sm:grid-cols-2">
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    <div className="grid sm:grid-cols-2 gap-5">
                       <div>
-                        <label htmlFor="firstName" className="block text-sm font-semibold text-slate-700 mb-2">
-                          First name <span className="text-slate-400">*</span>
+                        <label htmlFor="firstName" className="block text-[11px] tracking-[0.1em] uppercase text-slate-500 font-medium mb-2">
+                          First name <span className="text-slate-300">*</span>
                         </label>
                         <input
                           id="firstName"
                           type="text"
                           required
-                          className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400/20"
+                          className="w-full border border-slate-200 bg-white px-4 py-3 text-slate-900 text-sm placeholder:text-slate-300 focus:border-slate-400 focus:outline-none"
                           placeholder="First"
                         />
                       </div>
                       <div>
-                        <label htmlFor="lastName" className="block text-sm font-semibold text-slate-700 mb-2">
-                          Last name <span className="text-slate-400">*</span>
+                        <label htmlFor="lastName" className="block text-[11px] tracking-[0.1em] uppercase text-slate-500 font-medium mb-2">
+                          Last name <span className="text-slate-300">*</span>
                         </label>
                         <input
                           id="lastName"
                           type="text"
                           required
-                          className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400/20"
+                          className="w-full border border-slate-200 bg-white px-4 py-3 text-slate-900 text-sm placeholder:text-slate-300 focus:border-slate-400 focus:outline-none"
                           placeholder="Last"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-2">
-                        Email address <span className="text-slate-400">*</span>
+                      <label htmlFor="email" className="block text-[11px] tracking-[0.1em] uppercase text-slate-500 font-medium mb-2">
+                        Email address <span className="text-slate-300">*</span>
                       </label>
                       <input
                         id="email"
                         type="email"
                         required
-                        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400/20"
+                        className="w-full border border-slate-200 bg-white px-4 py-3 text-slate-900 text-sm placeholder:text-slate-300 focus:border-slate-400 focus:outline-none"
                         placeholder="you@example.com"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="organization" className="block text-sm font-semibold text-slate-700 mb-2">
-                        Organization <span className="text-slate-400 font-normal">(optional)</span>
+                      <label htmlFor="organization" className="block text-[11px] tracking-[0.1em] uppercase text-slate-500 font-medium mb-2">
+                        Organization <span className="text-slate-300 normal-case tracking-normal font-light">(optional)</span>
                       </label>
                       <input
                         id="organization"
                         type="text"
-                        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400/20"
+                        className="w-full border border-slate-200 bg-white px-4 py-3 text-slate-900 text-sm placeholder:text-slate-300 focus:border-slate-400 focus:outline-none"
                         placeholder="Company, institution, or organization"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="inquiryType" className="block text-sm font-semibold text-slate-700 mb-2">
-                        Inquiry type <span className="text-slate-400">*</span>
+                      <label htmlFor="inquiryType" className="block text-[11px] tracking-[0.1em] uppercase text-slate-500 font-medium mb-2">
+                        Inquiry type <span className="text-slate-300">*</span>
                       </label>
                       <select
                         id="inquiryType"
                         required
                         defaultValue=""
-                        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400/20"
+                        className="w-full border border-slate-200 bg-white px-4 py-3 text-slate-900 text-sm focus:border-slate-400 focus:outline-none"
                       >
                         <option value="" disabled>Select a category</option>
                         {INQUIRY_TYPES.map((type) => (
@@ -236,21 +176,21 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label htmlFor="message" className="block text-sm font-semibold text-slate-700 mb-2">
-                        Message <span className="text-slate-400">*</span>
+                      <label htmlFor="message" className="block text-[11px] tracking-[0.1em] uppercase text-slate-500 font-medium mb-2">
+                        Message <span className="text-slate-300">*</span>
                       </label>
                       <textarea
                         id="message"
                         required
                         rows={5}
-                        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400/20 resize-none"
+                        className="w-full border border-slate-200 bg-white px-4 py-3 text-slate-900 text-sm placeholder:text-slate-300 focus:border-slate-400 focus:outline-none resize-none"
                         placeholder="Tell us how we can help, how you'd like to get involved, or about the work you're doing..."
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="inline-flex w-full items-center justify-center rounded-xl bg-slate-900 px-8 py-4 font-semibold text-white shadow-sm transition-all hover:bg-slate-800 hover:shadow-md sm:w-auto"
+                      className="text-[11px] font-medium tracking-[0.14em] uppercase bg-slate-900 text-white px-8 py-4 hover:bg-slate-700 transition-colors"
                     >
                       Send message
                     </button>
@@ -259,86 +199,109 @@ export default function ContactPage() {
               </div>
 
               {/* SIDEBAR */}
-              <aside className="space-y-6">
-                <div className="rounded-2xl border border-slate-200/80 bg-white p-8">
-                  <h3 className="text-lg font-semibold text-slate-900">What to expect</h3>
-                  <ul className="mt-5 space-y-4">
+              <aside className="flex flex-col gap-px">
+
+                <div className="bg-white border border-slate-100 p-8 mb-4">
+                  <div className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium mb-5">
+                    What to expect
+                  </div>
+                  <div className="space-y-5">
                     {[
-                      { step: "01", text: "We review every message personally — no auto-responders beyond the confirmation." },
+                      { step: "01", text: "Every message is reviewed personally — no auto-responders beyond the confirmation." },
                       { step: "02", text: "Responses typically within 48 business hours." },
-                      { step: "03", text: "For board, sponsorship, and research partnership inquiries, we'll schedule a call to discuss further." },
+                      { step: "03", text: "For board, sponsorship, and research inquiries, we'll schedule a call." },
                     ].map((item) => (
-                      <li key={item.step} className="flex gap-4">
-                        <span className="shrink-0 text-xl font-light text-slate-200">{item.step}</span>
-                        <p className="text-sm leading-relaxed text-slate-600">{item.text}</p>
-                      </li>
+                      <div key={item.step} className="flex gap-4">
+                        <span className="text-[10px] tracking-[0.15em] text-slate-300 font-medium pt-0.5 flex-shrink-0">{item.step}</span>
+                        <p className="text-sm leading-relaxed text-slate-500 font-light">{item.text}</p>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
 
-                <div className="rounded-2xl border border-slate-200/80 bg-white p-8">
-                  <h3 className="text-lg font-semibold text-slate-900">Common inquiries</h3>
-                  <ul className="mt-4 space-y-2">
+                <div className="bg-white border border-slate-100 p-8 mb-4">
+                  <div className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium mb-5">
+                    Common inquiries
+                  </div>
+                  <div className="space-y-0">
                     {[
                       { label: "Board membership", href: "/about#board" },
                       { label: "Event sponsorships", href: "/events" },
-                      { label: "Conservation & research programs", href: "/conservation" },
-                      { label: "Volunteer opportunities", href: "#" },
-                      { label: "Submit a conservation tip", href: "/conservation#issues" },
-                      { label: "International collaboration", href: "#" },
+                      { label: "Conservation & research", href: "/conservation" },
+                      { label: "Volunteer opportunities", href: "/contribute" },
+                      { label: "Submit a conservation tip", href: "/conservation" },
+                      { label: "International collaboration", href: "/contact" },
                     ].map((item) => (
-                      <li key={item.label}>
-                        <Link
-                          href={item.href}
-                          className="flex items-center justify-between text-sm text-slate-600 py-1 hover:text-slate-900 transition-colors"
-                        >
-                          {item.label}
-                          <svg className="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </Link>
-                      </li>
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        className="flex items-center justify-between py-3 border-b border-slate-100 last:border-b-0 text-sm text-slate-600 hover:text-slate-900 font-light transition-colors"
+                      >
+                        {item.label}
+                        <span className="text-slate-300">→</span>
+                      </Link>
                     ))}
-                  </ul>
+                  </div>
                 </div>
 
-                <div className="rounded-2xl border border-slate-200/80 bg-slate-900 p-8 text-white">
-                  <h3 className="text-lg font-semibold">Headquartered in Texas.<br />Operating worldwide.</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-300">
-                    The Blue Duck Foundation is based in McKinney, TX and operates programs, partnerships, and initiatives globally. We welcome inquiries from anywhere in the world.
+                <div className="bg-slate-900 p-8">
+                  <div className="text-[10px] tracking-[0.2em] uppercase text-slate-600 font-medium mb-4">
+                    Based in Texas
+                  </div>
+                  <p className="font-['Cormorant_Garamond'] text-xl font-light text-white mb-3">
+                    McKinney, Texas.<br />Operating worldwide.
                   </p>
-                  <p className="mt-4 text-sm font-medium text-slate-400">EIN 41-4361489</p>
+                  <p className="text-sm leading-relaxed text-slate-400 font-light mb-4">
+                    We welcome inquiries from anywhere in the world — conservation doesn't stop at borders, and neither do we.
+                  </p>
+                  <div className="text-[11px] tracking-[0.08em] text-slate-600 font-medium">
+                    EIN 41-4361489
+                  </div>
                 </div>
+
               </aside>
             </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="bg-white">
-          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-            <div className="overflow-hidden rounded-2xl bg-slate-900 shadow-xl">
-              <div className="px-8 py-12 md:px-12 md:py-16">
-                <div className="grid gap-8 md:grid-cols-2 md:items-center">
-                  <div>
-                    <h3 className="text-3xl font-light tracking-tight text-white">Ready to make an impact?</h3>
-                    <p className="mt-3 text-lg text-slate-300">
-                      Whether you give time, resources, or expertise — every contribution builds the Foundation's capacity to protect the natural world and support the communities that depend on it.
-                    </p>
+        {/* ── CTA ───────────────────────────────────────────────────────── */}
+        <section>
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
+            <div className="bg-slate-900 px-10 py-14 lg:px-16 lg:py-16">
+              <div className="grid lg:grid-cols-2 gap-10 lg:items-center">
+                <div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-5 h-px bg-slate-600" />
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-slate-500 font-medium">
+                      Make an impact
+                    </span>
                   </div>
-                  <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
-                    <Link href="/about" className="inline-flex items-center justify-center rounded-xl bg-white px-8 py-4 font-semibold text-slate-900 transition-colors hover:bg-slate-100">
-                      Learn about us
-                    </Link>
-                    <Link href="/conservation" className="inline-flex items-center justify-center rounded-xl border border-white/30 px-8 py-4 font-semibold text-white transition-colors hover:bg-white/10">
-                      Our programs
-                    </Link>
-                  </div>
+                  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light text-white mb-4 leading-tight">
+                    Ready to<br /><em className="italic">get involved?</em>
+                  </h3>
+                  <p className="text-[15px] leading-relaxed text-slate-400 font-light">
+                    Whether you give time, resources, or expertise — every contribution builds the Foundation's capacity to protect the natural world and the communities that depend on it.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 lg:justify-end">
+                  <Link
+                    href="/about"
+                    className="text-[11px] font-medium tracking-[0.14em] uppercase bg-white text-slate-900 px-8 py-4 hover:bg-slate-100 transition-colors text-center"
+                  >
+                    Learn about us
+                  </Link>
+                  <Link
+                    href="/conservation"
+                    className="text-[11px] font-medium tracking-[0.14em] uppercase border border-slate-700 text-white px-8 py-4 hover:border-slate-500 transition-colors text-center"
+                  >
+                    Our programs
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
       </main>
 
       <Footer />
