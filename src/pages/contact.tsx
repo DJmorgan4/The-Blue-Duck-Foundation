@@ -18,10 +18,38 @@ const INQUIRY_TYPES = [
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+
+    const form = e.currentTarget;
+    const data = {
+      firstName: (form.elements.namedItem("firstName") as HTMLInputElement).value,
+      lastName: (form.elements.namedItem("lastName") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      organization: (form.elements.namedItem("organization") as HTMLInputElement).value,
+      inquiryType: (form.elements.namedItem("inquiryType") as HTMLSelectElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error("Failed to send");
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please email us directly at info@theblueduck.org");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -113,6 +141,7 @@ export default function ContactPage() {
                         </label>
                         <input
                           id="firstName"
+                          name="firstName"
                           type="text"
                           required
                           className="w-full border border-slate-200 bg-white px-4 py-3 text-slate-900 text-sm placeholder:text-slate-300 focus:border-slate-400 focus:outline-none"
@@ -125,6 +154,7 @@ export default function ContactPage() {
                         </label>
                         <input
                           id="lastName"
+                          name="lastName"
                           type="text"
                           required
                           className="w-full border border-slate-200 bg-white px-4 py-3 text-slate-900 text-sm placeholder:text-slate-300 focus:border-slate-400 focus:outline-none"
@@ -139,6 +169,7 @@ export default function ContactPage() {
                       </label>
                       <input
                         id="email"
+                        name="email"
                         type="email"
                         required
                         className="w-full border border-slate-200 bg-white px-4 py-3 text-slate-900 text-sm placeholder:text-slate-300 focus:border-slate-400 focus:outline-none"
@@ -152,6 +183,7 @@ export default function ContactPage() {
                       </label>
                       <input
                         id="organization"
+                        name="organization"
                         type="text"
                         className="w-full border border-slate-200 bg-white px-4 py-3 text-slate-900 text-sm placeholder:text-slate-300 focus:border-slate-400 focus:outline-none"
                         placeholder="Company, institution, or organization"
@@ -164,6 +196,7 @@ export default function ContactPage() {
                       </label>
                       <select
                         id="inquiryType"
+                        name="inquiryType"
                         required
                         defaultValue=""
                         className="w-full border border-slate-200 bg-white px-4 py-3 text-slate-900 text-sm focus:border-slate-400 focus:outline-none"
@@ -181,6 +214,7 @@ export default function ContactPage() {
                       </label>
                       <textarea
                         id="message"
+                        name="message"
                         required
                         rows={5}
                         className="w-full border border-slate-200 bg-white px-4 py-3 text-slate-900 text-sm placeholder:text-slate-300 focus:border-slate-400 focus:outline-none resize-none"
@@ -188,11 +222,16 @@ export default function ContactPage() {
                       />
                     </div>
 
+                    {error && (
+                      <p className="text-sm text-red-600 font-light">{error}</p>
+                    )}
+
                     <button
                       type="submit"
-                      className="text-[11px] font-medium tracking-[0.14em] uppercase bg-slate-900 text-white px-8 py-4 hover:bg-slate-700 transition-colors"
+                      disabled={loading}
+                      className="text-[11px] font-medium tracking-[0.14em] uppercase bg-slate-900 text-white px-8 py-4 hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Send message
+                      {loading ? "Sending..." : "Send message"}
                     </button>
                   </form>
                 )}
@@ -200,7 +239,6 @@ export default function ContactPage() {
 
               {/* SIDEBAR */}
               <aside className="flex flex-col gap-px">
-
                 <div className="bg-white border border-slate-100 p-8 mb-4">
                   <div className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium mb-5">
                     What to expect
@@ -258,7 +296,6 @@ export default function ContactPage() {
                     EIN 41-4361489
                   </div>
                 </div>
-
               </aside>
             </div>
           </div>
