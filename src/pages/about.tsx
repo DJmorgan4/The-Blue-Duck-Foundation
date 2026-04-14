@@ -121,7 +121,6 @@ export default function AboutPage() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="grid lg:grid-cols-[55fr_45fr] min-h-[520px]">
 
-              {/* Left */}
               <div className="py-20 lg:py-28 lg:pr-16 lg:border-r border-slate-100 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 mb-10">
@@ -159,7 +158,6 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* Right */}
               <div className="hidden lg:flex flex-col justify-between py-28 pl-16">
                 <div className="space-y-0">
                   {[
@@ -182,12 +180,11 @@ export default function AboutPage() {
                   ))}
                 </div>
 
-                {/* Credential tiles */}
                 <div className="grid grid-cols-2 border border-slate-100">
                   {[
                     { val: "501(c)(3)", lbl: "Federal exemption" },
-                    { val: "Feb 2026", lbl: "Effective date" },
-                    { val: "Public", lbl: "Charity class" },
+                    { val: "Feb 2026",  lbl: "Effective date" },
+                    { val: "Public",    lbl: "Charity class" },
                     { val: "41-4361489", lbl: "EIN" },
                   ].map((s, i) => (
                     <div
@@ -256,16 +253,16 @@ export default function AboutPage() {
                   desc="For the land, for communities, for the science, and for the people doing the work. Every decision starts here."
                 />
                 <div className="border-t border-dashed border-slate-200 pt-8">
-  <div className="text-[10px] font-medium tracking-[0.2em] text-slate-300 uppercase mb-6">
-    03
-  </div>
-  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light tracking-tight text-slate-300 mb-4 italic">
-    Do What's Right
-  </h3>
-  <p className="text-sm leading-relaxed text-slate-300 font-light">
-    When the path is unclear, we return to purpose. We act with integrity — for the land, for the people, and for those who come after us.
-  </p>
-</div>
+                  <div className="text-[10px] font-medium tracking-[0.2em] text-slate-400 uppercase mb-6">
+                    03
+                  </div>
+                  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light tracking-tight text-slate-900 mb-4">
+                    Do What's Right
+                  </h3>
+                  <p className="text-sm leading-relaxed text-slate-500 font-light">
+                    When the path is unclear, we return to purpose. We act with integrity — for the land, for the people, and for those who come after us.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -358,42 +355,15 @@ export default function AboutPage() {
                 </p>
               </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8">
-                <ProgramArea
-                  label="Global Environmental Stewardship"
-                  desc="Ecosystems worldwide — wetlands, waterways, forests, coastal, marine, and more."
-                />
-                <ProgramArea
-                  label="Wildlife & Biodiversity Protection"
-                  desc="Conservation, habitat restoration, ecological monitoring, and anti-poaching support."
-                />
-                <ProgramArea
-                  label="Water & Freshwater Resources"
-                  desc="Watershed protection, water quality, and humanitarian freshwater access internationally."
-                />
-                <ProgramArea
-                  label="Geological & Earth Sciences"
-                  desc="Research, documentation, and public education on geological and earth system science."
-                />
-                <ProgramArea
-                  label="Environmental Monitoring Technology"
-                  desc="IoT sensors, data systems, and scientific tools for transparent, accountable conservation."
-                />
-                <ProgramArea
-                  label="Archaeological & Cultural Heritage"
-                  desc="Site documentation, indigenous history, and protection of historically significant landscapes."
-                />
-                <ProgramArea
-                  label="Natural Resource Region Support"
-                  desc="Charitable assistance to communities in resource-dependent or environmentally impacted areas."
-                />
-                <ProgramArea
-                  label="Renewable Energy & Research"
-                  desc="Advancing forward-thinking research and development in energy, science, and sustainability."
-                />
-                <ProgramArea
-                  label="Education & Public Outreach"
-                  desc="Digital platforms, public programs, and content connecting people to conservation science."
-                />
+                <ProgramArea label="Global Environmental Stewardship" desc="Ecosystems worldwide — wetlands, waterways, forests, coastal, marine, and more." />
+                <ProgramArea label="Wildlife & Biodiversity Protection" desc="Conservation, habitat restoration, ecological monitoring, and anti-poaching support." />
+                <ProgramArea label="Water & Freshwater Resources" desc="Watershed protection, water quality, and humanitarian freshwater access internationally." />
+                <ProgramArea label="Geological & Earth Sciences" desc="Research, documentation, and public education on geological and earth system science." />
+                <ProgramArea label="Environmental Monitoring Technology" desc="IoT sensors, data systems, and scientific tools for transparent, accountable conservation." />
+                <ProgramArea label="Archaeological & Cultural Heritage" desc="Site documentation, indigenous history, and protection of historically significant landscapes." />
+                <ProgramArea label="Natural Resource Region Support" desc="Charitable assistance to communities in resource-dependent or environmentally impacted areas." />
+                <ProgramArea label="Renewable Energy & Research" desc="Advancing forward-thinking research and development in energy, science, and sustainability." />
+                <ProgramArea label="Education & Public Outreach" desc="Digital platforms, public programs, and content connecting people to conservation science." />
               </div>
             </div>
           </div>
