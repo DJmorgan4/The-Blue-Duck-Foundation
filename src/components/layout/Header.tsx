@@ -19,17 +19,15 @@ export default function Header() {
       <nav className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-[68px]">
 
-          {/* Logo */}
           <Link
             href="/"
-            className="font-['Cormorant_Garamond'] text-[16px] font-light tracking-[0.16em] uppercase text-white hover:text-slate-300 transition-colors flex-shrink-0 mr-8"
+            className="font-['Cormorant_Garamond'] text-[16px] font-light tracking-[0.16em] uppercase text-white hover:text-slate-300 transition-colors flex-shrink-0"
           >
             <span className="hidden xl:inline">The Blue Duck Foundation</span>
             <span className="xl:hidden">Blue Duck Foundation</span>
           </Link>
 
-          {/* Desktop nav */}
-          <ul className="hidden lg:flex items-center gap-6 xl:gap-8 flex-1">
+          <ul className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
@@ -42,7 +40,6 @@ export default function Header() {
             ))}
           </ul>
 
-          {/* CTA */}
           <Link
             href="/support"
             className="hidden lg:inline-flex text-[11px] font-medium tracking-[0.12em] uppercase bg-white text-slate-900 px-5 py-2.5 hover:bg-slate-100 transition-colors flex-shrink-0 whitespace-nowrap"
@@ -50,7 +47,6 @@ export default function Header() {
             Support
           </Link>
 
-          {/* Mobile toggle */}
           <button
             type="button"
             className="lg:hidden p-2 text-slate-400 hover:text-white transition-colors"
@@ -69,7 +65,6 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden border-t border-slate-800 py-4">
             <div className="flex flex-col gap-0">
