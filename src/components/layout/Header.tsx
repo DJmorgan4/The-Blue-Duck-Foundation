@@ -6,8 +6,6 @@ const navLinks = [
   { href: "/",             label: "Home" },
   { href: "/about",        label: "About" },
   { href: "/conservation", label: "Conservation" },
-  { href: "/scholarship",  label: "Scholarship" },
-  { href: "/membership",   label: "Membership" },
   { href: "/events",       label: "Events" },
   { href: "/news",         label: "News" },
   { href: "/contact",      label: "Contact" },
@@ -24,14 +22,14 @@ export default function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="font-['Cormorant_Garamond'] text-[17px] font-light tracking-[0.18em] uppercase text-white hover:text-slate-300 transition-colors flex-shrink-0"
+            className="font-['Cormorant_Garamond'] text-[16px] font-light tracking-[0.16em] uppercase text-white hover:text-slate-300 transition-colors flex-shrink-0 mr-8"
           >
             <span className="hidden xl:inline">The Blue Duck Foundation</span>
             <span className="xl:hidden">Blue Duck Foundation</span>
           </Link>
 
           {/* Desktop nav */}
-          <ul className="hidden lg:flex items-center gap-6 xl:gap-7">
+          <ul className="hidden lg:flex items-center gap-6 xl:gap-8 flex-1">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
@@ -44,21 +42,13 @@ export default function Header() {
             ))}
           </ul>
 
-          {/* CTAs */}
-          <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
-            <Link
-              href="/donate"
-              className="text-[11px] font-medium tracking-[0.12em] uppercase bg-white text-slate-900 px-5 py-2.5 hover:bg-slate-100 transition-colors whitespace-nowrap"
-            >
-              Donate
-            </Link>
-            <Link
-              href="/contribute"
-              className="text-[11px] font-medium tracking-[0.12em] uppercase border border-slate-700 text-white px-5 py-2.5 hover:border-slate-500 hover:bg-slate-800 transition-colors whitespace-nowrap"
-            >
-              Get involved
-            </Link>
-          </div>
+          {/* CTA */}
+          <Link
+            href="/support"
+            className="hidden lg:inline-flex text-[11px] font-medium tracking-[0.12em] uppercase bg-white text-slate-900 px-5 py-2.5 hover:bg-slate-100 transition-colors flex-shrink-0 whitespace-nowrap"
+          >
+            Support
+          </Link>
 
           {/* Mobile toggle */}
           <button
@@ -87,28 +77,19 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-[11px] tracking-[0.1em] uppercase font-medium text-slate-400 hover:text-white transition-colors py-3 border-b border-slate-800 last:border-b-0"
+                  className="text-[11px] tracking-[0.1em] uppercase font-medium text-slate-400 hover:text-white transition-colors py-3 border-b border-slate-800"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
-              <div className="flex gap-3 mt-4">
-                <Link
-                  href="/donate"
-                  className="flex-1 text-[11px] font-medium tracking-[0.12em] uppercase bg-white text-slate-900 px-5 py-3 hover:bg-slate-100 transition-colors text-center"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Donate
-                </Link>
-                <Link
-                  href="/contribute"
-                  className="flex-1 text-[11px] font-medium tracking-[0.12em] uppercase border border-slate-700 text-white px-5 py-3 hover:border-slate-500 transition-colors text-center"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Get involved
-                </Link>
-              </div>
+              <Link
+                href="/support"
+                className="text-[11px] font-medium tracking-[0.12em] uppercase bg-white text-slate-900 px-5 py-3 hover:bg-slate-100 transition-colors text-center mt-4"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Support
+              </Link>
             </div>
           </div>
         )}

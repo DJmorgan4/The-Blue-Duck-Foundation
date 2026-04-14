@@ -6,7 +6,7 @@ const quickLinks = [
   { href: "/scholarship",  label: "Scholarship" },
   { href: "/membership",   label: "Membership" },
   { href: "/events",       label: "Events" },
-  { href: "/contribute",   label: "Get involved" },
+  { href: "/donate",       label: "Donate" },
 ];
 
 const resourceLinks = [
@@ -40,7 +40,6 @@ export default function Footer() {
               <div>McKinney, Texas · Operating worldwide</div>
             </div>
 
-            {/* Social */}
             <div className="flex gap-4 mt-8">
               {[
                 {
@@ -122,24 +121,18 @@ export default function Footer() {
               <div>McKinney, Texas</div>
               <div>Operating worldwide</div>
               <a
-                href="mailto:info@theblueduck.org"
+                href="mailto:dj@theblueduck.org"
                 className="block hover:text-white transition-colors"
               >
-                info@theblueduck.org
-              </a>
-              <a
-                href="mailto:partnerships@theblueduck.org"
-                className="block hover:text-white transition-colors"
-              >
-                partnerships@theblueduck.org
+                dj@theblueduck.org
               </a>
             </div>
             <div className="mt-8">
               <Link
-                href="/contribute"
-                className="text-[11px] font-medium tracking-[0.12em] uppercase border border-slate-700 text-white px-5 py-3 hover:border-slate-500 transition-colors inline-flex"
+                href="/donate"
+                className="text-[11px] font-medium tracking-[0.12em] uppercase bg-white text-slate-900 px-5 py-3 hover:bg-slate-100 transition-colors inline-flex"
               >
-                Support our mission
+                Donate
               </Link>
             </div>
           </div>
