@@ -256,16 +256,16 @@ export default function AboutPage() {
                   desc="For the land, for communities, for the science, and for the people doing the work. Every decision starts here."
                 />
                 <div className="border-t border-dashed border-slate-200 pt-8">
-                  <div className="text-[10px] font-medium tracking-[0.2em] text-slate-300 uppercase mb-6">
-                    03
-                  </div>
-                  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light tracking-tight text-slate-300 mb-4 italic">
-                    DO What's Right
-                  </h3>
-                  <p className="text-sm leading-relaxed text-slate-300 font-light">
-                    When the path is unclear, we return to purpose. We act with integrity — for the land, for the people, and for those who come after us.
-                  </p>
-                </div>
+  <div className="text-[10px] font-medium tracking-[0.2em] text-slate-300 uppercase mb-6">
+    03
+  </div>
+  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light tracking-tight text-slate-300 mb-4 italic">
+    Do What's Right
+  </h3>
+  <p className="text-sm leading-relaxed text-slate-300 font-light">
+    When the path is unclear, we return to purpose. We act with integrity — for the land, for the people, and for those who come after us.
+  </p>
+</div>
               </div>
             </div>
           </div>
