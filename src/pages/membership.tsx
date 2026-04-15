@@ -128,6 +128,32 @@ const faqs = [
 function TierCard({ tier, billing }: { tier: Tier; billing: BillingCycle }) {
   const price = billing === "annual" ? tier.annualPrice : tier.monthlyPrice;
   const savings = tier.monthlyPrice * 12 - tier.annualPrice;
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleJoin = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/create-membership-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          tierId: tier.id,
+          tierName: tier.name,
+          amount: price,
+          billing,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to create checkout");
+      if (data.url) window.location.href = data.url;
+    } catch (err: any) {
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className={`flex flex-col justify-between p-8 border ${
@@ -181,16 +207,19 @@ function TierCard({ tier, billing }: { tier: Tier; billing: BillingCycle }) {
         </ul>
       </div>
 
-      <Link
-        href="/contact"
-        className={`text-[11px] font-medium tracking-[0.14em] uppercase px-6 py-3.5 text-center inline-block transition-colors ${
+      {error && <p className="text-[11px] text-red-400 mb-3">{error}</p>}
+
+      <button
+        onClick={handleJoin}
+        disabled={loading}
+        className={`text-[11px] font-medium tracking-[0.14em] uppercase px-6 py-3.5 text-center transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
           tier.featured
             ? "bg-white text-slate-900 hover:bg-slate-100"
             : "border border-slate-200 text-slate-700 hover:border-slate-400"
         }`}
       >
-        {tier.cta}
-      </Link>
+        {loading ? "Redirecting…" : tier.cta}
+      </button>
     </div>
   );
 }
@@ -507,12 +536,27 @@ export default function MembershipPage() {
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 lg:justify-end">
-                  <Link
-                    href="/contact"
+                  <button
+                    onClick={() => {
+                      const flyway = tiers.find((t) => t.id === "flyway");
+                      if (!flyway) return;
+                      fetch("/api/create-membership-checkout", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                          tierId: flyway.id,
+                          tierName: flyway.name,
+                          amount: flyway.annualPrice,
+                          billing: "annual",
+                        }),
+                      })
+                        .then((r) => r.json())
+                        .then((d) => { if (d.url) window.location.href = d.url; });
+                    }}
                     className="text-[11px] font-medium tracking-[0.14em] uppercase bg-white text-slate-900 px-8 py-4 hover:bg-slate-100 transition-colors text-center"
                   >
                     Join as Flyway member
-                  </Link>
+                  </button>
                   <Link
                     href="/about"
                     className="text-[11px] font-medium tracking-[0.14em] uppercase border border-slate-700 text-white px-8 py-4 hover:border-slate-500 transition-colors text-center"

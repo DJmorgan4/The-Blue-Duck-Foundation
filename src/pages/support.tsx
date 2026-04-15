@@ -194,14 +194,29 @@ const MEMBERSHIP_TIERS = [
 ];
 
 function MembershipSection() {
-  const [billing, setBilling] = useState<"annual"|"monthly">("annual");
+  const [billing, setBilling] = useState<"annual" | "monthly">("annual");
+
+  const handleJoin = async (tierId: string, tierName: string, amount: number) => {
+    try {
+      const res = await fetch("/api/create-membership-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tierId, tierName, amount, billing }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to create checkout");
+      if (data.url) window.location.href = data.url;
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  };
 
   return (
     <div>
       {/* Billing toggle */}
       <div className="flex items-center justify-end mb-8">
         <div className="flex border border-slate-200 bg-white">
-          {(["annual","monthly"] as const).map((b) => (
+          {(["annual", "monthly"] as const).map((b) => (
             <button
               key={b}
               onClick={() => setBilling(b)}
@@ -250,14 +265,14 @@ function MembershipSection() {
                   ))}
                 </ul>
               </div>
-              <Link
-                href="/contact"
+              <button
+                onClick={() => handleJoin(tier.id, tier.name, price)}
                 className={`text-[11px] font-medium tracking-[0.12em] uppercase px-5 py-3 text-center transition-colors ${
                   tier.featured ? "bg-white text-slate-900 hover:bg-slate-100" : "border border-slate-200 text-slate-700 hover:border-slate-400"
                 }`}
               >
                 Join
-              </Link>
+              </button>
             </div>
           );
         })}
