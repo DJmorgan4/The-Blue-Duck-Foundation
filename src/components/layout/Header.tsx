@@ -42,12 +42,12 @@ export default function Header() {
             ))}
           </ul>
 
-          {/* Desktop CTA */}
+          {/* Desktop CTA — fixed: was /support (404), now /donate */}
           <Link
-            href="/support"
+            href="/donate"
             className="hidden lg:inline-flex text-[11px] font-medium tracking-[0.12em] uppercase bg-white text-slate-900 px-5 py-2.5 hover:bg-slate-100 transition-colors flex-shrink-0 whitespace-nowrap"
           >
-            Support
+            Donate
           </Link>
 
           {/* Mobile toggle */}
@@ -84,12 +84,13 @@ export default function Header() {
                   {link.label}
                 </Link>
               ))}
+              {/* Fixed: was /support, now /donate */}
               <Link
-                href="/support"
+                href="/donate"
                 className="text-[11px] font-medium tracking-[0.12em] uppercase bg-white text-slate-900 px-5 py-3 hover:bg-slate-100 transition-colors text-center mt-4"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Support
+                Donate
               </Link>
             </div>
           </div>
