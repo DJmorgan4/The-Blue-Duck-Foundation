@@ -337,7 +337,7 @@ export default function ScholarshipPage() {
                     event="Kaleb passes at 19 years old. The loss is immeasurable. But his impact — the way he lived, the way he loved — does not end here."
                   />
                   <TimelineItem
-                    year="2025"
+                    year="2026"
                     event="The Blue Duck Foundation is established as a 501(c)(3) nonprofit, with a mission rooted in conservation, community, and carrying legacies forward."
                   />
                   <TimelineItem
