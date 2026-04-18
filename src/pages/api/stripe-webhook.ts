@@ -230,7 +230,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const email = invoice.customer_email || "";
         const amount = invoice.amount_paid / 100;
         const date = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
-        const sub = invoice.subscription ? await stripe.subscriptions.retrieve(invoice.subscription as string) : null;
+        const subId = typeof invoice.subscription === "string" ? invoice.subscription : (invoice.subscription as any)?.id;
+        const sub = subId ? await stripe.subscriptions.retrieve(subId) : null;
         const tierName = sub?.metadata?.tierName || "Member";
         const billing = sub?.metadata?.billing || "monthly";
 
