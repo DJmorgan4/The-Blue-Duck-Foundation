@@ -10,7 +10,7 @@ export interface ConservationNewsItem {
   status: "watch" | "active" | "resolved" | "foundation";
   tags: string[];
   excerpt?: string;
-  summary?: string;
+  summary: string;
   slug?: string;
   isFoundationPost?: boolean;
   agency?: string;
