@@ -13,7 +13,19 @@
 
 import fs from "fs";
 import path from "path";
-import type { ConservationNewsItem } from "./texas";
+
+export interface ConservationNewsItem {
+  title: string;
+  url: string;
+  source: string;
+  date: string;
+  category: string;
+  status: string;
+  tags: string[];
+  excerpt?: string;
+  slug?: string;
+}
+
 
 function parseFrontmatter(content: string): { data: Record<string, any>; body: string } {
   const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
