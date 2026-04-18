@@ -13,6 +13,7 @@ export interface ConservationNewsItem {
   summary?: string;
   slug?: string;
   isFoundationPost?: boolean;
+  agency?: string;
 }
 
 export async function fetchAllConservationNews(
