@@ -17,16 +17,16 @@ async function getRawBody(req: NextApiRequest): Promise<Buffer> {
 }
 
 function getDonationTier(amount: number) {
-  if (amount >= 1000) return { label: "Sentinel",    gift: "Ship: Sentinel package — hat, patch, jacket + personal note", color: "#1e3a8a" };
-  if (amount >= 500)  return { label: "Steward",     gift: "Ship: Foundation hat + Flyway patch", color: "#065f46" };
-  if (amount >= 100)  return { label: "Conservator", gift: "Ship: Foundation sticker/decal pack", color: "#92400e" };
-  return               { label: "Supporter",   gift: "Digital: Add to supporter wall on website", color: "#475569" };
+  if (amount >= 1000) return { label: "Sentinel", gift: "Ship: Sentinel package — hat, patch, jacket + personal note", color: "#1e3a8a" };
+  if (amount >= 500) return { label: "Steward", gift: "Ship: Foundation hat + Flyway patch", color: "#065f46" };
+  if (amount >= 100) return { label: "Conservator", gift: "Ship: Foundation sticker/decal pack", color: "#92400e" };
+  return { label: "Supporter", gift: "Digital: Add to supporter wall on website", color: "#475569" };
 }
 
 const BENEFITS: Record<string, string[]> = {
-  playa:    ["Digital membership card", "Quarterly newsletter", "Member-only updates", "Supporter recognition", "Tax-deductible receipt"],
-  marsh:    ["Everything in Playa", "Printed card & welcome packet", "Field event invitations", "10% merchandise discount", "Annual impact report"],
-  flyway:   ["Everything in Marsh", "Named in annual report", "Exclusive patch & hat", "Conservation priority voting", "Forever 44 recognition", "Private donor briefings"],
+  playa: ["Digital membership card", "Quarterly newsletter", "Member-only updates", "Supporter recognition", "Tax-deductible receipt"],
+  marsh: ["Everything in Playa", "Printed card & welcome packet", "Field event invitations", "10% merchandise discount", "Annual impact report"],
+  flyway: ["Everything in Marsh", "Named in annual report", "Exclusive patch & hat", "Conservation priority voting", "Forever 44 recognition", "Private donor briefings"],
   sentinel: ["Everything in Flyway", "Founding patron plaque", "Personal impact briefing", "Project signage recognition", "Sentinel jacket", "Annual Banquet seat"],
 };
 
@@ -61,7 +61,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const sig = req.headers["stripe-signature"];
   if (!sig || !process.env.STRIPE_WEBHOOK_SECRET) return res.status(400).json({ error: "Missing signature" });
 
-  let event: Stripe.Event;
+  let event: any;
   try {
     const raw = await getRawBody(req);
     event = stripe.webhooks.constructEvent(raw, sig, process.env.STRIPE_WEBHOOK_SECRET!);
@@ -74,7 +74,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     if (event.type === "checkout.session.completed") {
-      const session = event.data.object as Stripe.Checkout.Session;
+      const session: any = event.data.object;
       const meta = session.metadata || {};
       const amount = (session.amount_total ?? 0) / 100;
       const email = session.customer_email || meta.email || "";
@@ -92,7 +92,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const cycle = billing === "annual" ? "year" : "month";
         const benefits = BENEFITS[tierId] || [];
 
-        // Welcome email to member
         if (email) {
           await resend.emails.send({
             from: "The Blue Duck Foundation <info@theblueduck.org>",
@@ -105,7 +104,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               </div>
               <p style="font-size:15px;line-height:1.8;color:#475569;font-weight:300;margin:0 0 24px;">
                 Your <strong style="color:#0f172a">${tierName}</strong> membership is active and fully tax-deductible under IRC Section 170.
-                This email is your official receipt — retain it for your tax records.
               </p>
               <table style="width:100%;background:#f8fafc;border:1px solid #e2e8f0;margin:0 0 24px;"><tr><td style="padding:20px 24px;">
                 <div style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:#94a3b8;margin-bottom:4px;">${tierName} · ${billing === "annual" ? "Annual" : "Monthly"}</div>
@@ -122,16 +120,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               </table>
               ${benefits.length ? `<div style="margin:0 0 24px;">
                 <div style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:#94a3b8;margin-bottom:10px;">Your ${tierName} benefits</div>
-                ${benefits.map(b => `<div style="padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:13px;color:#475569;"><span style="color:#10b981;margin-right:8px;">✓</span>${b}</div>`).join("")}
+                ${benefits.map((b: string) => `<div style="padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:13px;color:#475569;"><span style="color:#10b981;margin-right:8px;">✓</span>${b}</div>`).join("")}
               </div>` : ""}
               <div style="background:#0f172a;padding:18px 22px;margin:24px 0 0;">
-                <p style="margin:0;font-size:13px;color:#94a3b8;line-height:1.7;"><strong style="color:#e2e8f0;">Tax note:</strong> No goods or services of material value were exchanged for the deductible portion of your contribution. To manage or cancel, reply to this email.</p>
+                <p style="margin:0;font-size:13px;color:#94a3b8;line-height:1.7;"><strong style="color:#e2e8f0;">Tax note:</strong> No goods or services of material value were exchanged for the deductible portion. To manage or cancel, reply to this email.</p>
               </div>
             `),
           });
         }
 
-        // Internal alert to DJ
         await resend.emails.send({
           from: "The Blue Duck Foundation <info@theblueduck.org>",
           to: "dj@theblueduckllc.com",
@@ -141,14 +138,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:#94a3b8;margin-bottom:4px;">New Membership</div>
               <div style="font-size:22px;font-weight:300;">${fmt(amount)} · ${fullName}</div>
             </div>
-            <div style="background:#1e3a8a;color:#fff;padding:12px 18px;margin-bottom:20px;">
-              <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.7;margin-bottom:2px;">Tier</div>
-              <div style="font-size:16px;font-weight:300;">${tierName} · ${billing === "annual" ? "Annual" : "Monthly"}</div>
-            </div>
             <table style="width:100%;border-collapse:collapse;">
               ${row("Name", fullName)}
               ${row("Email", `<a href="mailto:${email}" style="color:#0f172a">${email}</a>`)}
-              ${row("Amount", `${fmt(amount)}/${cycle}`)}
+              ${row("Tier", `${tierName} · ${billing}`)}
+              ${row("Amount", fmt(amount))}
               ${row("Date", date)}
               ${row("Session", ref, true)}
             </table>
@@ -156,7 +150,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
 
       } else {
-        // DONATION
         const tier = getDonationTier(amount);
 
         if (email) {
@@ -170,8 +163,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 <div style="font-size:26px;font-weight:300;color:#0f172a;">Thank you, ${firstName || fullName}.</div>
               </div>
               <p style="font-size:15px;line-height:1.8;color:#475569;font-weight:300;margin:0 0 24px;">
-                Your contribution funds conservation, science, cultural preservation, and humanitarian work worldwide.
-                No goods or services were provided in exchange for this gift.
+                Your contribution funds conservation, science, cultural preservation, and humanitarian work worldwide. No goods or services were provided in exchange for this gift.
               </p>
               <table style="width:100%;background:#f8fafc;border:1px solid #e2e8f0;margin:0 0 24px;"><tr><td style="padding:20px 24px;">
                 <div style="font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:#94a3b8;margin-bottom:4px;">Donation Amount</div>
@@ -225,13 +217,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     if (event.type === "invoice.payment_succeeded") {
-      const invoice = event.data.object as Stripe.Invoice;
+      const invoice: any = event.data.object;
       if (invoice.billing_reason === "subscription_cycle") {
         const email = invoice.customer_email || "";
         const amount = invoice.amount_paid / 100;
         const date = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
-        const subId = typeof invoice.subscription === "string" ? invoice.subscription : (invoice.subscription as any)?.id;
-        const sub = subId ? await stripe.subscriptions.retrieve(subId) : null;
+        const subId = typeof invoice.subscription === "string" ? invoice.subscription : invoice.subscription?.id;
+        const sub: any = subId ? await stripe.subscriptions.retrieve(subId) : null;
         const tierName = sub?.metadata?.tierName || "Member";
         const billing = sub?.metadata?.billing || "monthly";
 
@@ -267,7 +259,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     if (event.type === "customer.subscription.deleted") {
-      const sub = event.data.object as Stripe.Subscription;
+      const sub: any = event.data.object;
       console.log(`[webhook] Cancelled: ${sub.id} — ${sub.metadata?.tierName}`);
     }
 
