@@ -23,7 +23,7 @@ export interface ConservationNewsItem {
   sourceType?: string;
   date: string;
   category: string;
-  status: string;
+  status: "watch" | "active" | "resolved" | "foundation";
   tags: string[];
   excerpt?: string;
   summary?: string;
