@@ -5,7 +5,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2026-03-25.dahlia" as any,
 });
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://theblueduck.org"\;
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://theblueduck.org";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
