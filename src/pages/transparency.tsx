@@ -102,7 +102,7 @@ export default function TransparencyPage() {
                         ["IRS contact", "Ms. Stinson · 877-829-5500"],
                         ["IRS ID number", "3913317"],
                         ["Address on file", "1203 S College Street, McKinney TX 75069"],
-                      ].map(({label, value}, i) => (
+                      ].map(([label, value], i) => (
                         <div key={i} className="flex flex-col py-3 border-b border-slate-100 pr-6">
                           <span className="text-[10px] tracking-[0.12em] uppercase text-slate-400 mb-1">{label}</span>
                           <span className="text-sm text-slate-700 font-light">{value}</span>
