@@ -15,17 +15,21 @@ import fs from "fs";
 import path from "path";
 
 export interface ConservationNewsItem {
+  id: string;
   title: string;
-  url: string;
+  url?: string;
+  link?: string;
   source: string;
+  sourceType?: string;
   date: string;
   category: string;
   status: string;
   tags: string[];
   excerpt?: string;
+  summary?: string;
   slug?: string;
+  isFoundationPost?: boolean;
 }
-
 
 function parseFrontmatter(content: string): { data: Record<string, any>; body: string } {
   const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
@@ -39,16 +43,15 @@ function parseFrontmatter(content: string): { data: Record<string, any>; body: s
     const key = line.slice(0, colonIdx).trim();
     let value: any = line.slice(colonIdx + 1).trim();
 
-    // Parse arrays like ["tag1", "tag2"]
     if (value.startsWith("[") && value.endsWith("]")) {
       value = value
         .slice(1, -1)
         .split(",")
         .map((v: string) => v.trim().replace(/^["']|["']$/g, ""));
-    }
-    // Remove surrounding quotes from strings
-    else if ((value.startsWith('"') && value.endsWith('"')) ||
-             (value.startsWith("'") && value.endsWith("'"))) {
+    } else if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
       value = value.slice(1, -1);
     }
 
@@ -66,7 +69,7 @@ export function loadFoundationPosts(): ConservationNewsItem[] {
   const files = fs.readdirSync(postsDir)
     .filter((f) => f.endsWith(".md"))
     .sort()
-    .reverse(); // newest first
+    .reverse();
 
   const posts: ConservationNewsItem[] = [];
 
