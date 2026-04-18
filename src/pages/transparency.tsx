@@ -102,7 +102,7 @@ export default function TransparencyPage() {
                         ["IRS contact", "Ms. Stinson · 877-829-5500"],
                         ["IRS ID number", "3913317"],
                         ["Address on file", "1203 S College Street, McKinney TX 75069"],
-                      ].map(([label, value], i) => (
+                      ].map(({label, value}, i) => (
                         <div key={i} className="flex flex-col py-3 border-b border-slate-100 pr-6">
                           <span className="text-[10px] tracking-[0.12em] uppercase text-slate-400 mb-1">{label}</span>
                           <span className="text-sm text-slate-700 font-light">{value}</span>
@@ -226,7 +226,7 @@ export default function TransparencyPage() {
                       { label: "Accounting year end", value: "December 31" },
                       { label: "Governing documents", value: "Available on request — email info@theblueduck.org" },
                       { label: "IRS determination letter", value: "On file — issued March 25, 2026, effective February 18, 2026" },
-                    ].map(([label, value], i) => (
+                    ].map(({label, value}, i) => (
                       <div key={i} className="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-8 py-4 border-b border-slate-100">
                         <span className="text-[11px] tracking-[0.1em] uppercase text-slate-400 sm:w-48 flex-shrink-0">{label}</span>
                         <span className="text-sm text-slate-600 font-light">{value}</span>
