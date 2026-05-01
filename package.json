@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@stripe/stripe-js": "^9.2.0",
+    "@supabase/supabase-js": "^2.105.1",
     "micro": "^10.0.1",
     "next": "^14",
     "react": "^18",
