@@ -107,9 +107,7 @@ export default function CandidatesPage() {
                         >
                           View in Lithic &rarr;
                         </a>
-                        <button className="text-[10px] tracking-[0.12em] uppercase font-medium border border-slate-900 text-slate-900 px-4 py-2 hover:bg-slate-900 hover:text-white transition-colors">
-                          Start Field Visit
-                        </button>
+                        <a href={`https://cetointeractive.com/portal?site_id=${site.id}&lat=${site.lat}&lng=${site.lng}`} target="_blank" rel="noreferrer" className="text-[10px] tracking-[0.12em] uppercase font-medium border border-slate-900 text-slate-900 px-4 py-2 hover:bg-slate-900 hover:text-white transition-colors">Start Field Visit</a>
                       </div>
                     </div>
                   ))}
