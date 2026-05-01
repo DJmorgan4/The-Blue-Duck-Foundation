@@ -99,7 +99,7 @@ export default function CandidatesPage() {
                         </div>
                       </div>
                       <div className="flex gap-2 flex-shrink-0">
-                        
+                        <a
                           href={`https://lithicearth.com/portal/globe?lat=${site.lat}&lng=${site.lng}`}
                           target="_blank"
                           rel="noreferrer"
