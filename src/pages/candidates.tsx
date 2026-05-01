@@ -105,7 +105,7 @@ export default function CandidatesPage() {
                           rel="noreferrer"
                           className="text-[10px] tracking-[0.12em] uppercase font-medium border border-slate-200 text-slate-500 px-4 py-2 hover:border-slate-400 transition-colors"
                         >
-                          View in Lithic →
+                          View in Lithic &rarr;
                         </a>
                         <button className="text-[10px] tracking-[0.12em] uppercase font-medium border border-slate-900 text-slate-900 px-4 py-2 hover:bg-slate-900 hover:text-white transition-colors">
                           Start Field Visit
