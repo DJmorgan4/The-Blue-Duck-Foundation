@@ -80,82 +80,26 @@ export default function ScholarshipPage() {
         <Header />
 
         <main className="flex-grow bg-white font-['Jost',sans-serif]">
-          {/* HERO */}
-          <section
-            className="relative flex min-h-[82vh] flex-col items-center justify-center overflow-hidden border-b border-slate-100"
-            style={{
-              background:
-                "linear-gradient(150deg, #7f1d1d 0%, #991b1b 35%, #1e3a8a 75%, #1e40af 100%)",
-            }}
-          >
-            <div
-              className="absolute inset-0 opacity-[0.04]"
-              style={{
-                backgroundImage:
-                  "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E\")",
-              }}
-            />
-
-            <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
-              <div className="mb-10 flex items-center justify-center gap-4">
-                <div className="h-px w-12 bg-white/30" />
-
-                <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/50">
-                  The Blue Duck Foundation
-                </span>
-
-                <div className="h-px w-12 bg-white/30" />
-              </div>
-
-              <div className="mb-2 font-['Cormorant_Garamond'] font-light leading-none text-white">
-                <div className="text-7xl tracking-tight sm:text-9xl lg:text-[150px]">
-                  Forever
-                </div>
-
-                <div
-                  className="text-7xl tracking-tight sm:text-9xl lg:text-[150px]"
-                  style={{
-                    WebkitTextStroke: "1.5px rgba(255,255,255,0.7)",
-                    color: "transparent",
-                  }}
-                >
-                  44
-                </div>
-              </div>
-
-              <p className="mb-10 mt-6 font-['Cormorant_Garamond'] text-xl italic text-white/70">
-                Scholarship Fund
-              </p>
-
-              <div className="inline-block border border-white/20 bg-white/[0.08] px-8 py-6 backdrop-blur-sm">
-                <p className="mb-2 text-[10px] uppercase tracking-[0.25em] text-white/50">
-                  In loving memory of
-                </p>
-
-                <p className="font-['Cormorant_Garamond'] text-3xl italic text-white">
-                  Kaleb Cory
-                </p>
-
-                <p className="mt-2 text-[10px] tracking-[0.2em] text-white/40">
-                  December 15, 1994 — July 27, 2014
-                </p>
-              </div>
-            </div>
-
-            <div className="absolute bottom-8 flex flex-col items-center gap-2">
-              <p className="text-[10px] uppercase tracking-[0.25em] text-white/30">
-                His story continues
-              </p>
-
-              <div className="h-10 w-px bg-gradient-to-b from-white/30 to-transparent" />
-            </div>
-          </section>
-
-          {/* MEMORIAL TRIBUTE */}
+          {/* MEMORIAL OPENING */}
           <section className="border-b border-slate-100 bg-white">
-            <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
+            <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-24">
+              <div className="mb-14 max-w-4xl">
+                <div className="mb-5 flex items-center gap-3">
+                  <div className="h-px w-6 bg-red-700" />
+
+                  <span className="text-[10px] font-medium uppercase tracking-[0.24em] text-red-700">
+                    Forever 44 Scholarship Fund
+                  </span>
+                </div>
+
+                <h1 className="font-['Cormorant_Garamond'] text-5xl font-light leading-tight text-slate-900 sm:text-6xl lg:text-7xl">
+                  Honoring the life and legacy
+                  <br />
+                  <em className="italic text-red-800">of Kaleb Cory</em>
+                </h1>
+              </div>
+
               <div className="grid items-start gap-14 lg:grid-cols-[340px_1fr] lg:gap-20">
-                {/* Photograph */}
                 <div className="mx-auto w-full max-w-[320px] lg:mx-0">
                   <div className="overflow-hidden border border-slate-200 bg-slate-100 shadow-lg">
                     <Image
@@ -188,6 +132,7 @@ export default function ScholarshipPage() {
                       <p className="font-['Cormorant_Garamond'] text-3xl font-light text-red-800">
                         19
                       </p>
+
                       <p className="mt-1 text-[9px] uppercase tracking-[0.12em] text-slate-400">
                         Years of life
                       </p>
@@ -197,6 +142,7 @@ export default function ScholarshipPage() {
                       <p className="font-['Cormorant_Garamond'] text-3xl font-light text-blue-900">
                         44
                       </p>
+
                       <p className="mt-1 text-[9px] uppercase tracking-[0.12em] text-slate-400">
                         His number
                       </p>
@@ -206,6 +152,7 @@ export default function ScholarshipPage() {
                       <p className="font-['Cormorant_Garamond'] text-3xl font-light text-red-800">
                         ∞
                       </p>
+
                       <p className="mt-1 text-[9px] uppercase tracking-[0.12em] text-slate-400">
                         His legacy
                       </p>
@@ -213,7 +160,6 @@ export default function ScholarshipPage() {
                   </div>
                 </div>
 
-                {/* Story */}
                 <div className="max-w-3xl">
                   <div className="mb-7 flex items-center gap-3">
                     <div className="h-px w-6 bg-red-700" />
@@ -289,8 +235,7 @@ export default function ScholarshipPage() {
                   </div>
 
                   <h2 className="font-['Cormorant_Garamond'] text-4xl font-light leading-tight text-slate-900">
-                    What{" "}
-                    <em className="italic text-red-700">44</em>
+                    What <em className="italic text-red-700">44</em>
                     <br />
                     means
                   </h2>
@@ -600,34 +545,21 @@ export default function ScholarshipPage() {
           </section>
 
           {/* CLOSING CTA */}
-          <section
-            className="py-24 sm:py-28"
-            style={{
-              background:
-                "linear-gradient(150deg, #7f1d1d 0%, #991b1b 40%, #1e3a8a 100%)",
-            }}
-          >
+          <section className="bg-slate-950 py-24 sm:py-28">
             <div className="mx-auto max-w-4xl px-6 text-center">
+              <p className="mb-5 text-[10px] font-medium uppercase tracking-[0.25em] text-red-300">
+                Forever 44 Scholarship Fund
+              </p>
+
               <h2 className="mb-6 font-['Cormorant_Garamond'] text-4xl font-light leading-tight text-white sm:text-6xl">
                 Carrying Kaleb&apos;s memory
                 <br />
                 <em className="italic">into the future</em>
               </h2>
 
-              <p className="mb-4 font-['Cormorant_Garamond'] text-xl italic text-white/60">
-                In memory of Kaleb Cory — December 15, 1994 – July 27,
-                2014
+              <p className="mb-12 font-['Cormorant_Garamond'] text-xl italic text-slate-400">
+                In memory of Kaleb Cory — December 15, 1994 – July 27, 2014
               </p>
-
-              <div className="mb-12 flex items-center justify-center gap-4">
-                <div className="h-px w-16 bg-white/20" />
-
-                <span className="text-[10px] uppercase tracking-[0.25em] text-white/30">
-                  A Blue Duck Foundation Initiative
-                </span>
-
-                <div className="h-px w-16 bg-white/20" />
-              </div>
 
               <div className="flex flex-col justify-center gap-4 sm:flex-row">
                 <Link
@@ -639,7 +571,7 @@ export default function ScholarshipPage() {
 
                 <Link
                   href="/donate"
-                  className="border border-white/50 px-10 py-4 text-[11px] font-medium uppercase tracking-[0.14em] text-white transition-colors hover:bg-white/10"
+                  className="border border-white/40 px-10 py-4 text-[11px] font-medium uppercase tracking-[0.14em] text-white transition-colors hover:bg-white/10"
                 >
                   Fund a scholarship
                 </Link>
