@@ -29,10 +29,12 @@ function ValueCard({
 function BoardMember({
   name,
   role,
+  href,
   empty,
 }: {
   name?: string;
   role?: string;
+  href?: string;
   empty?: boolean;
 }) {
   if (empty) {
@@ -56,11 +58,25 @@ function BoardMember({
       </div>
     );
   }
+
   return (
-    <div className="border border-slate-200 p-8 flex flex-col justify-between min-h-[200px] bg-white">
-      <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-white text-sm font-medium">
-        {name?.charAt(0)}
+    <Link
+      href={href ?? "/about"}
+      aria-label={`View information about ${name}`}
+      className="group border border-slate-200 p-8 flex flex-col justify-between min-h-[200px] bg-white transition-all duration-300 hover:border-slate-400 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
+    >
+      <div className="flex items-start justify-between">
+        <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-white text-sm font-medium transition-colors duration-300 group-hover:bg-slate-700">
+          {name?.charAt(0)}
+        </div>
+        <span
+          aria-hidden="true"
+          className="text-slate-300 transition-all duration-300 group-hover:text-slate-900 group-hover:translate-x-1"
+        >
+          →
+        </span>
       </div>
+
       <div>
         <p className="font-['Cormorant_Garamond'] text-xl font-light text-slate-900">
           {name}
@@ -68,8 +84,11 @@ function BoardMember({
         <p className="text-[11px] tracking-[0.08em] uppercase text-slate-400 font-medium mt-1">
           {role}
         </p>
+        <p className="mt-4 text-[10px] font-medium tracking-[0.12em] uppercase text-slate-300 transition-colors duration-300 group-hover:text-slate-600">
+          View profile
+        </p>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -257,7 +276,7 @@ export default function AboutPage() {
                     03
                   </div>
                   <h3 className="font-['Cormorant_Garamond'] text-4xl font-light tracking-tight text-slate-900 mb-4">
-                    Do What's Right
+                    Do What&apos;s Right
                   </h3>
                   <p className="text-sm leading-relaxed text-slate-500 font-light">
                     When the path is unclear, we return to purpose. We act with integrity — for the land, for the people, and for those who come after us.
@@ -288,13 +307,13 @@ export default function AboutPage() {
                     The Blue Duck Foundation exists to close the gap between environmental science and real-world action — and between forward-thinking work and the funding it needs to happen.
                   </p>
                   <p>
-                    We are rooted in Texas. But our work doesn't stop at state lines or national borders. Ecosystems don't. Neither do we.
+                    We are rooted in Texas. But our work doesn&apos;t stop at state lines or national borders. Ecosystems don&apos;t. Neither do we.
                   </p>
                   <p>
-                    We create transparent, fully compliant pathways for individuals and organizations to support meaningful work — monitoring technology, archaeological preservation, freshwater access, renewable energy research. Work that too often goes unfunded because the infrastructure to support it hasn't existed.
+                    We create transparent, fully compliant pathways for individuals and organizations to support meaningful work — monitoring technology, archaeological preservation, freshwater access, renewable energy research. Work that too often goes unfunded because the infrastructure to support it hasn&apos;t existed.
                   </p>
                   <p className="font-medium text-slate-700">
-                    We're building that infrastructure now.
+                    We&apos;re building that infrastructure now.
                   </p>
                 </div>
               </div>
@@ -396,10 +415,26 @@ export default function AboutPage() {
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
-              <BoardMember name="DJ Morgan" role="Executive Director & Founder" />
-              <BoardMember name="Cameron Francis" role="Board Member" />
-              <BoardMember name="Jeramiah Sullivan" role="Board Member" />
-              <BoardMember empty />
+              <BoardMember
+                name="DJ Morgan"
+                role="Executive Director & Founder"
+                href="/about#dj-morgan"
+              />
+              <BoardMember
+                name="Cameron Francis"
+                role="Board Member"
+                href="/about#cameron-francis"
+              />
+              <BoardMember
+                name="Jeramiah Sullivan"
+                role="Board Member"
+                href="/about#jeramiah-sullivan"
+              />
+              <BoardMember
+                name="Kerry Sims"
+                role="Board Member"
+                href="/about#kerry-sims"
+              />
               <BoardMember empty />
             </div>
 
@@ -410,7 +445,7 @@ export default function AboutPage() {
                     Interested in serving on the board?
                   </h3>
                   <p className="text-sm leading-relaxed text-slate-500 font-light">
-                    We're seeking professionals in conservation, law, finance, environmental science, archaeology, or international development who believe in transparent, accountable stewardship.
+                    We&apos;re seeking professionals in conservation, law, finance, environmental science, archaeology, or international development who believe in transparent, accountable stewardship.
                   </p>
                 </div>
                 <div className="lg:flex lg:justify-end">
