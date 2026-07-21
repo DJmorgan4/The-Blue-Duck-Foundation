@@ -7,6 +7,7 @@ const navLinks = [
   { href: "/about",        label: "About" },
   { href: "/foundation",   label: "Forever 44" },
   { href: "/conservation", label: "Conservation" },
+  { href: "/discovery-lab", label: "Discovery Lab" },
   { href: "/events",       label: "Events" },
   { href: "/news",         label: "News" },
   { href: "/contact",      label: "Contact" },
