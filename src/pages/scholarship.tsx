@@ -1,326 +1,483 @@
-import Link from "next/link";
+import type { ReactNode } from "react";
 import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 
-// ─── CRITERIA ITEM ─────────────────────────────────────────────────────────
-function CriteriaItem({ children }: { children: React.ReactNode }) {
+function CriteriaItem({ children }: { children: ReactNode }) {
   return (
-    <li className="flex items-start gap-4 py-4 border-b border-slate-100 last:border-0">
-      <span className="mt-2 w-1.5 h-1.5 rounded-full bg-red-700 flex-shrink-0" />
-      <span className="text-sm text-slate-600 font-light leading-relaxed">{children}</span>
+    <li className="flex items-start gap-4 border-b border-slate-100 py-4 last:border-0">
+      <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-red-700" />
+      <span className="text-sm font-light leading-relaxed text-slate-600">
+        {children}
+      </span>
     </li>
   );
 }
 
-// ─── TIMELINE ITEM ─────────────────────────────────────────────────────────
-function TimelineItem({ year, event }: { year: string; event: string }) {
+function TimelineItem({
+  year,
+  event,
+}: {
+  year: string;
+  event: string;
+}) {
   return (
-    <div className="grid grid-cols-[1fr_2fr] gap-8 border-t border-slate-100 py-6 first:border-t-0">
-      <div className="text-[11px] tracking-[0.12em] uppercase text-red-700 font-medium pt-0.5">
+    <div className="grid gap-3 border-t border-slate-100 py-6 first:border-t-0 sm:grid-cols-[170px_1fr] sm:gap-8">
+      <div className="pt-0.5 text-[11px] font-medium uppercase tracking-[0.12em] text-red-700">
         {year}
       </div>
-      <p className="text-sm text-slate-600 font-light leading-relaxed">{event}</p>
+
+      <p className="text-sm font-light leading-relaxed text-slate-600">
+        {event}
+      </p>
     </div>
   );
 }
 
-// ─── VALUE PILLAR ──────────────────────────────────────────────────────────
-function ValuePillar({ number, title, desc }: { number: string; title: string; desc: string }) {
+function ValuePillar({
+  number,
+  title,
+  desc,
+}: {
+  number: string;
+  title: string;
+  desc: string;
+}) {
   return (
-    <div className="border-t border-slate-200 pt-6 pb-4">
-      <div className="text-[10px] tracking-[0.2em] uppercase text-slate-300 font-medium mb-3">
+    <div className="border-t border-slate-200 pb-4 pt-6">
+      <div className="mb-3 text-[10px] font-medium uppercase tracking-[0.2em] text-slate-300">
         {number}
       </div>
-      <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-red-800 mb-3 italic">
+
+      <h3 className="mb-3 font-['Cormorant_Garamond'] text-2xl font-light italic text-red-800">
         {title}
       </h3>
-      <p className="text-sm text-slate-500 font-light leading-relaxed">{desc}</p>
+
+      <p className="text-sm font-light leading-relaxed text-slate-500">
+        {desc}
+      </p>
     </div>
   );
 }
 
-// ─── PAGE ──────────────────────────────────────────────────────────────────
 export default function ScholarshipPage() {
   return (
     <>
       <Head>
-        <title>Forever 44 Scholarship Fund — The Blue Duck Foundation</title>
+        <title>
+          Forever 44 Scholarship Fund — The Blue Duck Foundation
+        </title>
+
         <meta
           name="description"
-          content="The Forever 44 Scholarship Fund honors the memory of Kaleb Cory and supports graduating seniors who demonstrate resilience, heart, and determination."
+          content="The Forever 44 Scholarship Fund honors the memory of Kaleb Cory and supports students who demonstrate resilience, character, and determination."
         />
       </Head>
 
-      <div className="min-h-screen flex flex-col">
-        {/* Shared Header — replaces the old standalone nav */}
+      <div className="flex min-h-screen flex-col">
         <Header />
 
         <main className="flex-grow bg-white font-['Jost',sans-serif]">
-
-          {/* ── HERO ──────────────────────────────────────────────────────── */}
+          {/* HERO */}
           <section
-            className="relative min-h-[90vh] flex flex-col items-center justify-center border-b border-slate-100"
-            style={{ background: "linear-gradient(150deg, #7f1d1d 0%, #991b1b 35%, #1e3a8a 75%, #1e40af 100%)" }}
+            className="relative flex min-h-[82vh] flex-col items-center justify-center overflow-hidden border-b border-slate-100"
+            style={{
+              background:
+                "linear-gradient(150deg, #7f1d1d 0%, #991b1b 35%, #1e3a8a 75%, #1e40af 100%)",
+            }}
           >
             <div
               className="absolute inset-0 opacity-[0.04]"
               style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E")`,
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E\")",
               }}
             />
 
-            <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-              <div className="flex items-center justify-center gap-4 mb-12">
+            <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
+              <div className="mb-10 flex items-center justify-center gap-4">
                 <div className="h-px w-12 bg-white/30" />
-                <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 font-medium">
+
+                <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/50">
                   The Blue Duck Foundation
                 </span>
+
                 <div className="h-px w-12 bg-white/30" />
               </div>
 
-              <div className="font-['Cormorant_Garamond'] font-light text-white leading-none mb-2">
-                <div className="text-8xl sm:text-9xl lg:text-[160px] tracking-tight">
+              <div className="mb-2 font-['Cormorant_Garamond'] font-light leading-none text-white">
+                <div className="text-7xl tracking-tight sm:text-9xl lg:text-[150px]">
                   Forever
                 </div>
+
                 <div
-                  className="text-8xl sm:text-9xl lg:text-[160px] tracking-tight"
-                  style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.7)", color: "transparent" }}
+                  className="text-7xl tracking-tight sm:text-9xl lg:text-[150px]"
+                  style={{
+                    WebkitTextStroke: "1.5px rgba(255,255,255,0.7)",
+                    color: "transparent",
+                  }}
                 >
                   44
                 </div>
               </div>
 
-              <p className="font-['Cormorant_Garamond'] text-xl text-white/70 italic mt-6 mb-12">
+              <p className="mb-10 mt-6 font-['Cormorant_Garamond'] text-xl italic text-white/70">
                 Scholarship Fund
               </p>
 
-              <div className="border border-white/20 bg-white/8 px-8 py-6 inline-block backdrop-blur-sm">
-                <p className="text-[10px] tracking-[0.25em] uppercase text-white/50 mb-2">
+              <div className="inline-block border border-white/20 bg-white/[0.08] px-8 py-6 backdrop-blur-sm">
+                <p className="mb-2 text-[10px] uppercase tracking-[0.25em] text-white/50">
                   In loving memory of
                 </p>
-                <p className="font-['Cormorant_Garamond'] text-3xl text-white italic">
+
+                <p className="font-['Cormorant_Garamond'] text-3xl italic text-white">
                   Kaleb Cory
                 </p>
-                <p className="text-[10px] tracking-[0.2em] text-white/40 mt-2">
+
+                <p className="mt-2 text-[10px] tracking-[0.2em] text-white/40">
                   December 15, 1994 — July 27, 2014
                 </p>
               </div>
             </div>
 
-            <div className="absolute bottom-10 flex flex-col items-center gap-2">
-              <p className="text-[10px] tracking-[0.25em] uppercase text-white/30">His story continues</p>
-              <div className="w-px h-10 bg-gradient-to-b from-white/30 to-transparent" />
+            <div className="absolute bottom-8 flex flex-col items-center gap-2">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-white/30">
+                His story continues
+              </p>
+
+              <div className="h-10 w-px bg-gradient-to-b from-white/30 to-transparent" />
             </div>
           </section>
 
-          {/* ── MEMORIAL TRIBUTE ──────────────────────────────────────────── */}
-          <section className="border-b border-slate-100">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-28">
-              <div className="grid lg:grid-cols-[1fr_2fr] gap-16 lg:gap-24">
+          {/* MEMORIAL TRIBUTE */}
+          <section className="border-b border-slate-100 bg-white">
+            <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
+              <div className="grid items-start gap-14 lg:grid-cols-[340px_1fr] lg:gap-20">
+                {/* Photograph */}
+                <div className="mx-auto w-full max-w-[320px] lg:mx-0">
+                  <div className="overflow-hidden border border-slate-200 bg-slate-100 shadow-lg">
+                    <Image
+                      src="/images/kaleb-cory.png"
+                      alt="Kaleb Cory kneeling on the football field beside his helmet"
+                      width={760}
+                      height={822}
+                      sizes="(max-width: 1024px) 320px, 340px"
+                      className="h-auto w-full object-cover"
+                      priority
+                    />
 
-                <div className="lg:sticky lg:top-24 self-start">
-                  <blockquote className="font-['Cormorant_Garamond'] text-2xl text-slate-800 italic font-light leading-relaxed mb-8">
-                    Legacy is not only something we remember — it is something we continue.
-                  </blockquote>
-                  <div className="w-12 h-px bg-red-700 mb-8" />
+                    <div className="border-t-4 border-red-800 bg-slate-950 px-6 py-5">
+                      <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-red-300">
+                        Forever 44
+                      </p>
 
-                  <div className="space-y-5">
-                    {[
-                      { val: "19", label: "Years of life",       color: "#991b1b" },
-                      { val: "∞",  label: "Years of legacy",     color: "#1e3a8a" },
-                      { val: "44", label: "Forever his number",  color: "#991b1b" },
-                    ].map((s, i) => (
-                      <div key={i} className="flex items-baseline gap-5 border-t border-slate-100 pt-4">
-                        <span
-                          className="font-['Cormorant_Garamond'] text-4xl font-light w-12 flex-shrink-0"
-                          style={{ color: s.color }}
-                        >
-                          {s.val}
-                        </span>
-                        <span className="text-[10px] tracking-[0.15em] uppercase text-slate-400 font-medium">
-                          {s.label}
-                        </span>
-                      </div>
-                    ))}
+                      <p className="mt-2 font-['Cormorant_Garamond'] text-3xl font-light text-white">
+                        Kaleb Cory
+                      </p>
+
+                      <p className="mt-2 text-[10px] uppercase tracking-[0.14em] text-slate-400">
+                        December 15, 1994 — July 27, 2014
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-7 grid grid-cols-3 gap-3 border-t border-slate-200 pt-6">
+                    <div>
+                      <p className="font-['Cormorant_Garamond'] text-3xl font-light text-red-800">
+                        19
+                      </p>
+                      <p className="mt-1 text-[9px] uppercase tracking-[0.12em] text-slate-400">
+                        Years of life
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="font-['Cormorant_Garamond'] text-3xl font-light text-blue-900">
+                        44
+                      </p>
+                      <p className="mt-1 text-[9px] uppercase tracking-[0.12em] text-slate-400">
+                        His number
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="font-['Cormorant_Garamond'] text-3xl font-light text-red-800">
+                        ∞
+                      </p>
+                      <p className="mt-1 text-[9px] uppercase tracking-[0.12em] text-slate-400">
+                        His legacy
+                      </p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="space-y-6 text-[15px] leading-[1.95] text-slate-500 font-light">
-                  <p>
-                    There are people who pass through your life and leave behind more than memories — they leave behind a way of seeing the world. Kaleb Cory was that kind of person.
-                  </p>
-                  <p>
-                    Born on December 15, 1994, Kaleb lived every day with the qualities that most people only aspire to: strength, loyalty, perseverance, and an unbreakable commitment to the people he loved. He was taken from us far too soon on July 27, 2014, at just 19 years old.
-                  </p>
-                  <p>
-                    But loss does not get the final word. Those who carry his memory forward — his family, his friends, the people whose lives he quietly shaped — refuse to let the story end there.
-                  </p>
+                {/* Story */}
+                <div className="max-w-3xl">
+                  <div className="mb-7 flex items-center gap-3">
+                    <div className="h-px w-6 bg-red-700" />
 
-                  <div className="border-l-2 border-blue-800 pl-8 py-2 my-8">
-                    <p className="font-['Cormorant_Garamond'] text-xl text-slate-700 italic">
-                      "Love — Live — Laugh"
+                    <span className="text-[10px] font-medium uppercase tracking-[0.22em] text-red-700">
+                      In loving memory
+                    </span>
+                  </div>
+
+                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light leading-tight text-slate-900 sm:text-5xl">
+                    Remembering Kaleb Cory
+                  </h2>
+
+                  <div className="mt-9 space-y-6 text-[15px] font-light leading-[1.95] text-slate-500">
+                    <p>
+                      There are people who pass through your life and leave
+                      behind more than memories — they leave a lasting impact
+                      on the people who knew and loved them. Kaleb Cory was one
+                      of those people.
+                    </p>
+
+                    <p>
+                      Born on December 15, 1994, Kaleb lived with strength,
+                      loyalty, perseverance, and a deep commitment to the
+                      people he loved. He was taken from his family and friends
+                      far too soon on July 27, 2014, at only 19 years old.
+                    </p>
+
+                    <p>
+                      The Forever 44 Scholarship Fund was created so that
+                      Kaleb&apos;s memory can continue through opportunities
+                      given to students who demonstrate resilience, character,
+                      determination, and care for the people around them.
+                    </p>
+
+                    <p>
+                      Through the Blue Duck Foundation, this scholarship honors
+                      Kaleb&apos;s life while helping young people move forward
+                      with purpose and the support they need to pursue their
+                      education.
                     </p>
                   </div>
 
-                  <p>
-                    Through the Blue Duck Foundation, we honor those taken from us too soon and support the families, siblings, and students who choose to carry their legacy forward.
-                  </p>
-                  <p className="font-['Cormorant_Garamond'] text-2xl text-red-800 italic font-light">
-                    Forever 44 lives on through every student who refuses to quit.
-                  </p>
+                  <div className="mt-10 border-l-2 border-blue-900 py-2 pl-7">
+                    <p className="font-['Cormorant_Garamond'] text-2xl font-light italic leading-relaxed text-red-800">
+                      Forever 44 lives on through every student who carries his
+                      memory forward.
+                    </p>
+                  </div>
                 </div>
-
               </div>
             </div>
           </section>
 
-          {/* ── RED/NAVY DIVIDER ──────────────────────────────────────────── */}
-          <div className="h-1" style={{ background: "linear-gradient(90deg, #991b1b, #1e3a8a)" }} />
+          <div
+            className="h-1"
+            style={{
+              background: "linear-gradient(90deg, #991b1b, #1e3a8a)",
+            }}
+          />
 
-          {/* ── WHAT 44 MEANS ─────────────────────────────────────────────── */}
+          {/* WHAT 44 MEANS */}
           <section className="border-b border-slate-100 bg-slate-50">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
-              <div className="grid lg:grid-cols-[1fr_3fr] gap-16 lg:gap-24">
+            <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
+              <div className="grid gap-16 lg:grid-cols-[1fr_3fr] lg:gap-24">
                 <div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-5 h-px bg-red-700" />
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-red-700 font-medium">
+                  <div className="mb-6 flex items-center gap-3">
+                    <div className="h-px w-5 bg-red-700" />
+
+                    <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-red-700">
                       The foundation of this fund
                     </span>
                   </div>
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
-                    What <em className="italic text-red-700">44</em><br />means
+
+                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light leading-tight text-slate-900">
+                    What{" "}
+                    <em className="italic text-red-700">44</em>
+                    <br />
+                    means
                   </h2>
                 </div>
-                <div className="grid sm:grid-cols-2 gap-x-12">
+
+                <div className="grid gap-x-12 sm:grid-cols-2">
                   <ValuePillar
                     number="01"
                     title="Strength"
-                    desc="The kind of strength that doesn't announce itself — that shows up quietly, steadily, even when it's hardest to find. Kaleb embodied this. Forever 44 carries it forward."
+                    desc="The strength to keep moving forward through hardship and uncertainty."
                   />
+
                   <ValuePillar
                     number="02"
                     title="Loyalty"
-                    desc="To the people you love, to the values you hold, to the commitments you make. True loyalty is rare. It was one of Kaleb's defining qualities, and the foundation of everything this scholarship stands for."
+                    desc="A commitment to family, friends, community, and the people who depend on us."
                   />
+
                   <ValuePillar
                     number="03"
                     title="Perseverance"
-                    desc="The refusal to quit when things get hard. Every student who receives this scholarship has demonstrated that they know how to keep going — because that is what Kaleb would have done."
+                    desc="The determination to continue working toward a better future when the path is difficult."
                   />
+
                   <ValuePillar
                     number="04"
                     title="Family & Friendship"
-                    desc="The bonds that hold us together across time and loss. We are here to preserve not just the land, but the connections between people — the ones that outlast us all."
+                    desc="The relationships that support us, shape us, and carry a person's memory forward."
                   />
                 </div>
               </div>
             </div>
           </section>
 
-          {/* ── SCHOLARSHIP DETAILS ───────────────────────────────────────── */}
+          {/* SCHOLARSHIP DETAILS */}
           <section className="border-b border-slate-100">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
-              <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-
+            <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
+              <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
                 <div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-5 h-px bg-red-700" />
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-red-700 font-medium">
+                  <div className="mb-6 flex items-center gap-3">
+                    <div className="h-px w-5 bg-red-700" />
+
+                    <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-red-700">
                       The award
                     </span>
                   </div>
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight mb-8">
-                    The Forever 44<br /><em className="italic text-red-700">Scholarship Fund</em>
+
+                  <h2 className="mb-8 font-['Cormorant_Garamond'] text-4xl font-light leading-tight text-slate-900">
+                    The Forever 44
+                    <br />
+                    <em className="italic text-red-700">
+                      Scholarship Fund
+                    </em>
                   </h2>
-                  <div className="space-y-5 text-[15px] leading-[1.9] text-slate-500 font-light mb-10">
+
+                  <div className="mb-10 space-y-5 text-[15px] font-light leading-[1.9] text-slate-500">
                     <p>
-                      Established to honor Kaleb's life and legacy, this scholarship supports graduating seniors who demonstrate resilience, heart, and determination — the same qualities that defined him.
+                      Established to honor Kaleb&apos;s life and memory, the
+                      scholarship supports students who demonstrate
+                      resilience, heart, character, and determination.
                     </p>
+
                     <p>
-                      Forever 44 represents strength in the face of adversity and the commitment to carry forward the legacy of those we have lost too soon.
+                      Forever 44 represents strength in the face of adversity
+                      and a commitment to carrying forward the memory of
+                      someone taken far too soon.
                     </p>
+
                     <p>
-                      Through the Blue Duck Foundation, we empower students to pursue higher education and build a future rooted in perseverance, purpose, and family.
+                      Through the Blue Duck Foundation, students receive support
+                      as they pursue higher education and build futures rooted
+                      in purpose, perseverance, and community.
                     </p>
                   </div>
-                  <div className="flex gap-4 flex-wrap">
-                    {/* Fixed: was /contact with no context — now links to contact with clear intent */}
+
+                  <div className="flex flex-wrap gap-4">
                     <Link
                       href="/contact"
-                      className="text-[11px] font-medium tracking-[0.14em] uppercase bg-red-700 text-white px-7 py-3.5 hover:bg-red-800 transition-colors inline-flex"
+                      className="inline-flex bg-red-700 px-7 py-3.5 text-[11px] font-medium uppercase tracking-[0.14em] text-white transition-colors hover:bg-red-800"
                     >
                       Apply now
                     </Link>
+
                     <Link
                       href="/donate"
-                      className="text-[11px] font-medium tracking-[0.14em] uppercase bg-blue-900 text-white px-7 py-3.5 hover:bg-blue-950 transition-colors inline-flex"
+                      className="inline-flex bg-blue-900 px-7 py-3.5 text-[11px] font-medium uppercase tracking-[0.14em] text-white transition-colors hover:bg-blue-950"
                     >
                       Fund a scholarship
                     </Link>
+
                     <Link
                       href="/about"
-                      className="text-[11px] font-medium tracking-[0.14em] uppercase border border-slate-200 text-slate-700 px-7 py-3.5 hover:border-slate-400 transition-colors inline-flex"
+                      className="inline-flex border border-slate-200 px-7 py-3.5 text-[11px] font-medium uppercase tracking-[0.14em] text-slate-700 transition-colors hover:border-slate-400"
                     >
                       About the Foundation
                     </Link>
                   </div>
                 </div>
 
-                <div className="bg-slate-50 border border-slate-100 p-10">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-5 h-px bg-red-700" />
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-red-700 font-medium">
-                      Eligibility & criteria
+                <div className="border border-slate-100 bg-slate-50 p-7 sm:p-10">
+                  <div className="mb-6 flex items-center gap-3">
+                    <div className="h-px w-5 bg-red-700" />
+
+                    <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-red-700">
+                      Eligibility &amp; criteria
                     </span>
                   </div>
-                  <p className="text-sm text-slate-500 font-light leading-relaxed mb-6">
-                    The Forever 44 Scholarship is awarded to students who carry the qualities Kaleb exemplified. Applicants are evaluated on the following:
+
+                  <p className="mb-6 text-sm font-light leading-relaxed text-slate-500">
+                    Applicants are evaluated on the following:
                   </p>
-                  <ul className="space-y-0">
-                    <CriteriaItem>Graduating high school senior or current undergraduate student</CriteriaItem>
-                    <CriteriaItem>Demonstrated resilience, perseverance, and strength of character</CriteriaItem>
-                    <CriteriaItem>Commitment to family, community, and those around them</CriteriaItem>
-                    <CriteriaItem>Pursuing higher education with purpose and determination</CriteriaItem>
-                    <CriteriaItem>Personal essay reflecting on legacy, loss, or carrying someone else's memory forward</CriteriaItem>
-                    <CriteriaItem>One letter of recommendation from a teacher, coach, or mentor</CriteriaItem>
+
+                  <ul>
+                    <CriteriaItem>
+                      Graduating high school senior or current undergraduate
+                      student
+                    </CriteriaItem>
+
+                    <CriteriaItem>
+                      Demonstrated resilience, perseverance, and strength of
+                      character
+                    </CriteriaItem>
+
+                    <CriteriaItem>
+                      Commitment to family, community, and the people around
+                      them
+                    </CriteriaItem>
+
+                    <CriteriaItem>
+                      Pursuing higher education with purpose and determination
+                    </CriteriaItem>
+
+                    <CriteriaItem>
+                      Personal essay reflecting on legacy, loss, resilience, or
+                      carrying someone&apos;s memory forward
+                    </CriteriaItem>
+
+                    <CriteriaItem>
+                      One letter of recommendation from a teacher, coach, or
+                      mentor
+                    </CriteriaItem>
                   </ul>
-                  <div className="mt-8 border-l-2 border-blue-800 pl-5 py-1">
-                    <p className="text-[10px] tracking-[0.15em] uppercase text-blue-800 font-medium mb-1">
+
+                  <div className="mt-8 border-l-2 border-blue-800 py-1 pl-5">
+                    <p className="mb-1 text-[10px] font-medium uppercase tracking-[0.15em] text-blue-800">
                       A note on selection
                     </p>
-                    <p className="text-sm text-slate-500 font-light leading-relaxed italic">
-                      GPA matters less than character. We are looking for students who refuse to quit — who carry others with them as they rise.
+
+                    <p className="text-sm font-light italic leading-relaxed text-slate-500">
+                      Selection considers the whole person, including
+                      character, perseverance, purpose, and care for others.
                     </p>
                   </div>
                 </div>
-
               </div>
             </div>
           </section>
 
-          {/* ── TIMELINE ──────────────────────────────────────────────────── */}
+          {/* TIMELINE */}
           <section className="border-b border-slate-100 bg-slate-50">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
-              <div className="grid lg:grid-cols-[1fr_2fr] gap-16 lg:gap-24">
-
+            <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
+              <div className="grid gap-16 lg:grid-cols-[1fr_2fr] lg:gap-24">
                 <div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-5 h-px bg-red-700" />
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-red-700 font-medium">
+                  <div className="mb-6 flex items-center gap-3">
+                    <div className="h-px w-5 bg-red-700" />
+
+                    <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-red-700">
                       The story
                     </span>
                   </div>
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
-                    A life remembered,<br />
-                    <em className="italic text-red-700">a legacy continued</em>
+
+                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light leading-tight text-slate-900">
+                    A life remembered,
+                    <br />
+                    <em className="italic text-red-700">
+                      a legacy continued
+                    </em>
                   </h2>
 
-                  <div className="mt-16 text-center">
+                  <div className="mt-12 text-center lg:mt-16">
                     <div
-                      className="font-['Cormorant_Garamond'] text-[140px] leading-none font-light select-none"
-                      style={{ WebkitTextStroke: "1px #991b1b", color: "transparent", opacity: 0.12 }}
+                      className="select-none font-['Cormorant_Garamond'] text-[120px] font-light leading-none sm:text-[140px]"
+                      style={{
+                        WebkitTextStroke: "1px #991b1b",
+                        color: "transparent",
+                        opacity: 0.12,
+                      }}
                     >
                       44
                     </div>
@@ -330,142 +487,167 @@ export default function ScholarshipPage() {
                 <div className="pt-2">
                   <TimelineItem
                     year="December 15, 1994"
-                    event="Kaleb Cory is born. He would grow into someone defined by loyalty, heart, and an unshakable commitment to the people around him."
+                    event="Kaleb Cory is born."
                   />
+
                   <TimelineItem
                     year="July 27, 2014"
-                    event="Kaleb passes at 19 years old. The loss is immeasurable. But his impact — the way he lived, the way he loved — does not end here."
+                    event="Kaleb passes away at 19 years old. His memory remains with his family, friends, and community."
                   />
+
                   <TimelineItem
                     year="2026"
-                    event="The Blue Duck Foundation is established as a 501(c)(3) nonprofit, with a mission rooted in conservation, community, and carrying legacies forward."
+                    event="The Blue Duck Foundation establishes the Forever 44 Scholarship Fund in Kaleb's memory."
                   />
-                  <TimelineItem
-                    year="2026"
-                    event="The Forever 44 Scholarship Fund is launched in Kaleb's memory — the first of many ways we will honor him and the people he stood for."
-                  />
+
                   <TimelineItem
                     year="Ongoing"
-                    event="Every year, students who embody what Kaleb stood for carry his legacy into the future. Forever 44 lives on through every one of them."
+                    event="Students supported by the scholarship carry Kaleb's memory forward as they pursue their education and serve their communities."
                   />
                 </div>
-
               </div>
             </div>
           </section>
 
-          {/* ── HOW TO SUPPORT ────────────────────────────────────────────── */}
+          {/* SUPPORT */}
           <section className="border-b border-slate-100">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
-              <div className="grid lg:grid-cols-[1fr_3fr] gap-16 lg:gap-24">
-
+            <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-24">
+              <div className="grid gap-16 lg:grid-cols-[1fr_3fr] lg:gap-24">
                 <div>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-5 h-px bg-red-700" />
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-red-700 font-medium">
+                  <div className="mb-6 flex items-center gap-3">
+                    <div className="h-px w-5 bg-red-700" />
+
+                    <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-red-700">
                       Get involved
                     </span>
                   </div>
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
-                    Help us carry it<br />
+
+                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light leading-tight text-slate-900">
+                    Help us carry it
+                    <br />
                     <em className="italic text-red-700">forward</em>
                   </h2>
-                  <p className="mt-4 text-sm text-slate-400 font-light leading-relaxed">
-                    Whether you knew Kaleb, believe in what this scholarship stands for, or simply want to support a student who refuses to give up — there is a place for you here.
+
+                  <p className="mt-4 text-sm font-light leading-relaxed text-slate-400">
+                    Support the scholarship, nominate a deserving student, or
+                    help share the opportunity with schools and communities.
                   </p>
                 </div>
 
-                <div className="grid sm:grid-cols-3 gap-px bg-slate-100">
-                  {[
-                    {
-                      title: "Donate",
-                      desc: "Every contribution directly funds scholarship awards for students who embody strength, loyalty, and perseverance. No gift is too small.",
-                      cta: "Make a contribution",
-                      href: "/donate",
-                      dark: true,
-                    },
-                    {
-                      title: "Nominate a student",
-                      desc: "Know someone who carries the qualities Kaleb stood for? Nominate them for the Forever 44 Scholarship.",
-                      cta: "Submit a nomination",
-                      href: "/contact",
-                      dark: false,
-                    },
-                    {
-                      title: "Spread the word",
-                      desc: "Share this scholarship with your school, community, or network. Help us find the students who deserve to carry this legacy forward.",
-                      cta: "Share Forever 44",
-                      href: "/contact",
-                      dark: false,
-                    },
-                  ].map((card, i) => (
-                    <div
-                      key={i}
-                      className={`p-8 flex flex-col justify-between ${card.dark ? "bg-slate-900" : "bg-white"}`}
-                    >
-                      <div>
-                        <h3 className={`font-['Cormorant_Garamond'] text-2xl font-light mb-3 ${card.dark ? "text-white" : "text-slate-900"}`}>
-                          {card.title}
-                        </h3>
-                        <p className={`text-sm font-light leading-relaxed mb-6 ${card.dark ? "text-slate-400" : "text-slate-500"}`}>
-                          {card.desc}
-                        </p>
-                      </div>
-                      <Link
-                        href={card.href}
-                        className={`text-[11px] font-medium tracking-[0.12em] uppercase transition-colors ${card.dark ? "text-red-400 hover:text-red-300" : "text-red-700 hover:text-red-900"}`}
-                      >
-                        {card.cta} →
-                      </Link>
-                    </div>
-                  ))}
-                </div>
+                <div className="grid gap-px bg-slate-100 sm:grid-cols-3">
+                  <div className="flex flex-col justify-between bg-slate-900 p-8">
+                    <div>
+                      <h3 className="mb-3 font-['Cormorant_Garamond'] text-2xl font-light text-white">
+                        Donate
+                      </h3>
 
+                      <p className="mb-6 text-sm font-light leading-relaxed text-slate-400">
+                        Contributions help fund scholarship awards for
+                        deserving students.
+                      </p>
+                    </div>
+
+                    <Link
+                      href="/donate"
+                      className="text-[11px] font-medium uppercase tracking-[0.12em] text-red-400 transition-colors hover:text-red-300"
+                    >
+                      Make a contribution →
+                    </Link>
+                  </div>
+
+                  <div className="flex flex-col justify-between bg-white p-8">
+                    <div>
+                      <h3 className="mb-3 font-['Cormorant_Garamond'] text-2xl font-light text-slate-900">
+                        Nominate a student
+                      </h3>
+
+                      <p className="mb-6 text-sm font-light leading-relaxed text-slate-500">
+                        Tell us about a student whose character and
+                        determination deserve recognition.
+                      </p>
+                    </div>
+
+                    <Link
+                      href="/contact"
+                      className="text-[11px] font-medium uppercase tracking-[0.12em] text-red-700 transition-colors hover:text-red-900"
+                    >
+                      Submit a nomination →
+                    </Link>
+                  </div>
+
+                  <div className="flex flex-col justify-between bg-white p-8">
+                    <div>
+                      <h3 className="mb-3 font-['Cormorant_Garamond'] text-2xl font-light text-slate-900">
+                        Spread the word
+                      </h3>
+
+                      <p className="mb-6 text-sm font-light leading-relaxed text-slate-500">
+                        Share the scholarship with schools, families, and
+                        communities.
+                      </p>
+                    </div>
+
+                    <Link
+                      href="/contact"
+                      className="text-[11px] font-medium uppercase tracking-[0.12em] text-red-700 transition-colors hover:text-red-900"
+                    >
+                      Contact the Foundation →
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
 
-          {/* ── CLOSING CTA ───────────────────────────────────────────────── */}
+          {/* CLOSING CTA */}
           <section
-            className="py-28"
-            style={{ background: "linear-gradient(150deg, #7f1d1d 0%, #991b1b 40%, #1e3a8a 100%)" }}
+            className="py-24 sm:py-28"
+            style={{
+              background:
+                "linear-gradient(150deg, #7f1d1d 0%, #991b1b 40%, #1e3a8a 100%)",
+            }}
           >
             <div className="mx-auto max-w-4xl px-6 text-center">
-              <h2 className="font-['Cormorant_Garamond'] text-5xl sm:text-6xl text-white font-light leading-tight mb-6">
-                Forever 44 lives on through<br />
-                every student who{" "}
-                <em className="italic">refuses to quit</em>
+              <h2 className="mb-6 font-['Cormorant_Garamond'] text-4xl font-light leading-tight text-white sm:text-6xl">
+                Carrying Kaleb&apos;s memory
+                <br />
+                <em className="italic">into the future</em>
               </h2>
-              <p className="font-['Cormorant_Garamond'] text-white/60 text-xl italic mb-4">
-                In memory of Kaleb Cory — December 15, 1994 – July 27, 2014
+
+              <p className="mb-4 font-['Cormorant_Garamond'] text-xl italic text-white/60">
+                In memory of Kaleb Cory — December 15, 1994 – July 27,
+                2014
               </p>
-              <div className="flex items-center justify-center gap-4 mb-12">
+
+              <div className="mb-12 flex items-center justify-center gap-4">
                 <div className="h-px w-16 bg-white/20" />
-                <span className="text-[10px] tracking-[0.25em] uppercase text-white/30">
+
+                <span className="text-[10px] uppercase tracking-[0.25em] text-white/30">
                   A Blue Duck Foundation Initiative
                 </span>
+
                 <div className="h-px w-16 bg-white/20" />
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+              <div className="flex flex-col justify-center gap-4 sm:flex-row">
                 <Link
                   href="/contact"
-                  className="text-[11px] font-medium tracking-[0.14em] uppercase bg-white text-slate-900 px-10 py-4 hover:bg-slate-100 transition-colors"
+                  className="bg-white px-10 py-4 text-[11px] font-medium uppercase tracking-[0.14em] text-slate-900 transition-colors hover:bg-slate-100"
                 >
                   Apply for the scholarship
                 </Link>
+
                 <Link
                   href="/donate"
-                  className="text-[11px] font-medium tracking-[0.14em] uppercase border border-white/50 text-white px-10 py-4 hover:bg-white/10 transition-colors"
+                  className="border border-white/50 px-10 py-4 text-[11px] font-medium uppercase tracking-[0.14em] text-white transition-colors hover:bg-white/10"
                 >
                   Fund a scholarship
                 </Link>
               </div>
             </div>
           </section>
-
         </main>
 
-        {/* Shared Footer — replaces the old standalone footer */}
         <Footer />
       </div>
     </>
