@@ -406,12 +406,6 @@ export default function AboutPage() {
                   Building an organization that outlasts all of us.
                 </p>
               </div>
-              <Link
-                href="/contact"
-                className="text-[11px] font-medium tracking-[0.12em] uppercase text-slate-500 hover:text-slate-900 transition-colors inline-flex items-center gap-2 self-start sm:self-auto"
-              >
-                Join the board →
-              </Link>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -435,29 +429,13 @@ export default function AboutPage() {
                 role="Board Member"
                 href="/about#kerry-sims"
               />
-              <BoardMember empty />
+              <BoardMember
+                name="Mark Zalig"
+                role="Board Member"
+                href="/about#mark-zalig"
+              />
             </div>
 
-            <div className="mt-10 border border-slate-200 bg-white p-8 lg:p-10">
-              <div className="grid lg:grid-cols-2 gap-8 lg:items-center">
-                <div>
-                  <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-2">
-                    Interested in serving on the board?
-                  </h3>
-                  <p className="text-sm leading-relaxed text-slate-500 font-light">
-                    We&apos;re seeking professionals in conservation, law, finance, environmental science, archaeology, or international development who believe in transparent, accountable stewardship.
-                  </p>
-                </div>
-                <div className="lg:flex lg:justify-end">
-                  <Link
-                    href="/contact"
-                    className="text-[11px] font-medium tracking-[0.14em] uppercase bg-slate-900 text-white px-7 py-3.5 hover:bg-slate-700 transition-colors inline-flex"
-                  >
-                    Express interest
-                  </Link>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
