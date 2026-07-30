@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
@@ -29,7 +30,6 @@ const alliance = [
 ];
 
 // Logos live here and nowhere else on the page.
-// Add a partner by adding a row. `logo: null` renders the name as a wordmark.
 const railPartners = [
   { name: "Ceto Interactive", logo: "/images/partners/ceto-interactive.png" },
   { name: "Astarte Works", logo: "/images/partners/astarte-works.png" },
@@ -58,7 +58,7 @@ const capabilities = [
   {
     title: "Long-Term Monitoring",
     description:
-      "Repeatable survey methods that measure change in water, habitat, and wildlife across seasons and years.",
+      "Repeatable survey methods that measure change in water, habitat, and wildlife across seasons.",
     tags: ["Water", "Wetlands", "Wildlife", "Sensors"],
   },
 ];
@@ -122,8 +122,8 @@ function contourRing(cx: number, cy: number, r: number, seed: number) {
 
 function ContourField() {
   const domes = [
-    { cx: 980, cy: 250, rings: 17, base: 26, gap: 27, seed: 0.8 },
-    { cx: 210, cy: 690, rings: 12, base: 22, gap: 30, seed: 2.9 },
+    { cx: 1010, cy: 230, rings: 16, base: 24, gap: 26, seed: 0.8 },
+    { cx: 170, cy: 700, rings: 11, base: 22, gap: 29, seed: 2.9 },
   ];
 
   return (
@@ -131,7 +131,7 @@ function ContourField() {
       aria-hidden="true"
       viewBox="0 0 1280 820"
       preserveAspectRatio="xMidYMid slice"
-      className="dl-contours absolute inset-0 h-full w-full"
+      className="absolute inset-0 h-full w-full"
     >
       {domes.map((d, di) =>
         Array.from({ length: d.rings }).map((_, i) => {
@@ -143,7 +143,7 @@ function ContourField() {
               fill="none"
               stroke="var(--brass)"
               strokeWidth={index ? 1.1 : 0.6}
-              opacity={(1 - i / (d.rings + 3)) * (index ? 0.5 : 0.28)}
+              opacity={(1 - i / (d.rings + 3)) * (index ? 0.45 : 0.24)}
             />
           );
         })
@@ -175,16 +175,22 @@ export default function DiscoveryLab() {
             "--depth": "#0B1D22",
             "--shoal": "#12303A",
             "--bone": "#E6E3D9",
-            "--paper": "#F1EEE5",
-            "--sand": "#DCD7C9",
+            "--sand": "#D8D3C4",
             "--brass": "#C4A05A",
             "--brass-hi": "#E3CB93",
             "--brass-ink": "#7A6027",
             "--stone": "#5B6462",
+
+            /* one type scale, used everywhere */
+            "--t-hero": "clamp(2.6rem, 6.4vw, 5.5rem)",
+            "--t-h2": "clamp(1.9rem, 3.3vw, 2.9rem)",
+            "--t-name": "clamp(1.5rem, 2.4vw, 2.2rem)",
+            "--t-h3": "clamp(1.25rem, 1.7vw, 1.55rem)",
+
             "--font-display":
               '"Instrument Serif", "Newsreader", "Cormorant Garamond", Georgia, serif',
             "--font-mono": '"IBM Plex Mono", ui-monospace, SFMono-Regular, monospace',
-          } as React.CSSProperties
+          } as CSSProperties
         }
       >
         <Header />
@@ -193,40 +199,40 @@ export default function DiscoveryLab() {
           {/* ---------------------------------------------------------- */}
           {/* Hero                                                        */}
           {/* ---------------------------------------------------------- */}
-          <section className="relative isolate overflow-hidden border-b border-[var(--bone)]/10">
+          <section className="relative isolate overflow-hidden">
             <ContourField />
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-[radial-gradient(120%_80%_at_85%_10%,rgba(18,48,58,0.55),transparent_60%)]"
+              className="absolute inset-0 bg-[radial-gradient(120%_80%_at_85%_5%,rgba(18,48,58,0.5),transparent_62%)]"
             />
 
-            <div className="relative mx-auto flex min-h-[92vh] max-w-[86rem] flex-col px-6 pb-14 pt-36 lg:px-10 lg:pb-16 lg:pt-48">
+            <div className="dl-wrap relative flex min-h-[86vh] flex-col pb-10 pt-28 lg:pb-12 lg:pt-32">
               <p className="dl-label flex items-center gap-4 text-[var(--brass)]">
                 <span className="h-px w-10 bg-[var(--brass)]/70" />
                 Blue Duck Discovery Lab
               </p>
 
-              <h1 className="dl-display mt-10 max-w-[18ch] text-[clamp(3.4rem,10vw,9.5rem)] leading-[0.88]">
+              <h1 className="dl-display mt-7 max-w-[15ch] text-[length:var(--t-hero)] leading-[0.9]">
                 Ground truth,
                 <span className="block text-[var(--brass-hi)]">
                   at landscape scale.
                 </span>
               </h1>
 
-              <div className="mt-14 grid gap-10 border-t border-[var(--bone)]/15 pt-10 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
-                <p className="dl-label text-[var(--bone)]/45">
+              <div className="mt-10 grid gap-8 border-t border-[var(--bone)]/15 pt-8 lg:grid-cols-[auto_minmax(0,42rem)] lg:gap-20">
+                <p className="dl-label whitespace-nowrap text-[var(--bone)]/40">
                   Research · Technology · Conservation
                 </p>
 
                 <div>
-                  <p className="max-w-2xl text-lg leading-relaxed text-[var(--bone)]/80 sm:text-xl">
+                  <p className="text-[1.0625rem] leading-relaxed text-[var(--bone)]/80 sm:text-lg">
                     A nonprofit environmental field laboratory. We fly, scan, and
                     survey working land and wetlands, then turn what the
                     instruments record into decisions conservation partners can
                     act on.
                   </p>
 
-                  <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+                  <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                     <Link href="/contact" className="dl-btn dl-btn-solid">
                       Partner with the lab
                     </Link>
@@ -237,10 +243,10 @@ export default function DiscoveryLab() {
                 </div>
               </div>
 
-              <div className="mt-auto flex flex-wrap items-center gap-x-10 gap-y-3 border-t border-[var(--bone)]/10 pt-6 lg:pt-8">
+              <div className="mt-auto flex flex-wrap items-center gap-x-10 gap-y-2 pt-14">
                 {["501(c)(3) nonprofit", "McKinney, Texas", "Central Flyway"].map(
                   (item) => (
-                    <p key={item} className="dl-mono text-[var(--bone)]/35">
+                    <p key={item} className="dl-mono text-[var(--bone)]/30">
                       {item}
                     </p>
                   )
@@ -254,7 +260,7 @@ export default function DiscoveryLab() {
           {/* ---------------------------------------------------------- */}
           <section
             aria-label="Discovery Alliance partners"
-            className="dl-rail-wrap overflow-hidden border-b border-[var(--bone)]/10 bg-[var(--depth)] py-8"
+            className="dl-rail-wrap overflow-hidden border-y border-[var(--bone)]/10 bg-[var(--depth)] py-7"
           >
             <div className="dl-rail flex w-max items-center">
               {[0, 1].map((copy) => (
@@ -266,188 +272,174 @@ export default function DiscoveryLab() {
                   {railPartners.map((partner) => (
                     <RailItem key={partner.name} {...partner} />
                   ))}
-                  <span className="mx-12 h-[3px] w-[3px] rounded-full bg-[var(--brass)]/70 lg:mx-16" />
-                  <p className="dl-label whitespace-nowrap text-[var(--bone)]/35">
+                  <span className="mx-10 h-[3px] w-[3px] rounded-full bg-[var(--brass)]/70" />
+                  <p className="dl-label whitespace-nowrap text-[var(--bone)]/30">
                     Discovery Alliance
                   </p>
-                  <span className="mx-12 h-[3px] w-[3px] rounded-full bg-[var(--brass)]/70 lg:mx-16" />
+                  <span className="mx-10 h-[3px] w-[3px] rounded-full bg-[var(--brass)]/70" />
                 </div>
               ))}
             </div>
           </section>
 
           {/* ---------------------------------------------------------- */}
-          {/* Philosophy                                                  */}
+          {/* Philosophy — full-measure statement, no side gutter          */}
           {/* ---------------------------------------------------------- */}
-          <section className="border-b border-[var(--bone)]/10 bg-[var(--abyss)]">
-            <div className="mx-auto max-w-[86rem] px-6 py-24 lg:px-10 lg:py-36">
-              <div className="grid gap-12 lg:grid-cols-[1fr_2.2fr] lg:gap-20">
-                <p className="dl-label text-[var(--brass)]">Research posture</p>
+          <section className="bg-[var(--abyss)]">
+            <div className="dl-wrap py-20 lg:py-24">
+              <p className="dl-label text-[var(--brass)]">Research posture</p>
 
-                <div>
-                  <h2 className="dl-display max-w-[16ch] text-[clamp(2.6rem,5.6vw,5.2rem)] leading-[0.98]">
-                    Better decisions begin with better data.
-                  </h2>
+              <h2 className="dl-display mt-6 max-w-[22ch] text-[length:var(--t-h2)] leading-[1.02]">
+                Better decisions begin with better data.
+              </h2>
 
-                  <div className="mt-12 grid gap-10 border-t border-[var(--bone)]/15 pt-10 text-[var(--bone)]/70 md:grid-cols-2">
-                    <p className="leading-relaxed">
-                      No single sensor tells the whole story. We combine
-                      environmental science, geophysics, and airborne survey so
-                      the patterns that only appear across datasets have
-                      somewhere to show up.
-                    </p>
-                    <p className="leading-relaxed">
-                      Every method we publish has been run in real landscapes,
-                      under real conditions, against a real conservation
-                      question — not on a demo plot.
-                    </p>
-                  </div>
-                </div>
+              <div className="mt-10 grid max-w-5xl gap-8 border-t border-[var(--bone)]/15 pt-8 text-[var(--bone)]/70 md:grid-cols-2 md:gap-14">
+                <p className="leading-relaxed">
+                  No single sensor tells the whole story. We combine
+                  environmental science, geophysics, and airborne survey so the
+                  patterns that only appear across datasets have somewhere to
+                  show up.
+                </p>
+                <p className="leading-relaxed">
+                  Every method we publish has been run in real landscapes, under
+                  real conditions, against a real conservation question — not on
+                  a demo plot.
+                </p>
               </div>
             </div>
           </section>
 
           {/* ---------------------------------------------------------- */}
-          {/* Alliance — names, not logos                                 */}
+          {/* LIGHT CHAPTER — alliance + capabilities share one surface    */}
           {/* ---------------------------------------------------------- */}
-          <section className="bg-[var(--bone)] text-[var(--abyss)]">
-            <div className="mx-auto max-w-[86rem] px-6 py-24 lg:px-10 lg:py-36">
-              <div className="grid gap-12 border-b border-[var(--abyss)]/15 pb-16 lg:grid-cols-[1fr_2.2fr] lg:gap-20 lg:pb-20">
-                <p className="dl-label text-[var(--brass-ink)]">
-                  Discovery Alliance
-                </p>
-
+          <div className="bg-[var(--bone)] text-[var(--abyss)]">
+            {/* Alliance — index table, names not logos */}
+            <section className="dl-wrap pb-16 pt-20 lg:pb-20 lg:pt-24">
+              <div className="flex flex-wrap items-end justify-between gap-6">
                 <div>
-                  <h2 className="dl-display max-w-[15ch] text-[clamp(2.6rem,5.6vw,5.2rem)] leading-[0.98]">
+                  <p className="dl-label text-[var(--brass-ink)]">
+                    Discovery Alliance
+                  </p>
+                  <h2 className="dl-display mt-6 max-w-[20ch] text-[length:var(--t-h2)] leading-[1.02]">
                     Built through collaboration. Proven in the field.
                   </h2>
-                  <p className="mt-8 max-w-2xl leading-relaxed text-[var(--stone)]">
-                    Three organizations, one shared field program. Each brings a
-                    discipline the others depend on.
-                  </p>
                 </div>
+                <p className="max-w-sm text-[0.9375rem] leading-relaxed text-[var(--stone)]">
+                  Three organizations, one shared field program. Each brings a
+                  discipline the others depend on.
+                </p>
               </div>
 
-              <div>
+              <div className="mt-12 border-t border-[var(--abyss)]/15">
                 {alliance.map((member) => (
                   <article
                     key={member.name}
-                    className="dl-member group grid gap-6 border-b border-[var(--abyss)]/12 py-12 lg:grid-cols-[1.1fr_0.7fr_1.2fr] lg:items-baseline lg:gap-12 lg:py-16"
+                    className="dl-member group grid gap-3 border-b border-[var(--abyss)]/12 py-8 lg:grid-cols-[1fr_0.8fr_1.2fr] lg:items-start lg:gap-10 lg:py-9"
                   >
-                    <h3 className="dl-display dl-member-name text-[clamp(2.2rem,4.4vw,3.9rem)] leading-none">
+                    <h3 className="dl-display dl-member-name text-[length:var(--t-name)] leading-[1.1]">
                       {member.name}
                     </h3>
 
-                    <p className="dl-label text-[var(--brass-ink)]">
+                    <p className="dl-label pt-1 text-[var(--brass-ink)] lg:pt-2">
                       {member.role}
                     </p>
 
-                    <p className="max-w-lg leading-relaxed text-[var(--stone)]">
+                    <p className="max-w-lg text-[0.9375rem] leading-relaxed text-[var(--stone)]">
                       {member.description}
                     </p>
                   </article>
                 ))}
               </div>
-            </div>
-          </section>
+            </section>
 
-          {/* ---------------------------------------------------------- */}
-          {/* Capabilities                                                */}
-          {/* ---------------------------------------------------------- */}
-          <section
-            id="capabilities"
-            className="scroll-mt-24 bg-[var(--paper)] text-[var(--abyss)]"
-          >
-            <div className="mx-auto max-w-[86rem] px-6 py-24 lg:px-10 lg:py-36">
-              <div className="mb-16 grid gap-10 lg:grid-cols-2 lg:items-end">
+            {/* Capabilities — 2×2 grid, different rhythm from the rows above */}
+            <section
+              id="capabilities"
+              className="dl-wrap scroll-mt-24 pb-20 pt-16 lg:pb-24 lg:pt-20"
+            >
+              <div className="flex flex-wrap items-end justify-between gap-6">
                 <div>
-                  <p className="dl-label mb-6 text-[var(--brass-ink)]">
+                  <p className="dl-label text-[var(--brass-ink)]">
                     Core capabilities
                   </p>
-                  <h2 className="dl-display text-[clamp(2.6rem,5.6vw,5.2rem)] leading-[0.95]">
+                  <h2 className="dl-display mt-6 max-w-[16ch] text-[length:var(--t-h2)] leading-[1.02]">
                     From observation to understanding.
                   </h2>
                 </div>
-
-                <p className="max-w-xl leading-relaxed text-[var(--stone)] lg:justify-self-end">
+                <p className="max-w-sm text-[0.9375rem] leading-relaxed text-[var(--stone)]">
                   Four practices that overlap on most sites. We rarely run one
                   without the others.
                 </p>
               </div>
 
-              <div className="border-t border-[var(--abyss)]/15">
+              <div className="mt-12 grid gap-px bg-[var(--abyss)]/15 sm:grid-cols-2">
                 {capabilities.map((capability) => (
                   <article
                     key={capability.title}
-                    className="dl-cap group grid gap-6 border-b border-[var(--abyss)]/15 py-11 lg:grid-cols-[1fr_1.3fr] lg:gap-16 lg:py-14"
+                    className="dl-cap group bg-[var(--bone)] p-7 lg:p-9"
                   >
-                    <h3 className="dl-display dl-cap-title text-[clamp(1.9rem,3.2vw,2.9rem)] leading-tight">
+                    <h3 className="dl-display dl-cap-title text-[length:var(--t-h3)] leading-tight">
                       {capability.title}
                     </h3>
 
-                    <div>
-                      <p className="max-w-xl leading-relaxed text-[var(--stone)]">
-                        {capability.description}
-                      </p>
+                    <p className="mt-4 max-w-md text-[0.9375rem] leading-relaxed text-[var(--stone)]">
+                      {capability.description}
+                    </p>
 
-                      <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
-                        {capability.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="dl-mono text-[var(--brass-ink)]"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+                      {capability.tags.map((tag) => (
+                        <span key={tag} className="dl-mono text-[var(--brass-ink)]">
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </article>
                 ))}
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
 
           {/* ---------------------------------------------------------- */}
-          {/* Instruments                                                 */}
+          {/* Instruments — spec sheet                                    */}
           {/* ---------------------------------------------------------- */}
           <section className="bg-[var(--abyss)]">
-            <div className="mx-auto max-w-[86rem] px-6 py-24 lg:px-10 lg:py-36">
-              <div className="grid gap-14 lg:grid-cols-[1fr_2.2fr] lg:gap-20">
+            <div className="dl-wrap py-20 lg:py-24">
+              <div className="flex flex-wrap items-end justify-between gap-6">
                 <div>
-                  <p className="dl-label mb-6 text-[var(--brass)]">Instruments</p>
-                  <h2 className="dl-display max-w-[12ch] text-[clamp(2.6rem,5.6vw,5.2rem)] leading-[0.95]">
+                  <p className="dl-label text-[var(--brass)]">Instruments</p>
+                  <h2 className="dl-display mt-6 max-w-[14ch] text-[length:var(--t-h2)] leading-[1.02]">
                     One landscape, read three ways.
                   </h2>
                 </div>
+              </div>
 
-                <div className="border-t border-[var(--bone)]/15">
-                  {instrumentGroups.map((group) => (
-                    <div
-                      key={group.domain}
-                      className="grid gap-6 border-b border-[var(--bone)]/15 py-10 lg:grid-cols-[0.8fr_1.4fr] lg:gap-12 lg:py-12"
-                    >
-                      <div>
-                        <h3 className="dl-display text-[clamp(1.6rem,2.4vw,2.2rem)] leading-tight">
-                          {group.domain}
-                        </h3>
-                        <p className="dl-mono mt-3 text-[var(--bone)]/35">
-                          {group.note}
-                        </p>
-                      </div>
-
-                      <ul className="flex flex-wrap content-start gap-x-8 gap-y-3">
-                        {group.items.map((item) => (
-                          <li
-                            key={item}
-                            className="text-[var(--bone)]/80 transition-colors hover:text-[var(--brass-hi)]"
-                          >
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
+              <div className="mt-12 border-t border-[var(--bone)]/15">
+                {instrumentGroups.map((group) => (
+                  <div
+                    key={group.domain}
+                    className="grid gap-3 border-b border-[var(--bone)]/15 py-7 lg:grid-cols-[0.9fr_1.6fr] lg:items-start lg:gap-10 lg:py-8"
+                  >
+                    <div>
+                      <h3 className="dl-display text-[length:var(--t-h3)] leading-tight">
+                        {group.domain}
+                      </h3>
+                      <p className="dl-mono mt-2 text-[var(--bone)]/30">
+                        {group.note}
+                      </p>
                     </div>
-                  ))}
-                </div>
+
+                    <ul className="flex flex-wrap content-start gap-x-7 gap-y-2 pt-1">
+                      {group.items.map((item) => (
+                        <li
+                          key={item}
+                          className="text-[0.9375rem] text-[var(--bone)]/75 transition-colors hover:text-[var(--brass-hi)]"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
@@ -456,30 +448,25 @@ export default function DiscoveryLab() {
           {/* Method                                                      */}
           {/* ---------------------------------------------------------- */}
           <section className="border-t border-[var(--bone)]/10 bg-[var(--depth)]">
-            <div className="mx-auto max-w-[86rem] px-6 py-24 lg:px-10 lg:py-36">
-              <div className="grid gap-12 lg:grid-cols-[1fr_2.2fr] lg:gap-20">
-                <p className="dl-label text-[var(--brass)]">How a project runs</p>
+            <div className="dl-wrap py-20 lg:py-24">
+              <p className="dl-label text-[var(--brass)]">How a project runs</p>
+              <h2 className="dl-display mt-6 max-w-[20ch] text-[length:var(--t-h2)] leading-[1.02]">
+                Research designed for real-world deployment.
+              </h2>
 
-                <div>
-                  <h2 className="dl-display max-w-[14ch] text-[clamp(2.6rem,5.6vw,5.2rem)] leading-[0.98]">
-                    Research designed for real-world deployment.
-                  </h2>
-
-                  <ol className="mt-14 grid gap-px bg-[var(--bone)]/15 sm:grid-cols-3">
-                    {method.map((step) => (
-                      <li key={step.step} className="bg-[var(--depth)] p-8">
-                        <p className="dl-mono text-[var(--brass)]">{step.step}</p>
-                        <h3 className="dl-display mt-14 text-[clamp(1.7rem,2.4vw,2.2rem)]">
-                          {step.title}
-                        </h3>
-                        <p className="mt-4 text-sm leading-relaxed text-[var(--bone)]/65">
-                          {step.text}
-                        </p>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              </div>
+              <ol className="mt-12 grid gap-px bg-[var(--bone)]/15 sm:grid-cols-3">
+                {method.map((step) => (
+                  <li key={step.step} className="bg-[var(--depth)] p-7 lg:p-8">
+                    <p className="dl-mono text-[var(--brass)]">{step.step}</p>
+                    <h3 className="dl-display mt-8 text-[length:var(--t-h3)]">
+                      {step.title}
+                    </h3>
+                    <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--bone)]/65">
+                      {step.text}
+                    </p>
+                  </li>
+                ))}
+              </ol>
             </div>
           </section>
 
@@ -487,22 +474,22 @@ export default function DiscoveryLab() {
           {/* CTA                                                         */}
           {/* ---------------------------------------------------------- */}
           <section className="bg-[var(--sand)] text-[var(--abyss)]">
-            <div className="mx-auto max-w-[86rem] px-6 py-24 lg:px-10 lg:py-32">
-              <p className="dl-label mb-10 text-[var(--brass-ink)]">Collaborate</p>
+            <div className="dl-wrap py-20 lg:py-24">
+              <p className="dl-label text-[var(--brass-ink)]">Collaborate</p>
 
-              <div className="grid gap-12 lg:grid-cols-[1.4fr_0.9fr] lg:items-end lg:gap-20">
-                <h2 className="dl-display max-w-[16ch] text-[clamp(2.8rem,6.4vw,6rem)] leading-[0.92]">
+              <div className="mt-6 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start lg:gap-20">
+                <h2 className="dl-display max-w-[18ch] text-[length:var(--t-h2)] leading-[1.02]">
                   Bring the next environmental question into the field.
                 </h2>
 
                 <div>
-                  <p className="mb-8 max-w-md leading-relaxed text-[var(--stone)]">
+                  <p className="max-w-md text-[0.9375rem] leading-relaxed text-[var(--stone)]">
                     We work with conservation organizations, agencies,
                     landowners, researchers, and technology developers. Tell us
                     the site and the question.
                   </p>
 
-                  <Link href="/contact" className="dl-btn dl-btn-dark">
+                  <Link href="/contact" className="dl-btn dl-btn-dark mt-7">
                     Start a conversation
                   </Link>
                 </div>
@@ -513,11 +500,23 @@ export default function DiscoveryLab() {
       </div>
 
       <style jsx global>{`
+        /* ---- shared container: one source of truth for gutters ---- */
+        .dl-root .dl-wrap {
+          margin-inline: auto;
+          max-width: 78rem;
+          padding-inline: 1.5rem;
+        }
+        @media (min-width: 1024px) {
+          .dl-root .dl-wrap {
+            padding-inline: 2.5rem;
+          }
+        }
+
         /* ---- type roles ---- */
         .dl-root .dl-display {
           font-family: var(--font-display);
           font-weight: 400;
-          letter-spacing: -0.022em;
+          letter-spacing: -0.02em;
         }
 
         .dl-root .dl-label {
@@ -525,14 +524,16 @@ export default function DiscoveryLab() {
           font-size: 0.625rem;
           font-weight: 500;
           text-transform: uppercase;
-          letter-spacing: 0.26em;
+          letter-spacing: 0.24em;
+          line-height: 1.4;
         }
 
         .dl-root .dl-mono {
           font-family: var(--font-mono);
           font-size: 0.625rem;
           text-transform: uppercase;
-          letter-spacing: 0.18em;
+          letter-spacing: 0.16em;
+          line-height: 1.4;
         }
 
         /* ---- buttons ---- */
@@ -540,12 +541,12 @@ export default function DiscoveryLab() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          padding: 1.05rem 2.25rem;
+          padding: 0.95rem 2rem;
           font-family: var(--font-mono);
           font-size: 0.625rem;
           font-weight: 600;
           text-transform: uppercase;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.18em;
           transition: background-color 0.25s ease, color 0.25s ease,
             border-color 0.25s ease;
         }
@@ -628,7 +629,7 @@ export default function DiscoveryLab() {
         }
         .dl-root .dl-member:hover .dl-member-name,
         .dl-root .dl-cap:hover .dl-cap-title {
-          transform: translateX(0.6rem);
+          transform: translateX(0.4rem);
           color: var(--brass-ink);
         }
 
@@ -658,20 +659,20 @@ export default function DiscoveryLab() {
 
 function RailItem({ logo, name }: { logo: string | null; name: string }) {
   return (
-    <div className="dl-rail-item mx-12 flex min-w-[200px] items-center justify-center lg:mx-16">
+    <div className="dl-rail-item mx-10 flex min-w-[180px] items-center justify-center lg:mx-14">
       {logo ? (
-        <div className="dl-logo relative h-10 w-40">
+        <div className="dl-logo relative h-9 w-36">
           <Image
             src={logo}
             alt={name}
             fill
-            sizes="160px"
+            sizes="144px"
             className="object-contain"
           />
         </div>
       ) : (
         <p
-          className="dl-display whitespace-nowrap text-3xl text-[var(--bone)]/55"
+          className="dl-display whitespace-nowrap text-2xl text-[var(--bone)]/55"
           aria-label={name}
         >
           {name}
