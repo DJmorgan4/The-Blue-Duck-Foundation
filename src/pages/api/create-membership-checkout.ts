@@ -53,7 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       subscription_data: { metadata: { tierId, tierName, billing } },
       line_items: [{ price: priceId, quantity: 1 }],
       allow_promotion_codes: true,
-      billing_address_collection: "auto",
+      billing_address_collection: "required",
       success_url: `${BASE_URL}/membership/success?session_id={CHECKOUT_SESSION_ID}&tier=${tierId}`,
       cancel_url: `${BASE_URL}/membership`,
     });
