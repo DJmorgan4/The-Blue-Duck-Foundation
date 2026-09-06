@@ -226,10 +226,11 @@ export default function DiscoveryLab() {
 
                 <div>
                   <p className="text-[1.0625rem] leading-relaxed text-[var(--bone)]/80 sm:text-lg">
-                    A nonprofit environmental field laboratory. We fly, scan, and
-                    survey working land and wetlands, then turn what the
-                    instruments record into decisions conservation partners can
-                    act on.
+                    A nonprofit environmental field laboratory built to answer
+                    conservation questions with instruments instead of
+                    assumptions — airborne survey, subsurface geophysics, and
+                    long-term monitoring on working land and wetlands across the
+                    Central Flyway.
                   </p>
 
                   <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -244,7 +245,7 @@ export default function DiscoveryLab() {
               </div>
 
               <div className="mt-auto flex flex-wrap items-center gap-x-10 gap-y-2 pt-14">
-                {["501(c)(3) nonprofit", "McKinney, Texas", "Central Flyway"].map(
+                {["501(c)(3) nonprofit", "Frisco, Texas", "Central Flyway"].map(
                   (item) => (
                     <p key={item} className="dl-mono text-[var(--bone)]/30">
                       {item}
@@ -301,9 +302,9 @@ export default function DiscoveryLab() {
                   show up.
                 </p>
                 <p className="leading-relaxed">
-                  Every method we publish has been run in real landscapes, under
-                  real conditions, against a real conservation question — not on
-                  a demo plot.
+                  We publish our methods, our uncertainty, and the data behind
+                  both. A finding a partner cannot check is a finding they
+                  should not have to act on.
                 </p>
               </div>
             </div>
@@ -321,12 +322,13 @@ export default function DiscoveryLab() {
                     Discovery Alliance
                   </p>
                   <h2 className="dl-display mt-6 max-w-[20ch] text-[length:var(--t-h2)] leading-[1.02]">
-                    Built through collaboration. Proven in the field.
+                    One team. Three disciplines. No handoffs.
                   </h2>
                 </div>
                 <p className="max-w-sm text-[0.9375rem] leading-relaxed text-[var(--stone)]">
-                  Three organizations, one shared field program. Each brings a
-                  discipline the others depend on.
+                  Three founder-affiliated practices under common leadership.
+                  One accountable party from survey design through published
+                  findings.
                 </p>
               </div>
 
