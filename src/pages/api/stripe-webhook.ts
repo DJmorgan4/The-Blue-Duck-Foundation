@@ -1,11 +1,22 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import Stripe from "stripe";
 import { Resend } from "resend";
+import { createClient } from "@supabase/supabase-js";
 
 export const config = { api: { bodyParser: false } };
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2026-03-25.dahlia" as any });
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Service role key: the webhook writes the contributions ledger, which is
+// RLS-protected against anon clients. Add SUPABASE_SERVICE_ROLE_KEY in Vercel.
+// Dedicated Foundation project — NOT the shared NEXT_PUBLIC_SUPABASE_URL,
+// which points at Lithic Earth. Donor records stay isolated from venture data.
+const supabase = createClient(
+  process.env.FOUNDATION_SUPABASE_URL!,
+  process.env.FOUNDATION_SUPABASE_SERVICE_KEY!,
+  { auth: { persistSession: false } }
+);
 
 const ORG = {
   name: "The Blue Duck Foundation",
@@ -348,6 +359,112 @@ async function paymentMethodLabel(session: any): Promise<string> {
 
 /* ------------------------------------------------------------------------- */
 
+/* ---------------------------------------------------------------------------
+ * Confirmation email for monthly charges.
+ *
+ * A monthly membership charge is below both IRS thresholds — $250 for a
+ * required written acknowledgment and $75 for quid pro quo disclosure — so it
+ * does not need to carry tax language, and it should not. Netting a one-time
+ * welcome package against a single month's dues produces a technically true
+ * but badly misleading deductible figure. The January statement does the tax
+ * work once, against the year's total.
+ * ------------------------------------------------------------------------- */
+function confirmationEmail(opts: {
+  firstName: string; tierName: string; billing: string;
+  amount: number; date: string; ref: string;
+  benefits: string[]; benefitItems: Benefit[];
+}) {
+  const shipped = opts.benefitItems.filter((i) => i.fmv > 0);
+  return shell(
+    letterhead() +
+    ruledTitle("PAYMENT CONFIRMATION", `${opts.tierName} Membership`) +
+    `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${C.panel};margin:30px 0 0;">
+      <tr><td style="padding:28px 30px;">
+        <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+          ${field("Amount", fmt(opts.amount))}
+          ${field("Date", opts.date)}
+          ${field("Membership", `${esc(opts.tierName)} · Monthly`)}
+          ${field("Reference", esc(opts.ref))}
+        </table>
+      </td></tr></table>` +
+    sectionHeading("Tax Information") +
+    para(`${ORG.name} is a 501(c)(3) public charity, EIN ${ORG.ein}. This message confirms your payment; it is not your tax receipt.`) +
+    para(`Each January we send a single statement summarizing everything you contributed during the prior year, together with the value of any member benefits you received and the resulting deductible amount. That statement is the document to keep for your records.`) +
+    (shipped.length
+      ? para(`Your membership includes items we send once, when you join: ${shipped.map((i) => esc(i.label)).join(", ")}. Their value is accounted for in the annual statement rather than against any single month.`)
+      : "") +
+    (opts.benefits.length
+      ? sectionHeading(`Your ${opts.tierName} Benefits`) +
+        `<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+          ${opts.benefits.map((b) => `<tr><td style="padding:8px 0;border-bottom:1px solid ${C.ruleFaint};font:400 14px/1.6 ${SERIF};color:${C.inkSoft};">${esc(b)}</td></tr>`).join("")}
+        </table>`
+      : "") +
+    para(`<span style="color:${C.slate};font-size:13px;">To manage or cancel your membership, reply to this email.</span>`)
+  );
+}
+
+/* ------------------------------------------------------------------------- */
+
+type LedgerRow = {
+  stripe_event_id: string;
+  stripe_session_id?: string | null;
+  stripe_customer?: string | null;
+  occurred_at: string;
+  tax_year: number;
+  email: string;
+  donor_name?: string | null;
+  kind: "donation" | "membership_initial" | "membership_renewal";
+  tier_id?: string | null;
+  tier_name?: string | null;
+  billing?: string | null;
+  amount_cents: number;
+  benefit_fmv_cents: number;
+  benefit_items: { label: string; fmv: number }[];
+  receipt_number?: string | null;
+  receipt_sent: boolean;
+};
+
+/**
+ * Records the gift. Deliberately never throws.
+ *
+ * The donor's acknowledgment is the legally significant artifact; the ledger
+ * feeds year-end statements. On the free tier this project pauses after about
+ * a week of inactivity, and a paused database must not take down receipts. A
+ * failure here is logged loudly and surfaced in the admin email so the row can
+ * be backfilled from Stripe.
+ */
+async function recordContribution(row: LedgerRow): Promise<boolean> {
+  try {
+    const { error } = await supabase.from("contributions").insert(row);
+    // Duplicate stripe_event_id means Stripe retried after we recorded it.
+    if (error && error.code !== "23505") throw error;
+    return true;
+  } catch (err) {
+    console.error(`[webhook] LEDGER WRITE FAILED for ${row.stripe_event_id} — backfill needed:`, err);
+    return false;
+  }
+}
+
+/** True when this event was already processed, so a retry can't double-send. */
+async function alreadyProcessed(eventId: string): Promise<boolean> {
+  const { data, error } = await supabase
+    .from("contributions")
+    .select("id")
+    .eq("stripe_event_id", eventId)
+    .maybeSingle();
+  if (error) {
+    // Fail open: a ledger outage should not block receipts.
+    console.error("[webhook] idempotency check failed:", error);
+    return false;
+  }
+  return !!data;
+}
+
+const taxYear = (unixSeconds: number) =>
+  Number(new Date(unixSeconds * 1000).toLocaleDateString("en-US", { year: "numeric", timeZone: ORG.tz }));
+
+/* ------------------------------------------------------------------------- */
+
 async function getRawBody(req: NextApiRequest): Promise<Buffer> {
   return new Promise((resolve, reject) => {
     const chunks: Buffer[] = [];
@@ -374,9 +491,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   console.log(`[webhook] ${event.type} ${event.id}`);
 
-  // TODO: idempotency. We now return 500 so Stripe retries on failure, which
-  // means a partial failure can resend an email. Insert event.id into a
-  // Supabase table with a unique constraint and bail early if already present.
+  if (await alreadyProcessed(event.id)) {
+    console.log(`[webhook] ${event.id} already handled — skipping`);
+    return res.status(200).json({ received: true, duplicate: true });
+  }
 
   try {
     if (event.type === "checkout.session.completed") {
@@ -384,8 +502,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const meta = session.metadata || {};
       const amount = (session.amount_total ?? 0) / 100;
 
-      // customer_email is only set when passed at session creation. Checkout
-      // puts the address the donor actually typed in customer_details.
       const email = session.customer_details?.email || session.customer_email || meta.email || "";
       const firstName = meta.firstName || "";
       const fullName = `${firstName} ${meta.lastName || ""}`.trim() || session.customer_details?.name || "Supporter";
@@ -401,36 +517,70 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const tierId = meta.tierId || "";
         const billing = meta.billing || "monthly";
         const benefits = BENEFITS[tierId] || [];
+        const items = MEMBERSHIP_BENEFITS[tierId] || [];
+        const isAnnual = billing === "annual";
 
-        // Member benefits ship once, at signup, so the disclosure attaches to
-        // this first payment. Renewals carry no new goods.
-        const d = computeDeduction(amount, MEMBERSHIP_BENEFITS[tierId] || []);
-        if (d.unpriced) console.warn(`[webhook] Unpriced benefit in tier ${tierId} — FMV table incomplete`);
+        // Benefits ship once, at signup. On an annual plan the disclosure sits
+        // naturally against the year's payment. On a monthly plan it belongs in
+        // the January statement, not against one month's dues.
+        const d = computeDeduction(amount, isAnnual ? items : []);
+        if (isAnnual && d.unpriced) console.warn(`[webhook] Unpriced benefit in tier ${tierId}`);
 
         if (email) {
           await resend.emails.send({
-            from: ORG.from, to: email,
-            subject: `Membership Receipt — ${tierName} · ${ORG.name}`,
-            html: shell(
-              letterhead() +
-              ruledTitle("MEMBERSHIP RECEIPT", "Welcome to the Foundation") +
-              detailPanel({
-                number, date, name: fullName, address, amount, method,
-                type: `${tierName} Membership · ${billing === "annual" ? "Annual" : "Monthly"}`, d,
-              }) +
-              (benefits.length ? sectionHeading(`Your ${tierName} Benefits`) +
-                `<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                  ${benefits.map((b) => `<tr><td style="padding:8px 0;border-bottom:1px solid ${C.ruleFaint};font:400 14px/1.6 ${SERIF};color:${C.inkSoft};">${esc(b)}</td></tr>`).join("")}
-                </table>` : "") +
-              taxSection(d) +
-              para(`<span style="color:${C.slate};font-size:13px;">To manage or cancel your membership, reply to this email.</span>`)
-            ),
+            from: ORG.from,
+            to: email,
+            subject: isAnnual
+              ? `Membership Receipt — ${tierName} · ${ORG.name}`
+              : `Payment Confirmation — ${tierName} Membership`,
+            html: isAnnual
+              ? shell(
+                  letterhead() +
+                  ruledTitle("MEMBERSHIP RECEIPT", "Welcome to the Foundation") +
+                  detailPanel({
+                    number, date, name: fullName, address, amount, method,
+                    type: `${tierName} Membership · Annual`, d,
+                  }) +
+                  (benefits.length
+                    ? sectionHeading(`Your ${tierName} Benefits`) +
+                      `<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                        ${benefits.map((b) => `<tr><td style="padding:8px 0;border-bottom:1px solid ${C.ruleFaint};font:400 14px/1.6 ${SERIF};color:${C.inkSoft};">${esc(b)}</td></tr>`).join("")}
+                      </table>`
+                    : "") +
+                  taxSection(d) +
+                  para(`<span style="color:${C.slate};font-size:13px;">To manage or cancel your membership, reply to this email.</span>`)
+                )
+              : confirmationEmail({
+                  firstName, tierName, billing, amount, date, ref: number,
+                  benefits, benefitItems: items,
+                }),
           });
         }
 
+        const logged = await recordContribution({
+          stripe_event_id: event.id,
+          stripe_session_id: session.id,
+          stripe_customer: typeof session.customer === "string" ? session.customer : session.customer?.id,
+          occurred_at: new Date(session.created * 1000).toISOString(),
+          tax_year: taxYear(session.created),
+          email,
+          donor_name: fullName,
+          kind: "membership_initial",
+          tier_id: tierId,
+          tier_name: tierName,
+          billing,
+          amount_cents: session.amount_total ?? 0,
+          // Monthly members still received the package — the value is carried
+          // to the annual statement rather than netted here.
+          benefit_fmv_cents: Math.round(items.reduce((s, i) => s + i.fmv, 0) * 100),
+          benefit_items: items.map((i) => ({ label: i.label, fmv: i.fmv })),
+          receipt_number: number,
+          receipt_sent: isAnnual,
+        });
+
         await resend.emails.send({
           from: ORG.from, to: ORG.admin,
-          subject: `[New Member] ${fullName} — ${tierName} (${billing})`,
+          subject: `${logged ? "" : "[LEDGER FAILED] "}[New Member] ${fullName} — ${tierName} (${billing})`,
           html: shell(
             ruledTitle("NEW MEMBERSHIP") +
             `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin-top:28px;">
@@ -438,8 +588,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               ${field("Email", `<a href="mailto:${esc(email)}" style="color:${C.ink};">${esc(email)}</a>`)}
               ${field("Tier", `${esc(tierName)} · ${esc(billing)}`)}
               ${field("Amount", fmt(amount))}
-              ${field("Deductible", fmt(d.deductible))}
-              ${field("Benefit FMV", fmt(d.fmv))}
+              ${field("Sent", isAnnual ? "Tax receipt" : "Payment confirmation (statement in January)")}
+              ${field("Benefit FMV", fmt(items.reduce((s, i) => s + i.fmv, 0)))}
               ${field("Date", date)}
               ${field("Receipt", number)}
             </table>`
@@ -447,6 +597,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
 
       } else {
+        // One-time donations are complete transactions: the acknowledgment
+        // goes out now, with disclosure where benefits shipped.
         const tier = DONATION_BENEFITS.find((t) => amount >= t.min) || DONATION_BENEFITS[DONATION_BENEFITS.length - 1];
         const shipping: Record<string, string> = {
           Sentinel: "Ship: Sentinel package — hat, patch, jacket + personal note",
@@ -455,7 +607,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           Supporter: "Digital: Add to supporter wall on website",
         };
         const d = computeDeduction(amount, tier.items);
-        if (d.unpriced) console.warn(`[webhook] Unpriced benefit in tier ${tier.label} — FMV table incomplete`);
+        if (d.unpriced) console.warn(`[webhook] Unpriced benefit in tier ${tier.label}`);
 
         if (email) {
           await resend.emails.send({
@@ -474,9 +626,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           });
         }
 
+        const logged = await recordContribution({
+          stripe_event_id: event.id,
+          stripe_session_id: session.id,
+          stripe_customer: typeof session.customer === "string" ? session.customer : session.customer?.id,
+          occurred_at: new Date(session.created * 1000).toISOString(),
+          tax_year: taxYear(session.created),
+          email,
+          donor_name: fullName,
+          kind: "donation",
+          tier_name: tier.label,
+          amount_cents: session.amount_total ?? 0,
+          benefit_fmv_cents: Math.round(d.fmv * 100),
+          benefit_items: d.items.map((i) => ({ label: i.label, fmv: i.fmv })),
+          receipt_number: number,
+          receipt_sent: true,
+        });
+
         await resend.emails.send({
           from: ORG.from, to: ORG.admin,
-          subject: `[${fmt(amount)} donation] ${fullName} — ${tier.label}`,
+          subject: `${logged ? "" : "[LEDGER FAILED] "}[${fmt(amount)} donation] ${fullName} — ${tier.label}`,
           html: shell(
             ruledTitle("NEW DONATION") +
             `<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${C.panel};margin:28px 0 0;">
@@ -508,38 +677,64 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const date = receiptDate(invoice.created);
         const number = receiptNumber(invoice.created, invoice.id);
 
-        // invoice.subscription moved under invoice.parent in recent API
-        // versions — check both so this survives 2026-03-25.dahlia.
         const subId =
           (typeof invoice.subscription === "string" ? invoice.subscription : invoice.subscription?.id) ||
           invoice.parent?.subscription_details?.subscription;
         const sub: any = subId ? await stripe.subscriptions.retrieve(subId) : null;
         const tierName = sub?.metadata?.tierName || "Member";
+        const tierId = sub?.metadata?.tierId || "";
         const billing = sub?.metadata?.billing || "monthly";
+        const isAnnual = billing === "annual";
 
-        // Renewals deliver no new goods — the welcome package shipped at
-        // signup — so the full renewal amount is deductible.
+        // Renewals ship no new goods, so the payment is fully deductible.
         const d = computeDeduction(amount, []);
 
         if (email) {
           await resend.emails.send({
             from: ORG.from, to: email,
-            subject: `Membership Renewed — ${fmt(amount)} · ${ORG.name}`,
-            html: shell(
-              letterhead() +
-              ruledTitle("RENEWAL RECEIPT", `${tierName} Membership`) +
-              detailPanel({
-                number, date, name: invoice.customer_name || "Member", address: "",
-                amount, method: "Card on file",
-                type: `${tierName} Renewal · ${billing === "annual" ? "Annual" : "Monthly"}`, d,
-              }) +
-              taxSection(d) +
-              (invoice.hosted_invoice_url
-                ? `<p style="margin:22px 0 0;"><a href="${invoice.hosted_invoice_url}" style="font:400 12px/1.5 ${SERIF};letter-spacing:0.16em;text-transform:uppercase;color:${C.ink};">View full invoice</a></p>`
-                : "")
-            ),
+            subject: isAnnual
+              ? `Membership Renewed — ${fmt(amount)} · ${ORG.name}`
+              : `Payment Confirmation — ${tierName} Membership`,
+            html: isAnnual
+              ? shell(
+                  letterhead() +
+                  ruledTitle("RENEWAL RECEIPT", `${tierName} Membership`) +
+                  detailPanel({
+                    number, date, name: invoice.customer_name || "Member", address: "",
+                    amount, method: "Card on file",
+                    type: `${tierName} Renewal · Annual`, d,
+                  }) +
+                  taxSection(d) +
+                  (invoice.hosted_invoice_url
+                    ? `<p style="margin:22px 0 0;"><a href="${invoice.hosted_invoice_url}" style="font:400 12px/1.5 ${SERIF};letter-spacing:0.16em;text-transform:uppercase;color:${C.ink};">View full invoice</a></p>`
+                    : "")
+                )
+              : confirmationEmail({
+                  firstName: invoice.customer_name || "",
+                  tierName, billing, amount, date, ref: number,
+                  benefits: BENEFITS[tierId] || [],
+                  benefitItems: [], // nothing new ships on a renewal
+                }),
           });
         }
+
+        await recordContribution({
+          stripe_event_id: event.id,
+          stripe_customer: typeof invoice.customer === "string" ? invoice.customer : invoice.customer?.id,
+          occurred_at: new Date(invoice.created * 1000).toISOString(),
+          tax_year: taxYear(invoice.created),
+          email,
+          donor_name: invoice.customer_name || null,
+          kind: "membership_renewal",
+          tier_id: tierId,
+          tier_name: tierName,
+          billing,
+          amount_cents: invoice.amount_paid,
+          benefit_fmv_cents: 0,
+          benefit_items: [],
+          receipt_number: number,
+          receipt_sent: isAnnual,
+        });
       }
     }
 
@@ -549,8 +744,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
   } catch (err) {
-    // 500 so Stripe retries. The old 200 meant a Resend outage silently
-    // destroyed the receipt with no second attempt.
+    // 500 so Stripe retries. The ledger's unique constraint keeps a retry from
+    // producing a second receipt.
     console.error(`[webhook] Error on ${event.type} ${event.id}:`, err);
     return res.status(500).json({ received: false, error: String(err) });
   }
