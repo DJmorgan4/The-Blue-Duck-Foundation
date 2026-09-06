@@ -41,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
   }
 
-  const priceId = PRICE_IDS[tierId][billing];
+  const priceId = PRICE_IDS[tierId][billing as "monthly" | "annual"];
 
   // No silent fallback. The previous version dropped to a one-time payment
   // when a price ID was missing, which charged the member once, sent them a
