@@ -21,7 +21,7 @@ function ProgramCard({
       <div className="text-[10px] tracking-[0.2em] uppercase text-slate-300 font-medium mb-4">
         {tag}
       </div>
-      <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-1">
+      <h3 className="font-display text-2xl font-light text-slate-900 mb-1">
         {title}
       </h3>
       <div className="text-[11px] tracking-[0.08em] uppercase text-slate-400 font-medium mb-4">
@@ -65,7 +65,7 @@ function IssueCard({
     <div className="border-t border-slate-100 pt-6 pb-2">
       <div className="flex items-start justify-between gap-4 mb-3">
         <div>
-          <h3 className="font-['Cormorant_Garamond'] text-xl font-light text-slate-900 mb-1">
+          <h3 className="font-display text-xl font-light text-slate-900 mb-1">
             {title}
           </h3>
           <div className="text-[10px] tracking-[0.1em] uppercase text-slate-400 font-medium">
@@ -102,7 +102,7 @@ function SectionHeader({
           {eyebrow}
         </span>
       </div>
-      <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-3">
+      <h2 className="font-display text-4xl font-light text-slate-900 mb-3">
         {title}
       </h2>
       {body && (
@@ -135,7 +135,7 @@ export default function ConservationPage() {
                       Programs in development
                     </span>
                   </div>
-                  <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                  <h1 className="font-display text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
                     The work<br />
                     <em className="italic">itself.</em>
                   </h1>
@@ -158,7 +158,7 @@ export default function ConservationPage() {
                     href={item.href}
                     className="flex items-baseline justify-between py-4 border-b border-slate-100 first:border-t group"
                   >
-                    <span className="font-['Cormorant_Garamond'] text-[20px] font-light text-slate-800 group-hover:text-slate-900 transition-colors">
+                    <span className="font-display text-[20px] font-light text-slate-800 group-hover:text-slate-900 transition-colors">
                       {item.label}
                     </span>
                     <span className="text-[10px] tracking-[0.15em] text-slate-300 font-medium ml-4">
@@ -305,7 +305,7 @@ export default function ConservationPage() {
             <div className="border-t border-slate-200 mt-12 pt-10">
               <div className="grid lg:grid-cols-2 gap-10 lg:items-center">
                 <div>
-                  <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-2">
+                  <h3 className="font-display text-2xl font-light text-slate-900 mb-2">
                     Working on something that fits?
                   </h3>
                   <p className="text-sm leading-relaxed text-slate-500 font-light">
@@ -386,7 +386,7 @@ export default function ConservationPage() {
                   { label: "Operational Support", desc: "Grants and partnership support for humanitarian environmental organizations globally." },
                 ].map((item, i) => (
                   <div key={i} className="border-t border-slate-200 pt-5 pb-4 last:border-b">
-                    <h4 className="font-['Cormorant_Garamond'] text-lg font-light text-slate-900 mb-1">
+                    <h4 className="font-display text-lg font-light text-slate-900 mb-1">
                       {item.label}
                     </h4>
                     <p className="text-sm leading-relaxed text-slate-500 font-light">{item.desc}</p>
@@ -408,7 +408,7 @@ export default function ConservationPage() {
                     Issues we're watching
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-3">
+                <h2 className="font-display text-4xl font-light text-slate-900 mb-3">
                   On our radar
                 </h2>
                 <p className="text-[15px] leading-[1.85] text-slate-500 font-light max-w-xl">
@@ -455,7 +455,7 @@ export default function ConservationPage() {
                 status="ongoing"
               />
               <div className="border-t border-dashed border-slate-200 pt-6 pb-2">
-                <h3 className="font-['Cormorant_Garamond'] text-xl font-light text-slate-900 mb-2">
+                <h3 className="font-display text-xl font-light text-slate-900 mb-2">
                   Know something happening locally?
                 </h3>
                 <p className="text-sm leading-relaxed text-slate-500 font-light mb-4">
@@ -484,7 +484,7 @@ export default function ConservationPage() {
                       Stay informed
                     </span>
                   </div>
-                  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light text-white mb-4 leading-tight">
+                  <h3 className="font-display text-4xl font-light text-white mb-4 leading-tight">
                     Global Conservation<br /><em className="italic">&amp; Environment Brief</em>
                   </h3>
                   <p className="text-[15px] leading-relaxed text-slate-400 font-light">

@@ -17,7 +17,7 @@ function EventCard({
   return (
     <div className="border-t border-slate-100 pt-8">
       <div className="flex items-start justify-between gap-4 mb-4">
-        <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900">
+        <h3 className="font-display text-2xl font-light text-slate-900">
           {title}
         </h3>
         <span className="text-[10px] tracking-[0.15em] uppercase font-medium text-slate-400 flex-shrink-0 mt-1">
@@ -60,7 +60,7 @@ function QuarterRow({
   return (
     <div className={`border-t pt-6 pb-4 ${highlight ? "border-slate-900" : "border-slate-100"}`}>
       <div className="flex items-baseline justify-between mb-3">
-        <span className={`font-['Cormorant_Garamond'] text-xl font-light ${highlight ? "text-slate-900" : "text-slate-700"}`}>
+        <span className={`font-display text-xl font-light ${highlight ? "text-slate-900" : "text-slate-700"}`}>
           {period}
         </span>
         {highlight && (
@@ -104,7 +104,7 @@ export default function EventsPage() {
                     2026 Event Season
                   </span>
                 </div>
-                <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                <h1 className="font-display text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
                   Gather.<br />
                   <em className="italic">Give back.</em>
                 </h1>
@@ -121,7 +121,7 @@ export default function EventsPage() {
                   "Nature & Wildlife Photography Competition",
                 ].map((item, i) => (
                   <div key={i} className="flex items-baseline justify-between py-4 border-b border-slate-100 first:border-t">
-                    <span className="font-['Cormorant_Garamond'] text-[19px] font-light text-slate-700">
+                    <span className="font-display text-[19px] font-light text-slate-700">
                       {item}
                     </span>
                     <span className="text-[10px] tracking-[0.15em] text-slate-300 font-medium ml-4 flex-shrink-0">
@@ -147,7 +147,7 @@ export default function EventsPage() {
                     Signature events
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+                <h2 className="font-display text-4xl font-light text-slate-900 leading-tight">
                   Annual<br />flagship events
                 </h2>
                 <p className="mt-4 text-sm leading-relaxed text-slate-400 font-light">
@@ -226,7 +226,7 @@ export default function EventsPage() {
                     Year-round
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+                <h2 className="font-display text-4xl font-light text-slate-900 leading-tight">
                   The full<br />calendar
                 </h2>
                 <p className="mt-4 text-sm leading-relaxed text-slate-400 font-light">
@@ -314,7 +314,7 @@ export default function EventsPage() {
                       Stay connected
                     </span>
                   </div>
-                  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light text-white mb-4 leading-tight">
+                  <h3 className="font-display text-4xl font-light text-white mb-4 leading-tight">
                     Be first to<br /><em className="italic">know.</em>
                   </h3>
                   <p className="text-[15px] leading-relaxed text-slate-400 font-light">

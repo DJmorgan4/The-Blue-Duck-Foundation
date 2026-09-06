@@ -70,7 +70,7 @@ export default function ContactPage() {
                     We respond within 48 hours
                   </span>
                 </div>
-                <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                <h1 className="font-display text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
                   Let's talk.
                 </h1>
                 <p className="text-[15px] leading-[1.9] text-slate-500 font-light max-w-md">
@@ -110,7 +110,7 @@ export default function ContactPage() {
                     Send a message
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-8">
+                <h2 className="font-display text-4xl font-light text-slate-900 mb-8">
                   How can we help?
                 </h2>
 
@@ -119,7 +119,7 @@ export default function ContactPage() {
                     <div className="w-10 h-10 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mx-auto mb-5">
                       <span className="text-emerald-600 text-lg">✓</span>
                     </div>
-                    <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-2">
+                    <h3 className="font-display text-2xl font-light text-slate-900 mb-2">
                       Message received
                     </h3>
                     <p className="text-sm text-slate-500 font-light mb-6">
@@ -286,7 +286,7 @@ export default function ContactPage() {
                   <div className="text-[10px] tracking-[0.2em] uppercase text-slate-600 font-medium mb-4">
                     Based in Texas
                   </div>
-                  <p className="font-['Cormorant_Garamond'] text-xl font-light text-white mb-3">
+                  <p className="font-display text-xl font-light text-white mb-3">
                     McKinney, Texas.<br />Operating worldwide.
                   </p>
                   <p className="text-sm leading-relaxed text-slate-400 font-light mb-4">
@@ -313,7 +313,7 @@ export default function ContactPage() {
                       Make an impact
                     </span>
                   </div>
-                  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light text-white mb-4 leading-tight">
+                  <h3 className="font-display text-4xl font-light text-white mb-4 leading-tight">
                     Ready to<br /><em className="italic">get involved?</em>
                   </h3>
                   <p className="text-[15px] leading-relaxed text-slate-400 font-light">

@@ -51,7 +51,7 @@ function ValuePillar({
         {number}
       </div>
 
-      <h3 className="mb-3 font-['Cormorant_Garamond'] text-2xl font-light italic text-red-800">
+      <h3 className="mb-3 font-display text-2xl font-light italic text-red-800">
         {title}
       </h3>
 
@@ -92,7 +92,7 @@ export default function ScholarshipPage() {
                   </span>
                 </div>
 
-                <h1 className="font-['Cormorant_Garamond'] text-5xl font-light leading-tight text-slate-900 sm:text-6xl lg:text-7xl">
+                <h1 className="font-display text-5xl font-light leading-tight text-slate-900 sm:text-6xl lg:text-7xl">
                   Honoring the life and legacy
                   <br />
                   <em className="italic text-red-800">of Kaleb Cory</em>
@@ -117,7 +117,7 @@ export default function ScholarshipPage() {
                         Forever 44
                       </p>
 
-                      <p className="mt-2 font-['Cormorant_Garamond'] text-3xl font-light text-white">
+                      <p className="mt-2 font-display text-3xl font-light text-white">
                         Kaleb Cory
                       </p>
 
@@ -129,7 +129,7 @@ export default function ScholarshipPage() {
 
                   <div className="mt-7 grid grid-cols-3 gap-3 border-t border-slate-200 pt-6">
                     <div>
-                      <p className="font-['Cormorant_Garamond'] text-3xl font-light text-red-800">
+                      <p className="font-display text-3xl font-light text-red-800">
                         19
                       </p>
 
@@ -139,7 +139,7 @@ export default function ScholarshipPage() {
                     </div>
 
                     <div>
-                      <p className="font-['Cormorant_Garamond'] text-3xl font-light text-blue-900">
+                      <p className="font-display text-3xl font-light text-blue-900">
                         44
                       </p>
 
@@ -149,7 +149,7 @@ export default function ScholarshipPage() {
                     </div>
 
                     <div>
-                      <p className="font-['Cormorant_Garamond'] text-3xl font-light text-red-800">
+                      <p className="font-display text-3xl font-light text-red-800">
                         ∞
                       </p>
 
@@ -169,7 +169,7 @@ export default function ScholarshipPage() {
                     </span>
                   </div>
 
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light leading-tight text-slate-900 sm:text-5xl">
+                  <h2 className="font-display text-4xl font-light leading-tight text-slate-900 sm:text-5xl">
                     Remembering Kaleb Cory
                   </h2>
 
@@ -204,7 +204,7 @@ export default function ScholarshipPage() {
                   </div>
 
                   <div className="mt-10 border-l-2 border-blue-900 py-2 pl-7">
-                    <p className="font-['Cormorant_Garamond'] text-2xl font-light italic leading-relaxed text-red-800">
+                    <p className="font-display text-2xl font-light italic leading-relaxed text-red-800">
                       Forever 44 lives on through every student who carries his
                       memory forward.
                     </p>
@@ -234,7 +234,7 @@ export default function ScholarshipPage() {
                     </span>
                   </div>
 
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light leading-tight text-slate-900">
+                  <h2 className="font-display text-4xl font-light leading-tight text-slate-900">
                     What <em className="italic text-red-700">44</em>
                     <br />
                     means
@@ -283,7 +283,7 @@ export default function ScholarshipPage() {
                     </span>
                   </div>
 
-                  <h2 className="mb-8 font-['Cormorant_Garamond'] text-4xl font-light leading-tight text-slate-900">
+                  <h2 className="mb-8 font-display text-4xl font-light leading-tight text-slate-900">
                     The Forever 44
                     <br />
                     <em className="italic text-red-700">
@@ -407,7 +407,7 @@ export default function ScholarshipPage() {
                     </span>
                   </div>
 
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light leading-tight text-slate-900">
+                  <h2 className="font-display text-4xl font-light leading-tight text-slate-900">
                     A life remembered,
                     <br />
                     <em className="italic text-red-700">
@@ -417,7 +417,7 @@ export default function ScholarshipPage() {
 
                   <div className="mt-12 text-center lg:mt-16">
                     <div
-                      className="select-none font-['Cormorant_Garamond'] text-[120px] font-light leading-none sm:text-[140px]"
+                      className="select-none font-display text-[120px] font-light leading-none sm:text-[140px]"
                       style={{
                         WebkitTextStroke: "1px #991b1b",
                         color: "transparent",
@@ -467,7 +467,7 @@ export default function ScholarshipPage() {
                     </span>
                   </div>
 
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light leading-tight text-slate-900">
+                  <h2 className="font-display text-4xl font-light leading-tight text-slate-900">
                     Help us carry it
                     <br />
                     <em className="italic text-red-700">forward</em>
@@ -482,7 +482,7 @@ export default function ScholarshipPage() {
                 <div className="grid gap-px bg-slate-100 sm:grid-cols-3">
                   <div className="flex flex-col justify-between bg-slate-900 p-8">
                     <div>
-                      <h3 className="mb-3 font-['Cormorant_Garamond'] text-2xl font-light text-white">
+                      <h3 className="mb-3 font-display text-2xl font-light text-white">
                         Donate
                       </h3>
 
@@ -502,7 +502,7 @@ export default function ScholarshipPage() {
 
                   <div className="flex flex-col justify-between bg-white p-8">
                     <div>
-                      <h3 className="mb-3 font-['Cormorant_Garamond'] text-2xl font-light text-slate-900">
+                      <h3 className="mb-3 font-display text-2xl font-light text-slate-900">
                         Nominate a student
                       </h3>
 
@@ -522,7 +522,7 @@ export default function ScholarshipPage() {
 
                   <div className="flex flex-col justify-between bg-white p-8">
                     <div>
-                      <h3 className="mb-3 font-['Cormorant_Garamond'] text-2xl font-light text-slate-900">
+                      <h3 className="mb-3 font-display text-2xl font-light text-slate-900">
                         Spread the word
                       </h3>
 
@@ -551,13 +551,13 @@ export default function ScholarshipPage() {
                 Forever 44 Scholarship Fund
               </p>
 
-              <h2 className="mb-6 font-['Cormorant_Garamond'] text-4xl font-light leading-tight text-white sm:text-6xl">
+              <h2 className="mb-6 font-display text-4xl font-light leading-tight text-white sm:text-6xl">
                 Carrying Kaleb&apos;s memory
                 <br />
                 <em className="italic">into the future</em>
               </h2>
 
-              <p className="mb-12 font-['Cormorant_Garamond'] text-xl italic text-slate-400">
+              <p className="mb-12 font-display text-xl italic text-slate-400">
                 In memory of Kaleb Cory — December 15, 1994 – July 27, 2014
               </p>
 

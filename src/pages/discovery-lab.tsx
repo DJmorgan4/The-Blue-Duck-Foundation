@@ -188,7 +188,7 @@ export default function DiscoveryLab() {
             "--t-h3": "clamp(1.25rem, 1.7vw, 1.55rem)",
 
             "--font-display":
-              '"Instrument Serif", "Newsreader", "Cormorant Garamond", Georgia, serif',
+              "var(--font-stack-display)",
             "--font-mono": '"IBM Plex Mono", ui-monospace, SFMono-Regular, monospace',
           } as CSSProperties
         }

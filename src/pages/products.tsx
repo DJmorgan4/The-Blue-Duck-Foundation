@@ -98,7 +98,7 @@ export default function ProductsPage() {
                     Foundation store
                   </span>
                 </div>
-                <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                <h1 className="font-display text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
                   Wear the<br />
                   <em className="italic">mission.</em>
                 </h1>
@@ -111,7 +111,7 @@ export default function ProductsPage() {
                 <div className="space-y-0">
                   {products.map((cat, i) => (
                     <div key={i} className="flex items-baseline justify-between py-4 border-b border-slate-100 first:border-t">
-                      <span className="font-['Cormorant_Garamond'] text-[20px] font-light text-slate-800">
+                      <span className="font-display text-[20px] font-light text-slate-800">
                         {cat.category}
                       </span>
                       <span className="text-[10px] tracking-[0.15em] text-slate-300 font-medium ml-4">
@@ -165,7 +165,7 @@ export default function ProductsPage() {
                       {String(ci + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <h2 className="font-['Cormorant_Garamond'] text-3xl font-light text-slate-900">
+                  <h2 className="font-display text-3xl font-light text-slate-900">
                     {cat.category}
                   </h2>
                 </div>
@@ -174,7 +174,7 @@ export default function ProductsPage() {
                   {cat.items.map((item, ii) => (
                     <div key={ii} className="border-t border-slate-100 pt-6 pb-4">
                       <div className="flex items-start justify-between gap-3 mb-3">
-                        <h3 className="font-['Cormorant_Garamond'] text-xl font-light text-slate-900">
+                        <h3 className="font-display text-xl font-light text-slate-900">
                           {item.name}
                         </h3>
                         <span className="text-[9px] tracking-[0.15em] uppercase font-medium text-amber-600 bg-amber-50 px-2 py-1 flex-shrink-0 mt-0.5">
@@ -210,7 +210,7 @@ export default function ProductsPage() {
                     Member exclusives
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-4 leading-tight">
+                <h2 className="font-display text-4xl font-light text-slate-900 mb-4 leading-tight">
                   Some gear is earned,<br /><em className="italic">not bought.</em>
                 </h2>
                 <p className="text-[15px] leading-[1.9] text-slate-500 font-light max-w-md">
@@ -224,7 +224,7 @@ export default function ProductsPage() {
                 ].map((row, i) => (
                   <div key={i} className="flex items-baseline justify-between py-5 border-b border-slate-100 first:border-t">
                     <div>
-                      <span className="font-['Cormorant_Garamond'] text-xl font-light text-slate-900 mr-3">
+                      <span className="font-display text-xl font-light text-slate-900 mr-3">
                         {row.tier}
                       </span>
                       <span className="text-[10px] tracking-[0.1em] uppercase text-slate-300 font-medium">
@@ -259,7 +259,7 @@ export default function ProductsPage() {
                       Get notified
                     </span>
                   </div>
-                  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light text-white mb-4 leading-tight">
+                  <h3 className="font-display text-4xl font-light text-white mb-4 leading-tight">
                     Store launching<br /><em className="italic">soon.</em>
                   </h3>
                   <p className="text-[15px] leading-relaxed text-slate-400 font-light">

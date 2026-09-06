@@ -20,7 +20,7 @@ export default function PrivacyPage() {
                   <div className="w-6 h-px bg-slate-300" />
                   <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">Legal</span>
                 </div>
-                <h1 className="font-['Cormorant_Garamond'] text-6xl font-light leading-[1.04] text-slate-900 mb-6">
+                <h1 className="font-display text-6xl font-light leading-[1.04] text-slate-900 mb-6">
                   Privacy <em className="italic">Policy</em>
                 </h1>
                 <p className="text-sm text-slate-400 font-light mb-16">Last updated: April 17, 2026</p>
@@ -28,13 +28,13 @@ export default function PrivacyPage() {
                 <div className="space-y-12 text-[15px] leading-[1.9] text-slate-500 font-light">
 
                   <div>
-                    <h2 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-4">1. Who we are</h2>
+                    <h2 className="font-display text-2xl font-light text-slate-900 mb-4">1. Who we are</h2>
                     <p>The Blue Duck Foundation is a federally recognized 501(c)(3) public charity incorporated in Texas. EIN: 41-4361489. Effective date of exemption: February 18, 2026. Our registered address is 1203 S College Street, McKinney, TX 75069. We operate globally with a focus on conservation, environmental science, cultural preservation, and humanitarian work.</p>
                     <p className="mt-4">You can reach us at <a href="mailto:info@theblueduck.org" className="text-slate-900 underline underline-offset-2">info@theblueduck.org</a>.</p>
                   </div>
 
                   <div>
-                    <h2 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-4">2. Information we collect</h2>
+                    <h2 className="font-display text-2xl font-light text-slate-900 mb-4">2. Information we collect</h2>
                     <p>We collect information you voluntarily provide when you:</p>
                     <ul className="mt-4 space-y-2 pl-4">
                       {["Make a donation through our Stripe-powered checkout", "Sign up for membership", "Submit a contact or inquiry form", "Apply for the Forever 44 Scholarship", "Subscribe to Foundation updates"].map((item, i) => (
@@ -48,7 +48,7 @@ export default function PrivacyPage() {
                   </div>
 
                   <div>
-                    <h2 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-4">3. How we use your information</h2>
+                    <h2 className="font-display text-2xl font-light text-slate-900 mb-4">3. How we use your information</h2>
                     <p>We use the information we collect to:</p>
                     <ul className="mt-4 space-y-2 pl-4">
                       {[
@@ -68,7 +68,7 @@ export default function PrivacyPage() {
                   </div>
 
                   <div>
-                    <h2 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-4">4. How we share your information</h2>
+                    <h2 className="font-display text-2xl font-light text-slate-900 mb-4">4. How we share your information</h2>
                     <p>We do not sell, rent, or trade your personal information. We may share information with:</p>
                     <ul className="mt-4 space-y-2 pl-4">
                       {[
@@ -87,23 +87,23 @@ export default function PrivacyPage() {
                   </div>
 
                   <div>
-                    <h2 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-4">5. Donor privacy</h2>
+                    <h2 className="font-display text-2xl font-light text-slate-900 mb-4">5. Donor privacy</h2>
                     <p>The Blue Duck Foundation respects the privacy of our donors. We do not publicly disclose individual donor identities or giving amounts without explicit written consent. Donor information is used solely to process contributions, issue tax receipts, and maintain required nonprofit records.</p>
                     <p className="mt-4">As a 501(c)(3) public charity, we are required to file an annual Form 990 with the IRS. Certain information in the 990 — including aggregate financial data — is publicly available. Individual donor information is not disclosed in the 990.</p>
                   </div>
 
                   <div>
-                    <h2 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-4">6. Cookies and tracking</h2>
+                    <h2 className="font-display text-2xl font-light text-slate-900 mb-4">6. Cookies and tracking</h2>
                     <p>Our website may use cookies and similar technologies to improve your browsing experience and analyze site traffic. We use analytics tools to understand how visitors interact with our site. You can control cookie settings through your browser preferences. Disabling cookies may affect some site functionality.</p>
                   </div>
 
                   <div>
-                    <h2 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-4">7. Data security</h2>
+                    <h2 className="font-display text-2xl font-light text-slate-900 mb-4">7. Data security</h2>
                     <p>We implement industry-standard security measures to protect your information. Our site operates over HTTPS. Payment processing is handled entirely by Stripe — your card information never passes through or is stored on our servers. We regularly review our security practices to maintain appropriate safeguards.</p>
                   </div>
 
                   <div>
-                    <h2 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-4">8. Your rights</h2>
+                    <h2 className="font-display text-2xl font-light text-slate-900 mb-4">8. Your rights</h2>
                     <p>You have the right to:</p>
                     <ul className="mt-4 space-y-2 pl-4">
                       {[
@@ -123,17 +123,17 @@ export default function PrivacyPage() {
                   </div>
 
                   <div>
-                    <h2 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-4">9. Children's privacy</h2>
+                    <h2 className="font-display text-2xl font-light text-slate-900 mb-4">9. Children's privacy</h2>
                     <p>Our website is not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe we have inadvertently collected such information, please contact us immediately and we will delete it.</p>
                   </div>
 
                   <div>
-                    <h2 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-4">10. Changes to this policy</h2>
+                    <h2 className="font-display text-2xl font-light text-slate-900 mb-4">10. Changes to this policy</h2>
                     <p>We may update this Privacy Policy from time to time. When we do, we will update the "Last updated" date at the top of this page. We encourage you to review this policy periodically. Continued use of our website or services after changes constitutes acceptance of the updated policy.</p>
                   </div>
 
                   <div>
-                    <h2 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-4">11. Contact</h2>
+                    <h2 className="font-display text-2xl font-light text-slate-900 mb-4">11. Contact</h2>
                     <p>Questions about this Privacy Policy or our data practices? Contact us:</p>
                     <div className="mt-6 border border-slate-100 p-8">
                       <div className="space-y-2 text-sm">

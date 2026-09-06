@@ -38,7 +38,7 @@ function PillarRow({
             <span className="text-[10px] tracking-[0.15em] uppercase font-medium text-slate-400 border border-slate-200 px-3 py-1.5 inline-block mb-4">
               {label}
             </span>
-            <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+            <h2 className="font-display text-4xl font-light text-slate-900 leading-tight">
               {title}
             </h2>
           </div>
@@ -101,7 +101,7 @@ export default function HomePage() {
                       </span>
                     </div>
 
-                    <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                    <h1 className="font-display text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
                       Explore<br />
                       the world.<br />
                       <em className="italic">Help it.</em>
@@ -137,7 +137,7 @@ export default function HomePage() {
                       { num: "04", label: "Humanitarian Stewardship" },
                     ].map((item) => (
                       <div key={item.num} className="flex items-baseline justify-between py-4 border-b border-slate-100 first:border-t">
-                        <span className="font-['Cormorant_Garamond'] text-[22px] font-light text-slate-800">
+                        <span className="font-display text-[22px] font-light text-slate-800">
                           {item.label}
                         </span>
                         <span className="text-[10px] tracking-[0.15em] text-slate-300 font-medium ml-4">
@@ -158,7 +158,7 @@ export default function HomePage() {
                         key={i}
                         className="p-5 border-b border-r border-slate-100 last:border-r-0 [&:nth-child(2)]:border-r-0 [&:nth-child(3)]:border-b-0 [&:nth-child(4)]:border-b-0"
                       >
-                        <div className="font-['Cormorant_Garamond'] text-[19px] font-light text-slate-900 mb-0.5">
+                        <div className="font-display text-[19px] font-light text-slate-900 mb-0.5">
                           {s.val}
                         </div>
                         <div className="text-[10px] tracking-[0.08em] uppercase text-slate-400">
@@ -257,7 +257,7 @@ export default function HomePage() {
                         Stay informed
                       </span>
                     </div>
-                    <h2 className="font-['Cormorant_Garamond'] text-3xl font-light text-slate-900 mb-2">
+                    <h2 className="font-display text-3xl font-light text-slate-900 mb-2">
                       Follow our progress
                     </h2>
                     <p className="text-sm text-slate-500 font-light">
@@ -290,7 +290,7 @@ export default function HomePage() {
                         Get involved
                       </span>
                     </div>
-                    <h3 className="font-['Cormorant_Garamond'] text-4xl font-light text-white mb-4 leading-tight">
+                    <h3 className="font-display text-4xl font-light text-white mb-4 leading-tight">
                       Help us build<br /><em className="italic">something meaningful.</em>
                     </h3>
                     <p className="text-[15px] leading-relaxed text-slate-400 font-light mb-6">

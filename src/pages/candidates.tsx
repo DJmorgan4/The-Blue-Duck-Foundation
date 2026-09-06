@@ -52,7 +52,7 @@ export default function CandidatesPage() {
               </div>
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
                 <div>
-                  <h1 className="font-['Cormorant_Garamond'] text-5xl font-light text-slate-900 mb-3">
+                  <h1 className="font-display text-5xl font-light text-slate-900 mb-3">
                     Conservation Candidates
                   </h1>
                   <p className="text-[15px] leading-relaxed text-slate-500 font-light max-w-xl">
@@ -76,7 +76,7 @@ export default function CandidatesPage() {
               )}
               {!loading && sites.length === 0 && (
                 <div className="border border-dashed border-slate-200 p-12 text-center">
-                  <p className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-400 mb-2">No candidates yet</p>
+                  <p className="font-display text-2xl font-light text-slate-400 mb-2">No candidates yet</p>
                   <p className="text-sm text-slate-400 font-light">Sites saved from Lithic Earth will appear here.</p>
                 </div>
               )}
@@ -86,7 +86,7 @@ export default function CandidatesPage() {
                     <div key={site.id} className="py-6 grid sm:grid-cols-[1fr_auto] gap-4 items-start">
                       <div>
                         <div className="flex items-center gap-3 mb-1">
-                          <h2 className="font-['Cormorant_Garamond'] text-xl font-light text-slate-900">
+                          <h2 className="font-display text-xl font-light text-slate-900">
                             {site.name || `Site ${site.id.slice(0, 8)}`}
                           </h2>
                           <StatusBadge status={site.status} />

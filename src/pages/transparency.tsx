@@ -25,7 +25,7 @@ export default function TransparencyPage() {
                       Accountability
                     </span>
                   </div>
-                  <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                  <h1 className="font-display text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
                     Transparent<br />
                     <em className="italic">from day one.</em>
                   </h1>
@@ -68,7 +68,7 @@ export default function TransparencyPage() {
                     <div className="w-5 h-px bg-slate-300" />
                     <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">Federal recognition</span>
                   </div>
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+                  <h2 className="font-display text-4xl font-light text-slate-900 leading-tight">
                     IRS<br />Determination
                   </h2>
                   <p className="mt-4 text-sm text-slate-400 font-light leading-relaxed">
@@ -130,7 +130,7 @@ export default function TransparencyPage() {
                     <div className="w-5 h-px bg-slate-300" />
                     <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">Honest assessment</span>
                   </div>
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+                  <h2 className="font-display text-4xl font-light text-slate-900 leading-tight">
                     Where we<br />are right now
                   </h2>
                 </div>
@@ -177,7 +177,7 @@ export default function TransparencyPage() {
                     <div className="w-5 h-px bg-slate-300" />
                     <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">Commitments</span>
                   </div>
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+                  <h2 className="font-display text-4xl font-light text-slate-900 leading-tight">
                     Our financial<br />commitments
                   </h2>
                 </div>
@@ -192,7 +192,7 @@ export default function TransparencyPage() {
                   ].map((item, i) => (
                     <div key={i} className="border-t border-slate-200 pt-6 pb-4">
                       <div className="text-[10px] tracking-[0.2em] uppercase text-slate-300 font-medium mb-3">{item.num}</div>
-                      <h3 className="font-['Cormorant_Garamond'] text-xl font-light text-slate-900 mb-2">{item.title}</h3>
+                      <h3 className="font-display text-xl font-light text-slate-900 mb-2">{item.title}</h3>
                       <p className="text-sm text-slate-500 font-light leading-relaxed">{item.desc}</p>
                     </div>
                   ))}
@@ -210,7 +210,7 @@ export default function TransparencyPage() {
                     <div className="w-5 h-px bg-slate-300" />
                     <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">Governance</span>
                   </div>
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+                  <h2 className="font-display text-4xl font-light text-slate-900 leading-tight">
                     Governing<br />documents
                   </h2>
                 </div>
@@ -251,7 +251,7 @@ export default function TransparencyPage() {
             <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 lg:py-24">
               <div className="grid lg:grid-cols-2 gap-10 items-center">
                 <div>
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-4">
+                  <h2 className="font-display text-4xl font-light text-slate-900 mb-4">
                     Questions about our<br /><em className="italic">governance or financials?</em>
                   </h2>
                   <p className="text-[15px] text-slate-500 font-light leading-relaxed">

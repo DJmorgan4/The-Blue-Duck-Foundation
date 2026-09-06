@@ -22,7 +22,7 @@ function ContributionOption({
       <div className="text-[10px] tracking-[0.2em] uppercase text-slate-300 font-medium mb-4">
         {number}
       </div>
-      <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-3">
+      <h3 className="font-display text-2xl font-light text-slate-900 mb-3">
         {title}
       </h3>
       <p className="text-sm leading-relaxed text-slate-500 font-light mb-5">
@@ -60,7 +60,7 @@ function GivingTier({
             <div className={`text-[10px] tracking-[0.2em] uppercase font-medium mb-2 ${featured ? 'text-slate-500' : 'text-slate-300'}`}>
               {level}
             </div>
-            <div className={`font-['Cormorant_Garamond'] text-4xl font-light ${featured ? 'text-white' : 'text-slate-900'}`}>
+            <div className={`font-display text-4xl font-light ${featured ? 'text-white' : 'text-slate-900'}`}>
               {amount}
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function ContributePage() {
                     </span>
                   </div>
 
-                  <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                  <h1 className="font-display text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
                     Support work<br />
                     that <em className="italic">endures.</em>
                   </h1>
@@ -162,7 +162,7 @@ export default function ContributePage() {
                     Get involved
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+                <h2 className="font-display text-4xl font-light text-slate-900 leading-tight">
                   Ways to<br />support
                 </h2>
                 <p className="mt-4 text-sm leading-relaxed text-slate-400 font-light">
@@ -228,7 +228,7 @@ export default function ContributePage() {
                   Giving levels
                 </span>
               </div>
-              <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-3">
+              <h2 className="font-display text-4xl font-light text-slate-900 mb-3">
                 Find your level
               </h2>
               <p className="text-sm leading-relaxed text-slate-400 font-light max-w-xl">
@@ -285,7 +285,7 @@ export default function ContributePage() {
             <div className="mt-px bg-white border border-slate-100 p-8 lg:p-10">
               <div className="grid lg:grid-cols-2 gap-8 lg:items-center">
                 <div>
-                  <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-2">
+                  <h3 className="font-display text-2xl font-light text-slate-900 mb-2">
                     Larger gifts & institutional support
                   </h3>
                   <p className="text-sm leading-relaxed text-slate-500 font-light">
@@ -316,7 +316,7 @@ export default function ContributePage() {
                     Accountability
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+                <h2 className="font-display text-4xl font-light text-slate-900 leading-tight">
                   Our commitment<br />to transparency
                 </h2>
               </div>
@@ -356,7 +356,7 @@ export default function ContributePage() {
                     Connect
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-white leading-tight mb-6">
+                <h2 className="font-display text-4xl font-light text-white leading-tight mb-6">
                   Get involved<br /><em className="italic">from the start.</em>
                 </h2>
                 <p className="text-[15px] leading-[1.9] text-slate-400 font-light">

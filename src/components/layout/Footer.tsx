@@ -29,7 +29,7 @@ export default function Footer() {
           <div>
             <Link
               href="/"
-              className="font-['Cormorant_Garamond'] text-[17px] font-light tracking-[0.18em] uppercase text-white hover:text-slate-300 transition-colors block mb-5"
+              className="font-display text-[17px] font-light tracking-[0.18em] uppercase text-white hover:text-slate-300 transition-colors block mb-5"
             >
               The Blue Duck Foundation
             </Link>

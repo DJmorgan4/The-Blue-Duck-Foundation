@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/**
+ * Typography.
+ *
+ * The variables come from next/font in _app.tsx. Pages reference these two
+ * utilities instead of declaring their own font stacks — that drift is what
+ * left the site rendering a different serif on every device.
+ */
+
+:root {
+  --font-stack-display: var(--font-serif), Georgia, "Times New Roman", serif;
+  --font-stack-body: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+body {
+  font-family: var(--font-stack-body);
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-stack-display);
+  }
+
+  .font-body {
+    font-family: var(--font-stack-body);
+  }
+}

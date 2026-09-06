@@ -65,7 +65,7 @@ function DonateSection() {
                 key={amt}
                 type="button"
                 onClick={() => { setSelected(amt); setCustom(""); }}
-                className={`py-4 text-center transition-colors font-['Cormorant_Garamond'] text-2xl font-light ${
+                className={`py-4 text-center transition-colors font-display text-2xl font-light ${
                   selected === amt && !custom ? "bg-slate-900 text-white" : "bg-white text-slate-900 hover:bg-slate-50"
                 }`}
               >
@@ -240,13 +240,13 @@ function MembershipSection() {
                 {tier.featured && (
                   <div className="text-[9px] tracking-[0.2em] uppercase text-emerald-400 font-medium mb-2">Most popular</div>
                 )}
-                <div className={`font-['Cormorant_Garamond'] text-2xl font-light mb-0.5 ${tier.featured ? "text-white" : "text-slate-900"}`}>
+                <div className={`font-display text-2xl font-light mb-0.5 ${tier.featured ? "text-white" : "text-slate-900"}`}>
                   {tier.name}
                 </div>
                 <div className={`text-[10px] tracking-[0.12em] uppercase font-medium mb-5 ${tier.featured ? "text-slate-500" : "text-slate-300"}`}>
                   {tier.subtitle}
                 </div>
-                <div className={`font-['Cormorant_Garamond'] text-3xl font-light mb-1 ${tier.featured ? "text-white" : "text-slate-900"}`}>
+                <div className={`font-display text-3xl font-light mb-1 ${tier.featured ? "text-white" : "text-slate-900"}`}>
                   ${price}
                 </div>
                 <div className={`text-[10px] tracking-[0.08em] uppercase mb-1 ${tier.featured ? "text-slate-500" : "text-slate-400"}`}>
@@ -306,7 +306,7 @@ export default function SupportPage() {
                       501(c)(3) · EIN 41-4361489 · Tax-deductible
                     </span>
                   </div>
-                  <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-6">
+                  <h1 className="font-display text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-6">
                     Support the<br /><em className="italic">Foundation.</em>
                   </h1>
                   <p className="text-[15px] leading-[1.9] text-slate-500 font-light max-w-md">
@@ -321,7 +321,7 @@ export default function SupportPage() {
                   ].map((item, i) => (
                     <a key={i} href={item.anchor}
                       className="flex items-baseline justify-between py-5 border-b border-slate-100 first:border-t group">
-                      <span className="font-['Cormorant_Garamond'] text-[22px] font-light text-slate-700 group-hover:text-slate-900 transition-colors">
+                      <span className="font-display text-[22px] font-light text-slate-700 group-hover:text-slate-900 transition-colors">
                         {item.label}
                       </span>
                       <span className="text-slate-300 group-hover:text-slate-500 transition-colors">↓</span>
@@ -339,7 +339,7 @@ export default function SupportPage() {
                 <div className="w-5 h-px bg-slate-300" />
                 <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">01 — Donate</span>
               </div>
-              <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-10">
+              <h2 className="font-display text-4xl font-light text-slate-900 mb-10">
                 Make a one-time gift
               </h2>
               <DonateSection />
@@ -355,7 +355,7 @@ export default function SupportPage() {
               </div>
               <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-10">
                 <div>
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900">
+                  <h2 className="font-display text-4xl font-light text-slate-900">
                     Become a member
                   </h2>
                   <p className="text-[15px] text-slate-500 font-light mt-2 max-w-xl">
@@ -379,7 +379,7 @@ export default function SupportPage() {
               </div>
               <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
                 <div>
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-2">
+                  <h2 className="font-display text-4xl font-light text-slate-900 mb-2">
                     Forever 44<br /><em className="italic text-red-800">Scholarship Fund</em>
                   </h2>
                   <div className="w-10 h-px bg-red-700 mb-6" />
@@ -387,7 +387,7 @@ export default function SupportPage() {
                     Established in memory of <strong className="text-slate-700 font-medium">Kaleb Cory</strong> (December 15, 1994 – July 27, 2014). This scholarship supports graduating seniors who demonstrate resilience, heart, and determination — the qualities that defined him.
                   </p>
                   <blockquote className="border-l-2 border-blue-800 pl-5 py-1 mb-8">
-                    <p className="font-['Cormorant_Garamond'] text-lg italic text-slate-600 font-light">
+                    <p className="font-display text-lg italic text-slate-600 font-light">
                       "Legacy is not only something we remember — it is something we continue."
                     </p>
                   </blockquote>
@@ -435,7 +435,7 @@ export default function SupportPage() {
                       { val: "44", label: "Forever his number" },
                     ].map((s, i) => (
                       <div key={i} className="bg-white p-5 text-center">
-                        <div className="font-['Cormorant_Garamond'] text-3xl font-light text-red-800 mb-1">{s.val}</div>
+                        <div className="font-display text-3xl font-light text-red-800 mb-1">{s.val}</div>
                         <div className="text-[10px] tracking-[0.1em] uppercase text-slate-400">{s.label}</div>
                       </div>
                     ))}
@@ -455,7 +455,7 @@ export default function SupportPage() {
                       <div className="w-5 h-px bg-slate-600" />
                       <span className="text-[10px] tracking-[0.2em] uppercase text-slate-500 font-medium">Questions</span>
                     </div>
-                    <h3 className="font-['Cormorant_Garamond'] text-3xl font-light text-white mb-3 leading-tight">
+                    <h3 className="font-display text-3xl font-light text-white mb-3 leading-tight">
                       Need help or have<br /><em className="italic">a specific request?</em>
                     </h3>
                     <p className="text-[15px] leading-relaxed text-slate-400 font-light">

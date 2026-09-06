@@ -25,7 +25,7 @@ export default function DonateSuccessPage() {
                   </span>
                 </div>
 
-                <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                <h1 className="font-display text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
                   Thank you<br />
                   <em className="italic">for your support.</em>
                 </h1>

@@ -169,7 +169,7 @@ function TierCard({ tier, billing }: { tier: Tier; billing: BillingCycle }) {
                 Most popular
               </div>
             )}
-            <div className={`font-['Cormorant_Garamond'] text-3xl font-light mb-0.5 ${tier.featured ? "text-white" : "text-slate-900"}`}>
+            <div className={`font-display text-3xl font-light mb-0.5 ${tier.featured ? "text-white" : "text-slate-900"}`}>
               {tier.name}
             </div>
             <div className={`text-[10px] tracking-[0.15em] uppercase font-medium ${tier.featured ? "text-slate-500" : "text-slate-300"}`}>
@@ -177,7 +177,7 @@ function TierCard({ tier, billing }: { tier: Tier; billing: BillingCycle }) {
             </div>
           </div>
           <div className="text-right">
-            <div className={`font-['Cormorant_Garamond'] text-4xl font-light ${tier.featured ? "text-white" : "text-slate-900"}`}>
+            <div className={`font-display text-4xl font-light ${tier.featured ? "text-white" : "text-slate-900"}`}>
               ${price}
             </div>
             <div className={`text-[10px] tracking-[0.08em] uppercase ${tier.featured ? "text-slate-500" : "text-slate-400"}`}>
@@ -270,7 +270,7 @@ export default function MembershipPage() {
                       501(c)(3) · EIN 41-4361489 · Tax-deductible
                     </span>
                   </div>
-                  <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                  <h1 className="font-display text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
                     Become<br />
                     a <em className="italic">member.</em>
                   </h1>
@@ -285,7 +285,7 @@ export default function MembershipPage() {
                   {tiers.map((tier, i) => (
                     <div key={i} className="flex items-baseline justify-between py-4 border-b border-slate-100 first:border-t">
                       <div>
-                        <span className="font-['Cormorant_Garamond'] text-[20px] font-light text-slate-800 mr-3">
+                        <span className="font-display text-[20px] font-light text-slate-800 mr-3">
                           {tier.name}
                         </span>
                         <span className="text-[10px] tracking-[0.1em] uppercase text-slate-300 font-medium">
@@ -319,7 +319,7 @@ export default function MembershipPage() {
                     Membership tiers
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900">
+                <h2 className="font-display text-4xl font-light text-slate-900">
                   Choose your level
                 </h2>
               </div>
@@ -356,7 +356,7 @@ export default function MembershipPage() {
             <div className="mt-px bg-white border border-slate-100 p-8 lg:p-10">
               <div className="grid lg:grid-cols-2 gap-8 lg:items-center">
                 <div>
-                  <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-2">
+                  <h3 className="font-display text-2xl font-light text-slate-900 mb-2">
                     Corporate & organizational partnerships
                   </h3>
                   <p className="text-sm leading-relaxed text-slate-500 font-light">
@@ -385,7 +385,7 @@ export default function MembershipPage() {
                 Compare
               </span>
             </div>
-            <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-12">
+            <h2 className="font-display text-4xl font-light text-slate-900 mb-12">
               Everything side by side
             </h2>
             <div className="overflow-x-auto border border-slate-100 bg-white">
@@ -397,7 +397,7 @@ export default function MembershipPage() {
                     </th>
                     {tiers.map((tier) => (
                       <th key={tier.id} className="py-4 px-4 text-center">
-                        <div className="font-['Cormorant_Garamond'] text-lg font-light text-slate-900">{tier.name}</div>
+                        <div className="font-display text-lg font-light text-slate-900">{tier.name}</div>
                         <div className="text-[10px] tracking-[0.08em] uppercase text-slate-400 mt-0.5">${tier.annualPrice}/yr</div>
                       </th>
                     ))}
@@ -454,7 +454,7 @@ export default function MembershipPage() {
                     Why it matters
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-8 leading-tight">
+                <h2 className="font-display text-4xl font-light text-slate-900 mb-8 leading-tight">
                   Your membership is<br /><em className="italic">land, water, and legacy.</em>
                 </h2>
                 <div className="space-y-5 text-[15px] leading-[1.9] text-slate-500 font-light">
@@ -480,7 +480,7 @@ export default function MembershipPage() {
                   { title: "Open Pathways", desc: "Transparent, compliant channels for forward-thinking research and conservation support." },
                 ].map((item, i) => (
                   <div key={i} className="border-t border-slate-100 py-5 last:border-b grid grid-cols-[1fr_2fr] gap-8">
-                    <div className="font-['Cormorant_Garamond'] text-lg font-light text-slate-900">
+                    <div className="font-display text-lg font-light text-slate-900">
                       {item.title}
                     </div>
                     <p className="text-sm text-slate-500 font-light leading-relaxed">{item.desc}</p>
@@ -502,7 +502,7 @@ export default function MembershipPage() {
                     FAQ
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+                <h2 className="font-display text-4xl font-light text-slate-900 leading-tight">
                   Questions<br />answered.
                 </h2>
               </div>
@@ -525,7 +525,7 @@ export default function MembershipPage() {
                       Join today
                     </span>
                   </div>
-                  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light text-white mb-4 leading-tight">
+                  <h3 className="font-display text-4xl font-light text-white mb-4 leading-tight">
                     The world doesn't wait.<br /><em className="italic">Neither should you.</em>
                   </h3>
                   <p className="text-[15px] leading-relaxed text-slate-400 font-light mb-4">

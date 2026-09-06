@@ -24,7 +24,7 @@ export default function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="font-['Cormorant_Garamond'] text-[16px] font-light tracking-[0.16em] uppercase text-white hover:text-slate-300 transition-colors flex-shrink-0"
+            className="font-display text-[16px] font-light tracking-[0.16em] uppercase text-white hover:text-slate-300 transition-colors flex-shrink-0"
           >
             <span className="hidden xl:inline">The Blue Duck Foundation</span>
             <span className="xl:hidden">Blue Duck Foundation</span>

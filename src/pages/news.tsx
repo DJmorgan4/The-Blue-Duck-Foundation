@@ -97,7 +97,7 @@ function NewsCard({ item }: { item: ConservationNewsItem }) {
       <div className="grid grid-cols-[48px_1fr] gap-5">
         <div className="flex flex-col items-center pt-0.5">
           <span className="text-[9px] font-medium tracking-[0.15em] text-slate-400">{month}</span>
-          <span className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 leading-none">{day}</span>
+          <span className="font-display text-2xl font-light text-slate-900 leading-none">{day}</span>
           <span className="text-[9px] text-slate-300">{year}</span>
         </div>
 
@@ -231,7 +231,7 @@ export default function NewsPage({ items, generatedAt }: NewsProps) {
                       Live feed · Updated every 30 minutes
                     </span>
                   </div>
-                  <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-6">
+                  <h1 className="font-display text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-6">
                     Conservation<br /><em className="italic">Watch.</em>
                   </h1>
                   <p className="text-[15px] leading-[1.9] text-slate-500 font-light max-w-md">
@@ -251,7 +251,7 @@ export default function NewsPage({ items, generatedAt }: NewsProps) {
                   { val: items.length,    label: "Total stories",    color: "#0f172a" },
                 ].map((s, i) => (
                   <div key={i} className="p-6 border-b border-r border-slate-100 last:border-r-0 [&:nth-child(2)]:border-r-0 [&:nth-child(3)]:border-b-0 [&:nth-child(4)]:border-b-0">
-                    <div className="font-['Cormorant_Garamond'] text-4xl font-light mb-1" style={{ color: s.color }}>
+                    <div className="font-display text-4xl font-light mb-1" style={{ color: s.color }}>
                       {s.val}
                     </div>
                     <div className="text-[10px] tracking-[0.1em] uppercase text-slate-400 font-medium">{s.label}</div>
@@ -308,7 +308,7 @@ export default function NewsPage({ items, generatedAt }: NewsProps) {
           {/* Results */}
           {filtered.length === 0 ? (
             <div className="border border-dashed border-slate-200 p-16 text-center col-span-2">
-              <h3 className="font-['Cormorant_Garamond'] text-2xl font-light text-slate-900 mb-2">No stories found</h3>
+              <h3 className="font-display text-2xl font-light text-slate-900 mb-2">No stories found</h3>
               <p className="text-sm text-slate-400 font-light">Try broadening your search</p>
             </div>
           ) : (
@@ -325,7 +325,7 @@ export default function NewsPage({ items, generatedAt }: NewsProps) {
                   <div className="w-5 h-px bg-slate-300" />
                   <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">Sources</span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-3xl font-light text-slate-900 leading-tight">
+                <h2 className="font-display text-3xl font-light text-slate-900 leading-tight">
                   Where we<br />get our news
                 </h2>
               </div>
@@ -353,7 +353,7 @@ export default function NewsPage({ items, generatedAt }: NewsProps) {
           <div className="mt-12 bg-slate-900 px-10 py-12 lg:px-14 lg:py-14">
             <div className="grid lg:grid-cols-2 gap-8 lg:items-center">
               <div>
-                <h3 className="font-['Cormorant_Garamond'] text-3xl font-light text-white mb-2 leading-tight">
+                <h3 className="font-display text-3xl font-light text-white mb-2 leading-tight">
                   Support the work<br /><em className="italic">behind the watch.</em>
                 </h3>
                 <p className="text-[11px] tracking-[0.06em] text-slate-600 mt-3">

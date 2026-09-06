@@ -17,7 +17,7 @@ function ValueCard({
       <div className="text-[10px] font-medium tracking-[0.2em] text-slate-400 uppercase mb-6">
         {number}
       </div>
-      <h3 className="font-['Cormorant_Garamond'] text-4xl font-light tracking-tight text-slate-900 mb-4">
+      <h3 className="font-display text-4xl font-light tracking-tight text-slate-900 mb-4">
         {title}
       </h3>
       <p className="text-sm leading-relaxed text-slate-500 font-light">{desc}</p>
@@ -78,7 +78,7 @@ function BoardMember({
       </div>
 
       <div>
-        <p className="font-['Cormorant_Garamond'] text-xl font-light text-slate-900">
+        <p className="font-display text-xl font-light text-slate-900">
           {name}
         </p>
         <p className="text-[11px] tracking-[0.08em] uppercase text-slate-400 font-medium mt-1">
@@ -108,7 +108,7 @@ function GoalItem({
         {number}
       </div>
       <div>
-        <h4 className="font-['Cormorant_Garamond'] text-xl font-light text-slate-900 mb-2">
+        <h4 className="font-display text-xl font-light text-slate-900 mb-2">
           {title}
         </h4>
         <p className="text-sm leading-relaxed text-slate-500 font-light">{desc}</p>
@@ -149,7 +149,7 @@ export default function AboutPage() {
                     </span>
                   </div>
 
-                  <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                  <h1 className="font-display text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
                     Built from<br />
                     <em className="italic">curiosity.</em><br />
                     Driven by<br />
@@ -189,7 +189,7 @@ export default function AboutPage() {
                       key={item.num}
                       className="flex items-baseline justify-between py-4 border-b border-slate-100 first:border-t"
                     >
-                      <span className="font-['Cormorant_Garamond'] text-[22px] font-light text-slate-800">
+                      <span className="font-display text-[22px] font-light text-slate-800">
                         {item.label}
                       </span>
                       <span className="text-[10px] tracking-[0.15em] text-slate-300 font-medium ml-4">
@@ -210,7 +210,7 @@ export default function AboutPage() {
                       key={i}
                       className="p-5 border-b border-r border-slate-100 last:border-r-0 [&:nth-child(2)]:border-r-0 [&:nth-child(3)]:border-b-0 [&:nth-child(4)]:border-b-0"
                     >
-                      <div className="font-['Cormorant_Garamond'] text-[20px] font-light text-slate-900 mb-0.5">
+                      <div className="font-display text-[20px] font-light text-slate-900 mb-0.5">
                         {s.val}
                       </div>
                       <div className="text-[10px] tracking-[0.08em] uppercase text-slate-400">
@@ -256,7 +256,7 @@ export default function AboutPage() {
                     Our values
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+                <h2 className="font-display text-4xl font-light text-slate-900 leading-tight">
                   What we<br />stand for
                 </h2>
               </div>
@@ -275,7 +275,7 @@ export default function AboutPage() {
                   <div className="text-[10px] font-medium tracking-[0.2em] text-slate-400 uppercase mb-6">
                     03
                   </div>
-                  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light tracking-tight text-slate-900 mb-4">
+                  <h3 className="font-display text-4xl font-light tracking-tight text-slate-900 mb-4">
                     Do What&apos;s Right
                   </h3>
                   <p className="text-sm leading-relaxed text-slate-500 font-light">
@@ -299,7 +299,7 @@ export default function AboutPage() {
                     Mission
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-8">
+                <h2 className="font-display text-4xl font-light text-slate-900 mb-8">
                   Why we exist
                 </h2>
                 <div className="space-y-5 text-[15px] leading-[1.9] text-slate-500 font-light">
@@ -325,7 +325,7 @@ export default function AboutPage() {
                     Strategic goals
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 mb-8">
+                <h2 className="font-display text-4xl font-light text-slate-900 mb-8">
                   Where we're headed
                 </h2>
                 <div className="space-y-6">
@@ -366,7 +366,7 @@ export default function AboutPage() {
                     Programs
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight mb-4">
+                <h2 className="font-display text-4xl font-light text-slate-900 leading-tight mb-4">
                   Areas<br />of work
                 </h2>
                 <p className="text-sm leading-relaxed text-slate-400 font-light">
@@ -399,7 +399,7 @@ export default function AboutPage() {
                     Leadership
                   </span>
                 </div>
-                <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900">
+                <h2 className="font-display text-4xl font-light text-slate-900">
                   Board of Directors
                 </h2>
                 <p className="mt-2 text-sm text-slate-400 font-light">
@@ -451,7 +451,7 @@ export default function AboutPage() {
                       Get involved
                     </span>
                   </div>
-                  <h3 className="font-['Cormorant_Garamond'] text-4xl font-light text-white mb-4 leading-tight">
+                  <h3 className="font-display text-4xl font-light text-white mb-4 leading-tight">
                     This is just<br /><em className="italic">the beginning.</em>
                   </h3>
                   <p className="text-[15px] leading-relaxed text-slate-400 font-light">

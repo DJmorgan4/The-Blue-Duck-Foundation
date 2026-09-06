@@ -79,7 +79,7 @@ export default function DonatePage() {
                       501(c)(3) · EIN 41-4361489 · Tax-deductible
                     </span>
                   </div>
-                  <h1 className="font-['Cormorant_Garamond'] text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
+                  <h1 className="font-display text-6xl lg:text-7xl font-light leading-[1.04] tracking-tight text-slate-900 mb-8">
                     Support the<br />
                     <em className="italic">work.</em>
                   </h1>
@@ -93,7 +93,7 @@ export default function DonatePage() {
                     {TIERS.map((t, i) => (
                       <div key={i} className="flex items-start justify-between py-4 border-b border-slate-100 first:border-t gap-6">
                         <div>
-                          <div className="font-['Cormorant_Garamond'] text-[19px] font-light text-slate-800">{t.label}</div>
+                          <div className="font-display text-[19px] font-light text-slate-800">{t.label}</div>
                           <div className="text-[11px] text-slate-400 font-light mt-0.5">{t.desc}</div>
                         </div>
                         <div className="text-[11px] tracking-[0.08em] text-slate-300 font-medium flex-shrink-0 mt-1">
@@ -130,7 +130,7 @@ export default function DonatePage() {
                           key={amt}
                           type="button"
                           onClick={() => { setSelected(amt); setCustom(""); }}
-                          className={`py-4 text-center transition-colors font-['Cormorant_Garamond'] text-2xl font-light ${
+                          className={`py-4 text-center transition-colors font-display text-2xl font-light ${
                             selected === amt && !custom
                               ? "bg-slate-900 text-white"
                               : "bg-white text-slate-900 hover:bg-slate-50"
@@ -277,7 +277,7 @@ export default function DonatePage() {
                     <div className="w-5 h-px bg-slate-300" />
                     <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">Other ways to help</span>
                   </div>
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+                  <h2 className="font-display text-4xl font-light text-slate-900 leading-tight">
                     Beyond<br />a donation
                   </h2>
                 </div>
@@ -292,7 +292,7 @@ export default function DonatePage() {
                   ].map((item) => (
                     <div key={item.num} className="border-t border-slate-100 pt-6 pb-2">
                       <div className="text-[10px] tracking-[0.2em] uppercase text-slate-300 font-medium mb-3">{item.num}</div>
-                      <h3 className="font-['Cormorant_Garamond'] text-xl font-light text-slate-900 mb-2">{item.title}</h3>
+                      <h3 className="font-display text-xl font-light text-slate-900 mb-2">{item.title}</h3>
                       <p className="text-sm leading-relaxed text-slate-500 font-light mb-4">{item.desc}</p>
                       <Link href={item.href} className="text-[11px] font-medium tracking-[0.1em] uppercase text-slate-500 hover:text-slate-900 transition-colors">
                         {item.cta} →
@@ -313,7 +313,7 @@ export default function DonatePage() {
                     <div className="w-5 h-px bg-slate-300" />
                     <span className="text-[10px] tracking-[0.2em] uppercase text-slate-400 font-medium">Accountability</span>
                   </div>
-                  <h2 className="font-['Cormorant_Garamond'] text-4xl font-light text-slate-900 leading-tight">
+                  <h2 className="font-display text-4xl font-light text-slate-900 leading-tight">
                     Our commitment<br />to transparency
                   </h2>
                 </div>
