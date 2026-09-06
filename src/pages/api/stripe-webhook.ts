@@ -12,8 +12,8 @@ const ORG = {
   tagline: "People · Places · Wildlife · A Brighter Tomorrow",
   footerTagline: "Conservation today for a brighter tomorrow",
   ein: "41-4361489",
-  mailing: "P.O. Box 0000", // TODO
-  cityStateZip: "McKinney, TX 75070", // TODO — confirm registered address
+  mailing: "", // no street address printed by choice; not required on an acknowledgment
+  cityStateZip: "Frisco, Texas",
   site: "theblueduck.org",
   email: "info@theblueduck.org",
   from: "The Blue Duck Foundation <info@theblueduck.org>",
@@ -49,7 +49,13 @@ const IRS = {
 };
 
 /* ---------------------------------------------------------------------------
- * FAIR MARKET VALUE TABLE — FILL THIS IN.
+ * FAIR MARKET VALUE TABLE
+ *
+ * PROVISIONAL. No merchandise has been purchased yet, so these are market-rate
+ * estimates, not invoice figures. Replace every pair with real numbers once
+ * suppliers are chosen, and keep the invoices on file — a good-faith estimate
+ * has to trace back to something.
+ *
  * fmv  = retail price of a comparable item (reduces the donor's deduction)
  * cost = what the Foundation paid (tested against the token exception)
  * ------------------------------------------------------------------------- */
@@ -58,20 +64,20 @@ type Benefit = { label: string; fmv: number; cost: number; logoBearing: boolean 
 const DONATION_BENEFITS: { min: number; label: string; items: Benefit[] }[] = [
   {
     min: 1000, label: "Sentinel", items: [
-      { label: "Foundation jacket", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
-      { label: "Foundation hat", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
-      { label: "Patch", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
+      { label: "Foundation jacket", fmv: 115, cost: 70, logoBearing: true },
+      { label: "Foundation hat", fmv: 32, cost: 15, logoBearing: true },
+      { label: "Patch", fmv: 10, cost: 3, logoBearing: true },
     ],
   },
   {
     min: 500, label: "Steward", items: [
-      { label: "Foundation hat", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
-      { label: "Flyway patch", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
+      { label: "Foundation hat", fmv: 32, cost: 15, logoBearing: true },
+      { label: "Flyway patch", fmv: 10, cost: 3, logoBearing: true },
     ],
   },
   {
     min: 100, label: "Conservator", items: [
-      { label: "Sticker / decal pack", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
+      { label: "Sticker / decal pack", fmv: 12, cost: 3.5, logoBearing: true },
     ],
   },
   { min: 0, label: "Supporter", items: [] },
@@ -80,20 +86,20 @@ const DONATION_BENEFITS: { min: number; label: string; items: Benefit[] }[] = [
 const MEMBERSHIP_BENEFITS: Record<string, Benefit[]> = {
   playa: [],
   marsh: [
-    { label: "Printed card & welcome packet", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
+    { label: "Printed card & welcome packet", fmv: 16, cost: 7, logoBearing: true },
   ],
   flyway: [
-    { label: "Printed card & welcome packet", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
-    { label: "Exclusive patch", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
-    { label: "Foundation hat", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
+    { label: "Printed card & welcome packet", fmv: 16, cost: 7, logoBearing: true },
+    { label: "Exclusive patch", fmv: 10, cost: 3, logoBearing: true },
+    { label: "Foundation hat", fmv: 32, cost: 15, logoBearing: true },
   ],
   sentinel: [
-    { label: "Printed card & welcome packet", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
-    { label: "Exclusive patch", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
-    { label: "Foundation hat", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
-    { label: "Founding patron plaque", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
-    { label: "Sentinel jacket", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: true },
-    { label: "Annual Banquet seat", fmv: 0 /* TODO */, cost: 0 /* TODO */, logoBearing: false },
+    { label: "Printed card & welcome packet", fmv: 16, cost: 7, logoBearing: true },
+    { label: "Exclusive patch", fmv: 10, cost: 3, logoBearing: true },
+    { label: "Foundation hat", fmv: 32, cost: 15, logoBearing: true },
+    { label: "Founding patron plaque", fmv: 85, cost: 48, logoBearing: true },
+    { label: "Sentinel jacket", fmv: 115, cost: 70, logoBearing: true },
+    { label: "Annual Banquet seat", fmv: 75, cost: 40, logoBearing: false },
   ],
 };
 
@@ -125,7 +131,10 @@ function computeDeduction(payment: number, items: Benefit[]): Deduction {
 
   if (tokenQualifies || insubstantial) return { ...base, fmv, deductible: payment, disclose: false, unpriced };
 
-  return { ...base, fmv, deductible: Math.max(0, payment - fmv), disclose: payment > IRS.disclosureThreshold, unpriced };
+  // $75 is the threshold above which disclosure is *required*. Below it the
+  // "no goods or services" sentence would still be false, so disclose whenever
+  // benefits carry real value: accurate below the line, compliant above it.
+  return { ...base, fmv, deductible: Math.max(0, payment - fmv), disclose: fmv > 0, unpriced };
 }
 
 const esc = (s: any) =>
@@ -165,7 +174,7 @@ function letterhead() {
         <div style="font:400 25px/1.15 ${SERIF};letter-spacing:0.02em;color:${C.ink};">THE BLUE DUCK</div>
         <div style="font:400 25px/1.15 ${SERIF};letter-spacing:0.02em;color:${C.ink};margin-bottom:10px;">FOUNDATION</div>
         <div style="font:400 8px/1.5 ${SERIF};letter-spacing:0.1em;color:${C.slate};text-transform:uppercase;white-space:nowrap;margin-bottom:14px;">${ORG.tagline}</div>
-        <div style="font:400 13px/1.6 ${SERIF};color:${C.inkSoft};">${ORG.mailing} &nbsp;|&nbsp; ${ORG.cityStateZip}</div>
+        <div style="font:400 13px/1.6 ${SERIF};color:${C.inkSoft};">${ORG.mailing ? `${ORG.mailing} &nbsp;|&nbsp; ` : ""}${ORG.cityStateZip}</div>
         <div style="font:400 13px/1.6 ${SERIF};color:${C.inkSoft};">www.${ORG.site}</div>
         <div style="font:400 13px/1.6 ${SERIF};color:${C.inkSoft};margin-bottom:10px;">${ORG.email}</div>
         <div style="font:400 13px/1.6 ${SERIF};color:${C.inkSoft};">EIN: ${ORG.ein}</div>
