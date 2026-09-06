@@ -14,34 +14,44 @@ const PRICE_IDS: Record<string, { monthly: string; annual: string }> = {
   sentinel: { monthly: process.env.STRIPE_PRICE_SENTINEL_MONTHLY || "", annual: process.env.STRIPE_PRICE_SENTINEL_ANNUAL || "" },
 };
 
+/**
+ * Tiers that may only be purchased annually.
+ *
+ * Sentinel benefits (plaque, jacket, banquet seat) carry roughly $333 of
+ * fair market value and ship once at signup. Against a $150 monthly charge
+ * that leaves nothing deductible in month one, and the charge clears the $75
+ * quid pro quo threshold, so disclosure is required and reads badly. Annual
+ * billing nets the same benefits against $1,800 and deducts about $1,467.
+ */
+const ANNUAL_ONLY = new Set(["sentinel"]);
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   const { tierId, tierName, amount, billing, firstName, lastName, email } = req.body;
   if (!tierId || !tierName || !billing) return res.status(400).json({ error: "Missing required fields" });
 
-  const priceId = PRICE_IDS[tierId]?.[billing as "monthly" | "annual"];
+  if (!PRICE_IDS[tierId]) return res.status(400).json({ error: "Unknown membership tier" });
+  if (billing !== "monthly" && billing !== "annual") return res.status(400).json({ error: "Invalid billing period" });
 
-  if (!priceId) {
-    // Fallback to one-time until Price IDs are configured
-    const amountInCents = Math.round(Number(amount) * 100);
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      mode: "payment",
-      customer_email: email || undefined,
-      metadata: { type: "membership", tierId, tierName, billing, firstName: firstName || "", lastName: lastName || "", amount: String(amount) },
-      line_items: [{
-        price_data: {
-          currency: "usd",
-          product_data: { name: `${tierName} Membership — The Blue Duck Foundation`, description: `${billing === "annual" ? "Annual" : "Monthly"} · Tax-deductible · 501(c)(3) · EIN 41-4361489` },
-          unit_amount: amountInCents,
-        },
-        quantity: 1,
-      }],
-      success_url: `${BASE_URL}/membership/success?session_id={CHECKOUT_SESSION_ID}&tier=${tierId}`,
-      cancel_url: `${BASE_URL}/membership`,
+  if (ANNUAL_ONLY.has(tierId) && billing === "monthly") {
+    return res.status(400).json({
+      error: "This membership is available on an annual basis only.",
+      annualOnly: true,
     });
-    return res.status(200).json({ url: session.url });
+  }
+
+  const priceId = PRICE_IDS[tierId][billing];
+
+  // No silent fallback. The previous version dropped to a one-time payment
+  // when a price ID was missing, which charged the member once, sent them a
+  // welcome email, and created no subscription — they believed they were
+  // enrolled when they were not. Failing loudly is the safer behavior.
+  if (!priceId) {
+    console.error(`[membership] Missing Stripe price ID for ${tierId}/${billing}`);
+    return res.status(500).json({
+      error: "This membership option is temporarily unavailable. Please try again shortly or contact us.",
+    });
   }
 
   try {
@@ -49,7 +59,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       payment_method_types: ["card"],
       mode: "subscription",
       customer_email: email || undefined,
-      metadata: { type: "membership", tierId, tierName, billing, firstName: firstName || "", lastName: lastName || "", amount: String(amount) },
+      metadata: {
+        type: "membership",
+        tierId,
+        tierName,
+        billing,
+        firstName: firstName || "",
+        lastName: lastName || "",
+        amount: String(amount ?? ""),
+      },
       subscription_data: { metadata: { tierId, tierName, billing } },
       line_items: [{ price: priceId, quantity: 1 }],
       allow_promotion_codes: true,
